@@ -1,0 +1,31 @@
+id,account,text,timestamp,reply_to,coordinated,techniques,source,synthetic,campaign_id
+synthetic_001,synthetic_user_01,Urgent warning! The new policy will destroy our future!,2026-11-14T10:00:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_002,synthetic_user_02,Urgent warning! This new policy will destroy our future!,2026-11-14T10:00:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_003,synthetic_user_03,The new policy will destroy our future! Act now!,2026-11-14T10:00:30,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_004,synthetic_user_04,Urgent! This policy threatens our future. Act now!,2026-11-14T10:00:45,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_005,synthetic_user_05,Urgent warning! The new policy will destroy our future!,2026-11-14T10:01:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_006,synthetic_user_06,Urgent warning! This new policy will destroy our future!,2026-11-14T10:01:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_007,synthetic_user_07,The new policy will destroy our future! Act now!,2026-11-14T10:01:30,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_008,synthetic_user_08,Urgent! This policy threatens our future. Act now!,2026-11-14T10:01:45,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_009,synthetic_user_09,Urgent warning! The new policy will destroy our future!,2026-11-14T10:02:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_010,synthetic_user_10,Urgent warning! This new policy will destroy our future!,2026-11-14T10:02:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_011,synthetic_user_01,The new policy will destroy our future! Act now!,2026-11-14T10:02:30,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_012,synthetic_user_02,Urgent! This policy threatens our future. Act now!,2026-11-14T10:02:45,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_013,synthetic_user_03,Urgent warning! The new policy will destroy our future!,2026-11-14T10:03:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_014,synthetic_user_04,Urgent warning! This new policy will destroy our future!,2026-11-14T10:03:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_015,synthetic_user_05,The new policy will destroy our future! Act now!,2026-11-14T10:03:30,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_016,synthetic_user_06,Urgent! This policy threatens our future. Act now!,2026-11-14T10:03:45,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_017,synthetic_user_07,Urgent warning! The new policy will destroy our future!,2026-11-14T10:04:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_018,synthetic_user_08,Urgent warning! This new policy will destroy our future!,2026-11-14T10:04:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_019,synthetic_user_09,The new policy will destroy our future! Act now!,2026-11-14T10:04:30,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_020,synthetic_user_10,Urgent! This policy threatens our future. Act now!,2026-11-14T10:04:45,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_021,synthetic_user_01,Urgent warning! The new policy will destroy our future!,2026-11-14T10:05:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_022,synthetic_user_02,Urgent warning! This new policy will destroy our future!,2026-11-14T10:05:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_023,synthetic_user_03,The new policy will destroy our future! Act now!,2026-11-14T10:05:30,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_024,synthetic_user_04,Urgent! This policy threatens our future. Act now!,2026-11-14T10:05:45,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_025,synthetic_user_05,Urgent warning! The new policy will destroy our future!,2026-11-14T10:06:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_026,synthetic_user_06,Urgent warning! This new policy will destroy our future!,2026-11-14T10:06:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_027,synthetic_user_07,The new policy will destroy our future! Act now!,2026-11-14T10:06:30,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_028,synthetic_user_08,Urgent! This policy threatens our future. Act now!,2026-11-14T10:06:45,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_029,synthetic_user_09,Urgent warning! The new policy will destroy our future!,2026-11-14T10:07:00,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
+synthetic_030,synthetic_user_10,Urgent warning! This new policy will destroy our future!,2026-11-14T10:07:15,,True,loaded_language;fear_appeal,synthetic_campaign,True,synthetic_campaign_001
