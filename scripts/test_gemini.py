@@ -5,6 +5,6 @@ from google import genai
 load_dotenv()
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 r = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
     contents="Say hello in one short sentence.")
 print(r.text)
