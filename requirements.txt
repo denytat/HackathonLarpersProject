@@ -9,3 +9,5 @@ scikit-learn
 networkx
 openai
 google-genai
+numpy
+python-dateutil
