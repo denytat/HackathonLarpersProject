@@ -1,0 +1,11 @@
+﻿id,account,text,timestamp,reply_to,image_url
+od_001,user_01,"I took the train to work today and it was surprisingly quiet.",2026-10-18T07:15:00Z,,
+od_002,user_02,"The new bus route is useful, although the stop is quite far from my apartment.",2026-10-18T11:40:00Z,,
+od_003,user_03,"I prefer cycling when the weather is good. Today was perfect for it.",2026-10-18T15:25:00Z,,
+od_004,user_04,"Does the metro run later on Friday evenings?",2026-10-18T19:50:00Z,,
+od_005,user_05,"The ticket machine at my station did not accept contactless payment.",2026-10-19T08:05:00Z,,
+od_006,user_01,"I wish the train had more space for bicycles during rush hour.",2026-10-19T12:30:00Z,,
+od_007,user_02,"I checked the route planner and found a faster connection.",2026-10-19T16:10:00Z,,
+od_008,user_03,"The pavement near the library needs repairs. It is difficult with a stroller.",2026-10-19T20:45:00Z,,
+od_009,user_04,"I normally walk to the station because parking is expensive.",2026-10-20T09:20:00Z,,
+od_010,user_05,"A direct connection to the airport would make travelling much easier.",2026-10-20T17:55:00Z,,
