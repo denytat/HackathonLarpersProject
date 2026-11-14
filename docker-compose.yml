@@ -17,9 +17,12 @@ services:
 
   caddy:
     image: caddy:2
-    ports: ["80:80", "443:443"]
+    ports:
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./stitch_frontend/stitch_swarmspotter_platform:/srv/stitch:ro
       - caddy_data:/data
     depends_on: [ui, api]
     restart: unless-stopped

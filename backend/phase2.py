@@ -24,22 +24,13 @@ def run_phase2(posts):
     swarms = result["swarms"]
     post_results = result["posts"]
 
-    # Only analyse posts in detected swarms.
-    swarm_accounts = {
-        account
-        for swarm in swarms
-        for account in swarm["accounts"]
-    }
-
+    # Nemotron classifies every submitted post independently of swarm membership.
     post_lookup = {p["id"]: p for p in posts}
     classifications = {}
     text_cache = {}
 
-    # Nemotron: classify each unique message only once.
+    # Classify each unique message only once.
     for post in posts:
-        if post["account"] not in swarm_accounts:
-            continue
-
         post_id = post["id"]
         text = post["text"]
 

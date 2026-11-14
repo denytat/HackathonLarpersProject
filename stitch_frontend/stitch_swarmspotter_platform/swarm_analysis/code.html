@@ -282,12 +282,21 @@
   let urlQueue = [];
   try { urlQueue = JSON.parse(sessionStorage.getItem('swarmwatch_url_review_queue') || '[]'); }
   catch (_) { urlQueue = []; }
-  if (Array.isArray(urlQueue) && urlQueue.length) {
+  if (
+    sessionStorage.getItem('swarmwatch_last_workflow') === 'url' &&
+    Array.isArray(urlQueue) &&
+    urlQueue.length
+  ) {
     const section = $('url-review-section');
     section.classList.remove('hidden');
     const target = $('url-review-items');
     for (const item of urlQueue) {
-      if (!item || !item.url) continue;
+      if (
+        !item ||
+        !item.url ||
+        !item.analysis ||
+        typeof item.analysis.confidence !== 'number'
+      ) continue;
       const card = document.createElement('article');
       card.className = 'rounded-lg border border-surface-container-highest p-4 space-y-2';
       const heading = document.createElement('p');

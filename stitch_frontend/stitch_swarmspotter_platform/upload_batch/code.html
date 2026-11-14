@@ -324,7 +324,7 @@
 <script>
 (function initBatchUpload() {
   "use strict";
-  const API = "http://127.0.0.1:8000";
+  const API = "/api";
   const fileInput = document.getElementById("file-input");
   const dropzone = document.getElementById("dropzone");
   const fileStatus = document.getElementById("file-status");
@@ -478,10 +478,12 @@
       view.addEventListener("click", () => {
         try {
           if (item.type === "csv") {
+            sessionStorage.setItem("swarmwatch_last_workflow", "csv");
             sessionStorage.setItem("swarmwatch_input_posts", JSON.stringify(item.payload.posts));
             sessionStorage.setItem("swarmwatch_analysis", JSON.stringify(item.payload.result));
             window.location.href = "../swarm_analysis/code.html";
           } else {
+            sessionStorage.setItem("swarmwatch_last_workflow", "url");
             sessionStorage.setItem("swarmwatch_url_analysis", JSON.stringify(item.payload.result));
             closeHistory();
             renderUrlResults(item.payload.result);
@@ -516,6 +518,7 @@
       if (!result || !Array.isArray(result.swarms) || !Array.isArray(result.posts)) {
         throw new Error("Backend response did not contain swarms and posts.");
       }
+      sessionStorage.setItem("swarmwatch_last_workflow", "csv");
       sessionStorage.setItem("swarmwatch_input_posts", JSON.stringify(posts));
       sessionStorage.setItem("swarmwatch_analysis", JSON.stringify(result));
       saveHistory("csv", selectedFile.name, {posts, result});
@@ -598,6 +601,7 @@
     urlBtn.textContent = "Checking URL...";
     try {
       const result = await requestJSON("/analyze/urls", {urls: [url]});
+      sessionStorage.setItem("swarmwatch_last_workflow", "url");
       sessionStorage.setItem("swarmwatch_url_analysis", JSON.stringify(result));
       saveHistory("url", url, {result});
       renderUrlResults(result);
@@ -606,6 +610,8 @@
         item.status === "collected" && item.analysis &&
         typeof item.analysis.confidence === "number" &&
         Number.isFinite(item.analysis.confidence) &&
+        Array.isArray(item.analysis.techniques) &&
+        item.analysis.techniques.length > 0 &&
         item.analysis.confidence >= 0 && item.analysis.confidence < 0.7
       );
       if (reviewItems.length) {

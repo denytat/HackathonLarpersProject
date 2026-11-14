@@ -1,9 +1,16 @@
 swarmspotter.tech, www.swarmspotter.tech {
+
     handle /api/* {
         uri strip_prefix /api
         reverse_proxy api:8000
     }
+
     handle {
-        reverse_proxy ui:8501
+        root * /srv/stitch
+
+        @homepage path /
+        rewrite @homepage /upload_batch/code.html
+
+        file_server
     }
 }
