@@ -1,78 +1,171 @@
-
-import json
-from pathlib import Path
-
-from similarity import find_similar_posts
-from timing import find_timing_bursts
-from account_similarity import find_similar_accounts
-from clustering import detect_swarms
+﻿
+from backend.clustering import detect_swarms
 
 
-# Load sample dataset
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_PATH = PROJECT_ROOT / "data" / "sample_posts.json"
+def test_detects_swarm_with_all_three_signals():
+    text_matches = [
+        {
+            "account_1": "user1",
+            "account_2": "user2",
+            "similarity": 0.95
+        },
+        {
+            "account_1": "user2",
+            "account_2": "user3",
+            "similarity": 0.95
+        }
+    ]
 
-with open(DATA_PATH, "r", encoding="utf-8") as file:
-    data = json.load(file)
+    timing_bursts = [
+        {
+            "accounts": ["user1", "user2", "user3"]
+        }
+    ]
 
-posts = data["posts"]
+    account_matches = [
+        {
+            "account_1": "user1",
+            "account_2": "user2",
+            "similarity": 0.95
+        },
+        {
+            "account_1": "user2",
+            "account_2": "user3",
+            "similarity": 0.95
+        }
+    ]
 
+    swarms = detect_swarms(
+        text_matches,
+        timing_bursts,
+        account_matches,
+        min_signals=2,
+        min_accounts=3
+    )
 
-# STEP 1: Text similarity
-text_matches = find_similar_posts(
-    posts,
-    threshold=0.75
-)
-
-
-# STEP 2: Timing detection
-timing_bursts = find_timing_bursts(
-    posts,
-    window_seconds=60,
-    min_accounts=3
-)
-
-
-# STEP 3: Account behaviour similarity
-profiles, account_matches = find_similar_accounts(
-    posts,
-    threshold=0.75,
-    min_posts=2
-)
-
-
-# STEP 4: Graph clustering
-swarms = detect_swarms(
-    text_matches,
-    timing_bursts,
-    account_matches,
-    min_signals=2,
-    min_accounts=3
-)
+    assert len(swarms) == 1
+    assert swarms[0]["accounts"] == ["user1", "user2", "user3"]
 
 
-# Display results
-print("\nTEXT MATCHES:", len(text_matches))
-print("TIMING BURSTS:", len(timing_bursts))
-print("ACCOUNT MATCHES:", len(account_matches))
+def test_does_not_detect_swarm_with_only_text_and_timing():
+    text_matches = [
+        {
+            "account_1": "user1",
+            "account_2": "user2",
+            "similarity": 1.0
+        },
+        {
+            "account_1": "user2",
+            "account_2": "user3",
+            "similarity": 1.0
+        }
+    ]
 
-print("\nPOTENTIAL SWARMS:\n")
+    timing_bursts = [
+        {
+            "accounts": ["user1", "user2", "user3"]
+        }
+    ]
 
-for swarm in swarms:
+    swarms = detect_swarms(
+        text_matches,
+        timing_bursts,
+        [],
+        min_signals=2,
+        min_accounts=3
+    )
 
-    print("Swarm:", swarm["id"])
-    print("Accounts:", ", ".join(swarm["accounts"]))
-    print("Score:", swarm["score"])
+    assert swarms == []
 
-    print("\nEvidence:")
 
-    for item in swarm["evidence"]:
-        print(
-            f"{item['account_1']} <-> {item['account_2']} | "
-            f"Score: {item['score']} | "
-            f"Signals: {', '.join(item['signals'].keys())}"
-        )
+def test_does_not_detect_swarm_with_only_one_signal():
+    text_matches = [
+        {
+            "account_1": "user1",
+            "account_2": "user2",
+            "similarity": 0.95
+        },
+        {
+            "account_1": "user2",
+            "account_2": "user3",
+            "similarity": 0.95
+        }
+    ]
 
-    print("-" * 60)
+    swarms = detect_swarms(
+        text_matches,
+        [],
+        [],
+        min_signals=2,
+        min_accounts=3
+    )
 
-print(f"\nTotal potential swarms: {len(swarms)}")
+    assert swarms == []
+
+def test_does_not_detect_swarm_from_one_timing_burst_and_account_similarity():
+    timing_bursts = [
+        {
+            "accounts": ["user1", "user2", "user3"]
+        }
+    ]
+
+    account_matches = [
+        {
+            "account_1": "user1",
+            "account_2": "user2",
+            "similarity": 0.95
+        },
+        {
+            "account_1": "user2",
+            "account_2": "user3",
+            "similarity": 0.95
+        }
+    ]
+
+    swarms = detect_swarms(
+        [],
+        timing_bursts,
+        account_matches,
+        min_signals=2,
+        min_accounts=3
+    )
+
+    assert swarms == []
+
+def test_detects_swarm_with_text_and_account_similarity():
+    text_matches = [
+        {
+            "account_1": "user1",
+            "account_2": "user2",
+            "similarity": 0.95
+        },
+        {
+            "account_1": "user2",
+            "account_2": "user3",
+            "similarity": 0.95
+        }
+    ]
+
+    account_matches = [
+        {
+            "account_1": "user1",
+            "account_2": "user2",
+            "similarity": 0.95
+        },
+        {
+            "account_1": "user2",
+            "account_2": "user3",
+            "similarity": 0.95
+        }
+    ]
+
+    swarms = detect_swarms(
+        text_matches,
+        [],
+        account_matches,
+        min_signals=2,
+        min_accounts=3
+    )
+
+    assert len(swarms) == 1
+    assert swarms[0]["accounts"] == ["user1", "user2", "user3"]
