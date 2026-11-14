@@ -1,0 +1,58 @@
+/* Swarmwatch editorial design tokens
+   Light theme is the default. Dark overrides are applied via .sw-theme-dark on .stApp. */
+
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root,
+.stApp,
+.sw-theme-light {
+	--sw-bg: #f3eee6;
+	--sw-bg-sidebar: #ebe4d8;
+	--sw-surface: #fbfaf7;
+	--sw-surface-elevated: #ffffff;
+	--sw-border: #ddd6cb;
+	--sw-border-strong: #c9c0b2;
+	--sw-text: #1f1c19;
+	--sw-text-secondary: #5c564f;
+	--sw-text-muted: #7a736a;
+	--sw-accent: #3d4f5f;
+	--sw-accent-soft: rgba(61, 79, 95, 0.1);
+	--sw-accent-burgundy: #6b3a3a;
+	--sw-accent-burgundy-soft: rgba(107, 58, 58, 0.1);
+	--sw-ok: #2f5d50;
+	--sw-ok-soft: rgba(47, 93, 80, 0.12);
+	--sw-warn: #8a6a2f;
+	--sw-warn-soft: rgba(138, 106, 47, 0.12);
+	--sw-danger: #8b3a3a;
+	--sw-danger-soft: rgba(139, 58, 58, 0.12);
+	--sw-shadow: 0 1px 2px rgba(31, 28, 25, 0.04);
+	--sw-font-serif: "Libre Baskerville", "Times New Roman", Georgia, serif;
+	--sw-font-sans: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+	--sw-font-mono: "IBM Plex Mono", "Consolas", monospace;
+	--sw-radius: 4px;
+	--sw-radius-lg: 6px;
+}
+
+.stApp.sw-theme-dark,
+.sw-theme-dark {
+	--sw-bg: #1a1917;
+	--sw-bg-sidebar: #141312;
+	--sw-surface: #242220;
+	--sw-surface-elevated: #2c2a27;
+	--sw-border: #3a3733;
+	--sw-border-strong: #4d4943;
+	--sw-text: #f2ede6;
+	--sw-text-secondary: #b0a99f;
+	--sw-text-muted: #8a837a;
+	--sw-accent: #8fa3b5;
+	--sw-accent-soft: rgba(143, 163, 181, 0.14);
+	--sw-accent-burgundy: #c4877a;
+	--sw-accent-burgundy-soft: rgba(196, 135, 122, 0.14);
+	--sw-ok: #7eb6a4;
+	--sw-ok-soft: rgba(126, 182, 164, 0.14);
+	--sw-warn: #d2b36a;
+	--sw-warn-soft: rgba(210, 179, 106, 0.14);
+	--sw-danger: #d08989;
+	--sw-danger-soft: rgba(208, 137, 137, 0.14);
+	--sw-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}

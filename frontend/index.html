@@ -1,0 +1,1801 @@
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Swarmwatch — AI Social Threat Intelligence</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/tokens.css" />
+		<link rel="stylesheet" href="css/layout.css" />
+		<link rel="stylesheet" href="css/components.css" />
+	</head>
+	<body>
+		<div class="app-shell">
+			<!-- ==================== LEFT SIDEBAR ==================== -->
+			<aside class="sidebar">
+				<div>
+					<div class="brand-block">
+						<div class="brand-logo">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+								<circle
+									cx="12"
+									cy="12"
+									r="9"
+									stroke="#38BDF8"
+									stroke-width="1.5"
+									stroke-dasharray="3 2.5"
+								/>
+								<circle cx="12" cy="12" r="3.2" fill="#3B82F6" />
+								<circle cx="6.5" cy="7.5" r="1.8" fill="#8B5CF6" />
+								<circle cx="17.8" cy="8.2" r="1.8" fill="#38BDF8" />
+								<circle cx="16.5" cy="17.2" r="1.8" fill="#EF4444" />
+								<path
+									d="M8 8.5L10.3 10.5M16.2 9.2L14 10.8M15 15.8L13.5 13.8"
+									stroke="#60A5FA"
+									stroke-width="1.2"
+								/>
+							</svg>
+						</div>
+						<div class="brand-text">
+							<h1>Swarmwatch <span class="brand-tag">INTEL</span></h1>
+							<div class="brand-sub">Coordinated Threat Detection</div>
+						</div>
+					</div>
+
+					<div class="nav-section-label">Workspace</div>
+					<nav class="nav-list" id="sidebarNav">
+						<button class="nav-item active" data-page="overview">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+								<rect x="3" y="3" width="7" height="9" rx="1.5" />
+								<rect x="14" y="3" width="7" height="5" rx="1.5" />
+								<rect x="14" y="12" width="7" height="9" rx="1.5" />
+								<rect x="3" y="16" width="7" height="5" rx="1.5" />
+							</svg>
+							Overview
+						</button>
+						<button class="nav-item" data-page="analyze">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+								<polyline points="17 8 12 3 7 8" />
+								<line x1="12" y1="3" x2="12" y2="15" />
+							</svg>
+							Analyze
+						</button>
+						<button class="nav-item" data-page="results">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+								<circle cx="18" cy="5" r="3" />
+								<circle cx="6" cy="12" r="3" />
+								<circle cx="18" cy="19" r="3" />
+								<line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+								<line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+							</svg>
+							Results
+							<span class="nav-badge">87/100</span>
+						</button>
+						<button class="nav-item" data-page="benchmarks">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+								<path d="M3 3v18h18" />
+								<path d="M18 17V9" />
+								<path d="M13 17V5" />
+								<path d="M8 17v-3" />
+							</svg>
+							Benchmarks
+						</button>
+						<button class="nav-item" data-page="about">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+								<circle cx="12" cy="12" r="10" />
+								<line x1="12" y1="16" x2="12" y2="12" />
+								<line x1="12" y1="8" x2="12.01" y2="8" />
+							</svg>
+							About
+						</button>
+					</nav>
+				</div>
+
+				<div class="sidebar-status">
+					<div class="status-header">
+						<div class="status-pill">
+							<span class="pulse-dot"></span>
+							System Operational
+						</div>
+						<span class="mono status-version">v2.4.1</span>
+					</div>
+					<div class="status-desc">
+						Graph &amp; Semantic Inference Engine ready
+					</div>
+					<div class="status-meta">
+						<div>LATENCY<strong>42ms avg</strong></div>
+						<div>WORKERS<strong>8 / 8 active</strong></div>
+					</div>
+				</div>
+			</aside>
+
+			<!-- ==================== MAIN CONTENT ==================== -->
+			<div class="main-container">
+				<header class="topbar">
+					<div class="topbar-left">
+						<h2 id="pageTitle">Threat Intelligence Overview</h2>
+						<p id="pageDesc">
+							Real-time posture of analyzed campaigns, coordinated swarms, and
+							detection telemetry
+						</p>
+					</div>
+					<div class="topbar-actions">
+						<button class="btn btn-ghost" data-nav="results">
+							<svg
+								width="14"
+								height="14"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<circle cx="11" cy="11" r="8" />
+								<path d="m21 21-4.3-4.3" />
+							</svg>
+							Inspect Latest Swarm
+						</button>
+						<button class="btn btn-primary" data-nav="analyze">
+							<svg
+								width="14"
+								height="14"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path d="M12 5v14M5 12h14" />
+							</svg>
+							New Analysis
+						</button>
+					</div>
+				</header>
+
+				<main class="content-area">
+					<!-- =========================================================
+           PAGE A: OVERVIEW DASHBOARD
+      ========================================================= -->
+					<section id="page-overview" class="page-view active">
+						<div class="hero-banner">
+							<div>
+								<div class="hero-eyebrow">
+									<svg
+										width="13"
+										height="13"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+									</svg>
+									ACTIVE THREAT TELEMETRY
+								</div>
+								<h3 class="hero-title">
+									Uncover Coordinated Influence Before Narratives Scale
+								</h3>
+								<p class="hero-desc">
+									Swarmwatch fuses temporal burst modeling, semantic embedding
+									clustering, and behavioral graph forensics to expose synthetic
+									amplification networks and explain why campaigns are flagged.
+								</p>
+							</div>
+							<div class="hero-status-box">
+								<div>
+									<div class="hero-status-label">Engine Health</div>
+									<div class="hero-status-ok">
+										<span class="pulse-dot"></span> All Pipelines Nominal
+									</div>
+								</div>
+								<div class="hero-divider"></div>
+								<div>
+									<div class="hero-status-label">Active Alert</div>
+									<div class="hero-status-alert">2 High-Risk Swarms</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Metric Cards -->
+						<div class="grid-4 mb-18">
+							<div class="card metric-card">
+								<div class="metric-top">
+									<span class="metric-label">Total Analyzed Posts</span>
+									<div class="metric-icon">
+										<svg
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path
+												d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+											/>
+										</svg>
+									</div>
+								</div>
+								<div class="metric-value">1,482,910</div>
+								<div class="metric-foot">
+									<span class="badge badge-green">+18.4% 7d</span>
+									<span class="mono">42 datasets</span>
+								</div>
+							</div>
+
+							<div class="card metric-card">
+								<div class="metric-top">
+									<span class="metric-label">Detected Swarms</span>
+									<div class="metric-icon icon-violet">
+										<svg
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<circle cx="12" cy="12" r="3" />
+											<circle cx="19" cy="5" r="2" />
+											<circle cx="5" cy="19" r="2" />
+											<circle cx="5" cy="5" r="2" />
+											<circle cx="19" cy="19" r="2" />
+										</svg>
+									</div>
+								</div>
+								<div class="metric-value">37</div>
+								<div class="metric-foot">
+									<span class="badge badge-red">9 critical</span>
+									<span class="mono">avg 24 accts</span>
+								</div>
+							</div>
+
+							<div class="card metric-card">
+								<div class="metric-top">
+									<span class="metric-label">Suspicious Accounts</span>
+									<div class="metric-icon icon-red">
+										<svg
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+											<circle cx="9" cy="7" r="4" />
+											<line x1="17" y1="8" x2="23" y2="14" />
+											<line x1="23" y1="8" x2="17" y2="14" />
+										</svg>
+									</div>
+								</div>
+								<div class="metric-value">914</div>
+								<div class="metric-foot">
+									<span class="badge badge-amber">6.2% flag rate</span>
+									<span class="mono">3.4x burstiness</span>
+								</div>
+							</div>
+
+							<div class="card metric-card">
+								<div class="metric-top">
+									<span class="metric-label">Mean Coordination Index</span>
+									<div class="metric-icon icon-green">
+										<svg
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+										</svg>
+									</div>
+								</div>
+								<div class="metric-value">
+									74.2<span class="metric-denom">/100</span>
+								</div>
+								<div class="metric-foot">
+									<span class="badge badge-blue">High Alert</span>
+									<span class="mono">last 24h</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Activity Chart & Evaluation Snapshot -->
+						<div class="grid-12 mb-18">
+							<div class="card span-8">
+								<div class="card-header">
+									<div>
+										<div class="card-title">Coordination Activity Overview</div>
+										<div class="card-subtitle">
+											Synchronized amplification spikes vs. organic baseline
+											posting volume (UTC 14-day window)
+										</div>
+									</div>
+									<div class="legend-pills">
+										<span class="badge badge-blue">● Coordinated Bursts</span>
+										<span class="badge badge-slate">● Organic Baseline</span>
+									</div>
+								</div>
+								<svg
+									viewBox="0 0 760 230"
+									width="100%"
+									height="230"
+									class="chart-svg"
+								>
+									<defs>
+										<linearGradient id="areaBlue" x1="0" y1="0" x2="0" y2="1">
+											<stop
+												offset="0%"
+												stop-color="#3B82F6"
+												stop-opacity="0.38"
+											/>
+											<stop
+												offset="100%"
+												stop-color="#3B82F6"
+												stop-opacity="0"
+											/>
+										</linearGradient>
+										<linearGradient id="areaViolet" x1="0" y1="0" x2="0" y2="1">
+											<stop
+												offset="0%"
+												stop-color="#8B5CF6"
+												stop-opacity="0.28"
+											/>
+											<stop
+												offset="100%"
+												stop-color="#8B5CF6"
+												stop-opacity="0"
+											/>
+										</linearGradient>
+									</defs>
+									<g stroke="rgba(148,163,184,0.09)" stroke-dasharray="4 4">
+										<line x1="40" y1="25" x2="740" y2="25" />
+										<line x1="40" y1="75" x2="740" y2="75" />
+										<line x1="40" y1="125" x2="740" y2="125" />
+										<line x1="40" y1="175" x2="740" y2="175" />
+									</g>
+									<g fill="#64748B" font-size="10" font-family="JetBrains Mono">
+										<text x="6" y="29">100</text>
+										<text x="12" y="79">75</text>
+										<text x="12" y="129">50</text>
+										<text x="12" y="179">25</text>
+										<text x="45" y="210">May 01</text>
+										<text x="185" y="210">May 04</text>
+										<text x="325" y="210">May 07</text>
+										<text x="465" y="210">May 10</text>
+										<text x="605" y="210">May 13</text>
+										<text x="705" y="210">Today</text>
+									</g>
+									<path
+										d="M40 165 Q 110 155, 160 160 T 280 148 T 400 154 T 520 145 T 640 152 T 740 146 L 740 190 L 40 190 Z"
+										fill="url(#areaViolet)"
+										opacity="0.5"
+									/>
+									<path
+										d="M40 165 Q 110 155, 160 160 T 280 148 T 400 154 T 520 145 T 640 152 T 740 146"
+										fill="none"
+										stroke="#64748B"
+										stroke-width="1.8"
+										stroke-dasharray="5 4"
+									/>
+									<path
+										d="M40 150 L100 138 L155 142 L205 68 L255 128 L315 118 L375 44 L430 105 L490 98 L545 55 L605 112 L665 36 L740 62 L740 190 L40 190 Z"
+										fill="url(#areaBlue)"
+									/>
+									<path
+										d="M40 150 L100 138 L155 142 L205 68 L255 128 L315 118 L375 44 L430 105 L490 98 L545 55 L605 112 L665 36 L740 62"
+										fill="none"
+										stroke="#38BDF8"
+										stroke-width="2.4"
+									/>
+									<circle
+										cx="205"
+										cy="68"
+										r="4.5"
+										fill="#050811"
+										stroke="#38BDF8"
+										stroke-width="2.5"
+									/>
+									<circle
+										cx="375"
+										cy="44"
+										r="5"
+										fill="#EF4444"
+										stroke="#FCA5A5"
+										stroke-width="2"
+									/>
+									<circle
+										cx="665"
+										cy="36"
+										r="5.5"
+										fill="#EF4444"
+										stroke="#FCA5A5"
+										stroke-width="2"
+									/>
+									<g>
+										<rect
+											x="615"
+											y="6"
+											width="112"
+											height="22"
+											rx="5"
+											fill="#1E293B"
+											stroke="rgba(239,68,68,0.45)"
+										/>
+										<text
+											x="671"
+											y="20"
+											text-anchor="middle"
+											fill="#FCA5A5"
+											font-size="10"
+											font-family="JetBrains Mono"
+										>
+											Peak Swarm: 87/100
+										</text>
+									</g>
+								</svg>
+							</div>
+
+							<div class="card span-4">
+								<div class="card-header">
+									<div>
+										<div class="card-title">Evaluation Readiness</div>
+										<div class="card-subtitle">
+											Illustrative benchmark summary
+										</div>
+									</div>
+									<span class="badge badge-violet">Sample Layout</span>
+								</div>
+								<div class="progress-stack">
+									<div class="progress-item">
+										<div class="progress-meta">
+											<span>Precision (Swarm Cluster)</span
+											><span class="mono">Target &ge; 0.90</span>
+										</div>
+										<div class="score-bar full">
+											<div
+												class="score-fill fill-blue"
+												style="width: 92%"
+											></div>
+										</div>
+									</div>
+									<div class="progress-item">
+										<div class="progress-meta">
+											<span>Recall (Paraphrased Bots)</span
+											><span class="mono">Target &ge; 0.85</span>
+										</div>
+										<div class="score-bar full">
+											<div
+												class="score-fill fill-violet"
+												style="width: 87%"
+											></div>
+										</div>
+									</div>
+									<div class="progress-item">
+										<div class="progress-meta">
+											<span>False-Positive Guardrail</span
+											><span class="mono text-green">Target &le; 3.0%</span>
+										</div>
+										<div class="score-bar full">
+											<div
+												class="score-fill fill-green"
+												style="width: 95%"
+											></div>
+										</div>
+									</div>
+								</div>
+								<div class="inline-callout">
+									<span>View full evaluation suite</span>
+									<button class="btn btn-ghost btn-sm" data-nav="benchmarks">
+										Open Benchmarks &rarr;
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- Recent Analysis History -->
+						<div class="card">
+							<div class="card-header">
+								<div>
+									<div class="card-title">Recent Campaign Analyses</div>
+									<div class="card-subtitle">
+										Click any completed investigation to inspect network graphs
+										and forensic evidence
+									</div>
+								</div>
+								<button class="btn btn-ghost btn-sm" data-nav="analyze">
+									+ Upload CSV
+								</button>
+							</div>
+							<div class="table-wrap">
+								<table>
+									<thead>
+										<tr>
+											<th>Investigation Dataset</th>
+											<th>Scope</th>
+											<th>Swarms</th>
+											<th>Coordination Score</th>
+											<th>Verdict</th>
+											<th>Timestamp</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<div class="table-primary">
+													election_narrative_stream_05.csv
+												</div>
+												<div class="table-sub mono">ID: SW-2025-0891</div>
+											</td>
+											<td class="mono">48,210 posts</td>
+											<td><span class="badge badge-violet">2 Swarms</span></td>
+											<td>
+												<div class="score-bar-wrap">
+													<div class="score-bar">
+														<div
+															class="score-fill fill-red"
+															style="width: 87%"
+														></div>
+													</div>
+													<span class="mono text-red-strong">87/100</span>
+												</div>
+											</td>
+											<td>
+												<span class="badge badge-red"
+													>Critical Coordination</span
+												>
+											</td>
+											<td class="mono">14 mins ago</td>
+											<td class="text-right">
+												<button class="btn btn-ghost btn-sm" data-nav="results">
+													Inspect &rarr;
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="table-primary">
+													fin_ticker_pump_window.csv
+												</div>
+												<div class="table-sub mono">ID: SW-2025-0889</div>
+											</td>
+											<td class="mono">19,440 posts</td>
+											<td><span class="badge badge-violet">1 Swarm</span></td>
+											<td>
+												<div class="score-bar-wrap">
+													<div class="score-bar">
+														<div
+															class="score-fill fill-amber"
+															style="width: 72%"
+														></div>
+													</div>
+													<span class="mono text-amber-strong">72/100</span>
+												</div>
+											</td>
+											<td>
+												<span class="badge badge-amber"
+													>Likely Coordinated</span
+												>
+											</td>
+											<td class="mono">3 hours ago</td>
+											<td class="text-right">
+												<button class="btn btn-ghost btn-sm" data-nav="results">
+													Inspect &rarr;
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="table-primary">
+													product_launch_organic_ctrl.csv
+												</div>
+												<div class="table-sub mono">ID: SW-2025-0884</div>
+											</td>
+											<td class="mono">31,090 posts</td>
+											<td><span class="badge badge-slate">0 Swarms</span></td>
+											<td>
+												<div class="score-bar-wrap">
+													<div class="score-bar">
+														<div
+															class="score-fill fill-green"
+															style="width: 18%"
+														></div>
+													</div>
+													<span class="mono text-green-strong">18/100</span>
+												</div>
+											</td>
+											<td>
+												<span class="badge badge-green">Organic Activity</span>
+											</td>
+											<td class="mono">Yesterday</td>
+											<td class="text-right">
+												<button class="btn btn-ghost btn-sm" data-nav="results">
+													Inspect &rarr;
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</section>
+
+					<!-- =========================================================
+           PAGE B: ANALYZE WORKSPACE
+      ========================================================= -->
+					<section id="page-analyze" class="page-view">
+						<div class="grid-12">
+							<div class="span-7 stack-18">
+								<div class="card">
+									<div class="card-header">
+										<div>
+											<div class="card-title">Dataset Ingestion (CSV)</div>
+											<div class="card-subtitle">
+												Upload social media post exports for multi-signal swarm
+												forensics
+											</div>
+										</div>
+										<span class="badge badge-blue">Max 250MB &bull; UTF-8</span>
+									</div>
+
+									<div class="dropzone" id="csvDropzone">
+										<input type="file" id="csvFileInput" accept=".csv" hidden />
+										<div class="dropzone-icon">
+											<svg
+												width="24"
+												height="24"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="1.8"
+											>
+												<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+												<polyline points="17 8 12 3 7 8" />
+												<line x1="12" y1="3" x2="12" y2="15" />
+											</svg>
+										</div>
+										<div class="dropzone-title" id="dropzoneTitle">
+											Drag &amp; drop campaign CSV here, or click to browse
+										</div>
+										<div class="dropzone-sub" id="dropzoneSub">
+											Required columns:
+											<span class="mono text-cyan"
+												>account_id, timestamp, text</span
+											>
+											&bull; Optional:
+											<span class="mono">reply_to, followers, bio</span>
+										</div>
+										<div class="dropzone-actions">
+											<button
+												type="button"
+												class="btn btn-ghost btn-sm"
+												id="loadSampleBtn"
+											>
+												Load Sample Threat Dataset (48,210 rows)
+											</button>
+										</div>
+									</div>
+
+									<div id="fileInfoBox" class="file-info-box">
+										<div class="file-info-left">
+											<span class="badge badge-green">SCHEMA VALID</span>
+											<div>
+												<div id="fileNameLabel" class="file-name">
+													election_narrative_stream_05.csv
+												</div>
+												<div id="fileMetaLabel" class="file-meta mono">
+													48,210 posts &bull; 1,420 unique accounts &bull; 14.2
+													MB
+												</div>
+											</div>
+										</div>
+										<span class="mono text-green">Ready</span>
+									</div>
+								</div>
+
+								<!-- URL Ingestion (Coming Soon) -->
+								<div class="card coming-soon-card">
+									<div class="card-header">
+										<div>
+											<div class="card-title title-with-badge">
+												Live URL &amp; Thread Ingestion
+												<span class="badge badge-violet">COMING SOON</span>
+											</div>
+											<div class="card-subtitle">
+												Direct connector for public X/Twitter threads, Bluesky
+												feeds, and Telegram channels
+											</div>
+										</div>
+									</div>
+									<div class="url-input-row">
+										<input
+											type="text"
+											disabled
+											class="url-input-disabled mono"
+											placeholder="https://x.com/i/status/... or t.me/channel_stream"
+										/>
+										<button disabled class="btn btn-ghost btn-disabled">
+											Fetch &amp; Scan
+										</button>
+									</div>
+									<div class="coming-soon-note">
+										Connector pipeline in private beta. CSV batch analysis
+										provides full multi-modal forensic parity today.
+									</div>
+								</div>
+							</div>
+
+							<!-- Configuration & Pipeline Execution -->
+							<div class="span-5 stack-18">
+								<div class="card">
+									<div class="card-header">
+										<div>
+											<div class="card-title">Detection Configuration</div>
+											<div class="card-subtitle">
+												Tune forensic modules and clustering sensitivity
+											</div>
+										</div>
+									</div>
+
+									<div class="toggle-row">
+										<div>
+											<div class="toggle-title">Temporal Synchronization</div>
+											<div class="toggle-desc">
+												Detect sub-minute coordinated bursts
+											</div>
+										</div>
+										<div
+											class="switch on"
+											role="switch"
+											aria-checked="true"
+										></div>
+									</div>
+
+									<div class="toggle-row">
+										<div>
+											<div class="toggle-title">
+												Semantic Paraphrase Clustering
+											</div>
+											<div class="toggle-desc">
+												Dense embedding similarity &amp; template drift
+											</div>
+										</div>
+										<div
+											class="switch on"
+											role="switch"
+											aria-checked="true"
+										></div>
+									</div>
+
+									<div class="toggle-row">
+										<div>
+											<div class="toggle-title">Account Fingerprint Graph</div>
+											<div class="toggle-desc">
+												Co-hashtag, URL, &amp; creation-cohort linking
+											</div>
+										</div>
+										<div
+											class="switch on"
+											role="switch"
+											aria-checked="true"
+										></div>
+									</div>
+
+									<div class="toggle-row">
+										<div>
+											<div class="toggle-title">AI Manipulation Taxonomy</div>
+											<div class="toggle-desc">
+												Classify persuasion &amp; astroturfing tactics
+											</div>
+										</div>
+										<div
+											class="switch on"
+											role="switch"
+											aria-checked="true"
+										></div>
+									</div>
+
+									<div class="range-control">
+										<div class="range-header">
+											<span>Coordination Window</span>
+											<span class="mono text-cyan" id="windowLabel"
+												>180 seconds</span
+											>
+										</div>
+										<input
+											type="range"
+											id="windowRange"
+											min="30"
+											max="600"
+											step="30"
+											value="180"
+										/>
+									</div>
+
+									<button id="runAnalysisBtn" class="btn btn-primary btn-block">
+										<svg
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+										>
+											<polygon points="5 3 19 12 5 21 5 3" />
+										</svg>
+										Analyze Campaign for Swarms
+									</button>
+
+									<!-- Processing Pipeline States -->
+									<div id="pipelinePanel" class="pipeline-panel">
+										<div class="pipeline-head">
+											<span id="pipelineHeadline"
+												>Running Multi-Modal Forensics...</span
+											>
+											<span class="mono text-cyan" id="pipelinePct">0%</span>
+										</div>
+										<div class="score-bar full mb-12">
+											<div
+												id="pipelineBar"
+												class="score-fill fill-gradient"
+											></div>
+										</div>
+										<div class="stack-8">
+											<div class="pipeline-step" id="step-1">
+												<span>1.</span> Schema validation &amp; temporal
+												bucketing
+											</div>
+											<div class="pipeline-step" id="step-2">
+												<span>2.</span> Semantic embedding &amp; paraphrase
+												hashing
+											</div>
+											<div class="pipeline-step" id="step-3">
+												<span>3.</span> Behavioral graph community detection
+											</div>
+											<div class="pipeline-step" id="step-4">
+												<span>4.</span> Threat synthesis &amp; manipulation
+												tagging
+											</div>
+										</div>
+										<button
+											id="viewResultsNowBtn"
+											class="btn btn-success btn-block mt-14"
+											data-nav="results"
+										>
+											Analysis Complete — Open Results Dashboard &rarr;
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- =========================================================
+           PAGE C: RESULTS (FLAGSHIP FORENSIC VIEW)
+      ========================================================= -->
+					<section id="page-results" class="page-view">
+						<div class="grid-12 mb-18">
+							<div class="card verdict-card span-5">
+								<div class="verdict-gauge">
+									<svg viewBox="0 0 120 120" width="116" height="116">
+										<circle
+											cx="60"
+											cy="60"
+											r="50"
+											fill="none"
+											stroke="rgba(148,163,184,0.14)"
+											stroke-width="10"
+										/>
+										<circle
+											cx="60"
+											cy="60"
+											r="50"
+											fill="none"
+											stroke="#EF4444"
+											stroke-width="10"
+											stroke-linecap="round"
+											stroke-dasharray="314"
+											stroke-dashoffset="41"
+											transform="rotate(-90 60 60)"
+										/>
+									</svg>
+									<div class="verdict-gauge-label">
+										<span class="mono verdict-num">87</span>
+										<span class="mono verdict-max">/ 100</span>
+									</div>
+								</div>
+								<div>
+									<span class="badge badge-red mb-8"
+										>CRITICAL COORDINATION DETECTED</span
+									>
+									<h3 class="verdict-title">
+										High-Confidence Inauthentic Swarm
+									</h3>
+									<p class="verdict-desc">
+										Dataset
+										<span class="mono text-light"
+											>election_narrative_stream_05.csv</span
+										>
+										exhibits statistically improbable temporal locking and
+										templated framing across 42 accounts.
+									</p>
+								</div>
+							</div>
+
+							<div class="card span-7">
+								<div class="card-header mb-12">
+									<div>
+										<div class="card-title">Detected Swarm Clusters</div>
+										<div class="card-subtitle">
+											Distinct coordinated rings isolated from 1,420 total
+											accounts
+										</div>
+									</div>
+									<span class="mono text-muted-xs">Confidence: 94.2%</span>
+								</div>
+								<div class="grid-2 gap-12">
+									<div class="swarm-box swarm-alpha">
+										<div class="swarm-box-head">
+											<span>Swarm α — "Echo Core"</span>
+											<span class="badge badge-red">28 Accounts</span>
+										</div>
+										<div class="swarm-box-meta">
+											Mean inter-post lag
+											<span class="mono text-red-strong">41s</span> &bull;
+											Cosine text similarity <span class="mono">0.94</span>
+										</div>
+									</div>
+									<div class="swarm-box swarm-beta">
+										<div class="swarm-box-head">
+											<span>Swarm β — "Relay Bridge"</span>
+											<span class="badge badge-violet">14 Accounts</span>
+										</div>
+										<div class="swarm-box-meta">
+											Quote-amplifies Swarm α within
+											<span class="mono text-violet-strong">2.4m</span> &bull;
+											11 shared URLs
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Network Graph & Node Inspector -->
+						<div class="grid-12 mb-18">
+							<div class="card span-8">
+								<div class="card-header">
+									<div>
+										<div class="card-title">
+											Interactive Account Coordination Graph
+										</div>
+										<div class="card-subtitle">
+											Click any account node to inspect connections,
+											synchronization weights, and behavioral role
+										</div>
+									</div>
+									<div class="btn-group">
+										<button class="btn btn-ghost btn-sm" id="filterAllBtn">
+											All Nodes
+										</button>
+										<button class="btn btn-ghost btn-sm" id="filterSwarmBtn">
+											Swarm Only
+										</button>
+									</div>
+								</div>
+								<div class="network-stage">
+									<canvas id="networkCanvas"></canvas>
+									<div class="network-legend">
+										<span
+											><span class="legend-dot dot-violet"></span>Seed
+											Originator</span
+										>
+										<span
+											><span class="legend-dot dot-red"></span>Core
+											Amplifier</span
+										>
+										<span
+											><span class="legend-dot dot-amber"></span>Relay /
+											Bridge</span
+										>
+										<span
+											><span class="legend-dot dot-slate"></span>Organic
+											Periphery</span
+										>
+									</div>
+								</div>
+							</div>
+
+							<div class="card span-4 inspector-card">
+								<div>
+									<div class="card-header mb-10">
+										<div>
+											<div class="card-title">Node Inspector</div>
+											<div class="card-subtitle">
+												Selected account forensics
+											</div>
+										</div>
+										<span class="badge badge-red" id="inspBadge"
+											>Core Amplifier</span
+										>
+									</div>
+									<div class="inspector-panel">
+										<div class="inspector-top">
+											<div id="inspHandle" class="mono inspector-handle">
+												@civic_pulse_884
+											</div>
+											<div id="inspScore" class="mono inspector-score">
+												93/100
+											</div>
+										</div>
+										<div id="inspSummary" class="inspector-summary">
+											Synchronized with 11 peers across 6 burst windows. Shares
+											identical syntactic framing and account creation week
+											(2024-W41).
+										</div>
+										<div class="inspector-stats mono">
+											<div>
+												<span>PEERS</span
+												><strong id="inspPeers">11 edges</strong>
+											</div>
+											<div>
+												<span>AVG LAG</span><strong id="inspLag">38 sec</strong>
+											</div>
+											<div>
+												<span>POSTS</span><strong id="inspPosts">142</strong>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div>
+									<div class="subhead-sm">Top Suspicious Accounts</div>
+									<div class="stack-7" id="suspiciousQuickList"></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Posting Activity Timeline + AI Explanations -->
+						<div class="grid-12 mb-18">
+							<div class="card span-7">
+								<div class="card-header">
+									<div>
+										<div class="card-title">
+											Posting Activity &amp; Burst Synchronization Timeline
+										</div>
+										<div class="card-subtitle">
+											Highlighted shaded bands show 3-minute coordinated burst
+											windows
+										</div>
+									</div>
+									<span class="badge badge-red">4 Anomalous Bursts</span>
+								</div>
+								<svg viewBox="0 0 680 185" width="100%" height="185">
+									<rect
+										x="135"
+										y="15"
+										width="46"
+										height="140"
+										rx="4"
+										fill="rgba(239,68,68,0.12)"
+										stroke="rgba(239,68,68,0.3)"
+										stroke-dasharray="3 3"
+									/>
+									<rect
+										x="305"
+										y="15"
+										width="52"
+										height="140"
+										rx="4"
+										fill="rgba(239,68,68,0.14)"
+										stroke="rgba(239,68,68,0.35)"
+										stroke-dasharray="3 3"
+									/>
+									<rect
+										x="495"
+										y="15"
+										width="44"
+										height="140"
+										rx="4"
+										fill="rgba(139,92,246,0.14)"
+										stroke="rgba(139,92,246,0.35)"
+										stroke-dasharray="3 3"
+									/>
+									<g fill="#3B82F6">
+										<rect
+											x="48"
+											y="138"
+											width="10"
+											height="17"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="70"
+											y="132"
+											width="10"
+											height="23"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="92"
+											y="135"
+											width="10"
+											height="20"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="114"
+											y="128"
+											width="10"
+											height="27"
+											rx="2"
+											opacity="0.5"
+										/>
+										<rect
+											x="142"
+											y="34"
+											width="12"
+											height="121"
+											rx="2"
+											fill="#EF4444"
+										/>
+										<rect
+											x="158"
+											y="48"
+											width="12"
+											height="107"
+											rx="2"
+											fill="#EF4444"
+										/>
+										<rect
+											x="192"
+											y="129"
+											width="10"
+											height="26"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="224"
+											y="134"
+											width="10"
+											height="21"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="260"
+											y="122"
+											width="10"
+											height="33"
+											rx="2"
+											opacity="0.5"
+										/>
+										<rect
+											x="314"
+											y="24"
+											width="12"
+											height="131"
+											rx="2"
+											fill="#EF4444"
+										/>
+										<rect
+											x="331"
+											y="38"
+											width="12"
+											height="117"
+											rx="2"
+											fill="#EF4444"
+										/>
+										<rect
+											x="372"
+											y="125"
+											width="10"
+											height="30"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="415"
+											y="130"
+											width="10"
+											height="25"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="455"
+											y="120"
+											width="10"
+											height="35"
+											rx="2"
+											opacity="0.5"
+										/>
+										<rect
+											x="503"
+											y="42"
+											width="12"
+											height="113"
+											rx="2"
+											fill="#8B5CF6"
+										/>
+										<rect
+											x="519"
+											y="58"
+											width="12"
+											height="97"
+											rx="2"
+											fill="#8B5CF6"
+										/>
+										<rect
+											x="565"
+											y="128"
+											width="10"
+											height="27"
+											rx="2"
+											opacity="0.45"
+										/>
+										<rect
+											x="605"
+											y="134"
+											width="10"
+											height="21"
+											rx="2"
+											opacity="0.45"
+										/>
+									</g>
+									<line
+										x1="36"
+										y1="155"
+										x2="650"
+										y2="155"
+										stroke="rgba(148,163,184,0.2)"
+									/>
+									<g fill="#64748B" font-size="10" font-family="JetBrains Mono">
+										<text x="45" y="173">08:00</text>
+										<text x="136" y="173" fill="#FCA5A5">09:14 Burst</text>
+										<text x="304" y="173" fill="#FCA5A5">11:42 Burst</text>
+										<text x="492" y="173" fill="#C4B5FD">14:08 Relay</text>
+										<text x="600" y="173">16:00 UTC</text>
+									</g>
+								</svg>
+							</div>
+
+							<div class="card span-5">
+								<div class="card-header">
+									<div>
+										<div class="card-title">
+											AI Threat Explanation &amp; Manipulation Tactics
+										</div>
+										<div class="card-subtitle">
+											Why Swarmwatch flagged this campaign
+										</div>
+									</div>
+									<span class="badge badge-violet">Explainable AI</span>
+								</div>
+								<p class="ai-explanation">
+									Three seed accounts publish crisis-framed claims, followed
+									within <strong>41 seconds</strong> by 25 core amplifiers
+									posting paraphrased variations using identical causal
+									templates. A secondary relay ring injects legitimacy via
+									quote-replies to manufacture synthetic consensus.
+								</p>
+								<div class="subhead-sm">Detected Manipulation Techniques</div>
+								<div class="tag-wrap">
+									<span class="badge badge-red"
+										>Astroturfing / Synthetic Consensus</span
+									>
+									<span class="badge badge-amber"
+										>Urgency &amp; Fear Appeals</span
+									>
+									<span class="badge badge-violet">Template Paraphrasing</span>
+									<span class="badge badge-blue"
+										>Coordinated Quote-Amplification</span
+									>
+									<span class="badge badge-slate">Whataboutism Framing</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Text Similarity & Account Similarity Evidence -->
+						<div class="grid-2">
+							<div class="card">
+								<div class="card-header">
+									<div>
+										<div class="card-title">Text Similarity Evidence</div>
+										<div class="card-subtitle">
+											Semantic paraphrase alignment (Cosine Similarity:
+											<span class="mono text-violet-strong">0.94</span>)
+										</div>
+									</div>
+									<span class="badge badge-violet">Cluster #1</span>
+								</div>
+								<div class="stack-10">
+									<div class="evidence-quote">
+										<div class="evidence-meta mono">
+											@civic_pulse_884 &bull; 11:42:08 UTC
+										</div>
+										"Notice how
+										<span class="highlight-phrase"
+											>nobody in leadership is answering the audit gap</span
+										>
+										while
+										<span class="highlight-phrase"
+											>ordinary families absorb the hidden cost</span
+										>
+										#AccountabilityNow"
+									</div>
+									<div class="evidence-quote">
+										<div class="evidence-meta mono">
+											@metro_watch_019 &bull; 11:42:44 UTC (+36s)
+										</div>
+										"Why is
+										<span class="highlight-phrase"
+											>nobody in leadership addressing the audit gap</span
+										>
+										when
+										<span class="highlight-phrase"
+											>working families absorb the hidden cost</span
+										>? #AccountabilityNow"
+									</div>
+								</div>
+							</div>
+
+							<div class="card">
+								<div class="card-header">
+									<div>
+										<div class="card-title">Account Similarity Evidence</div>
+										<div class="card-subtitle">
+											Structural &amp; metadata overlap across Swarm α
+										</div>
+									</div>
+									<span class="badge badge-amber">Cohort Anomaly</span>
+								</div>
+								<div class="evidence-grid">
+									<div class="evidence-tile">
+										<div class="tile-label mono">CREATION COHORT</div>
+										<div class="tile-val">78%</div>
+										<div class="tile-desc">
+											Created within same 9-day window (Oct 2024)
+										</div>
+									</div>
+									<div class="evidence-tile">
+										<div class="tile-label mono">HASHTAG &amp; URL OVERLAP</div>
+										<div class="tile-val">0.89 Jaccard</div>
+										<div class="tile-desc">
+											Identical 4-tag sequences &amp; 3 shortened domains
+										</div>
+									</div>
+									<div class="evidence-tile span-full-row">
+										<div>
+											<div class="tile-label mono">ACTIVE-HOUR CORRELATION</div>
+											<div class="tile-desc">
+												Synchronized 09:00–17:00 UTC shift cadence (r = 0.91)
+											</div>
+										</div>
+										<span class="badge badge-red">Non-Organic</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- =========================================================
+           PAGE D: BENCHMARKS
+      ========================================================= -->
+					<section id="page-benchmarks" class="page-view">
+						<div class="disclaimer-banner">
+							<div>
+								<strong>Evaluation Schema Preview:</strong> Values shown below
+								are <em>illustrative layout placeholders</em> demonstrating
+								Swarmwatch's benchmark reporting framework—not live empirical
+								claims.
+							</div>
+							<span class="badge badge-violet">Illustrative Layout</span>
+						</div>
+
+						<div class="grid-5 mb-18">
+							<div class="card">
+								<div class="metric-label">Precision (Illustrative)</div>
+								<div class="metric-value mt-8">0.92</div>
+								<div class="metric-foot">
+									<span class="badge badge-blue">Swarm ID</span>
+								</div>
+							</div>
+							<div class="card">
+								<div class="metric-label">Recall (Illustrative)</div>
+								<div class="metric-value mt-8">0.87</div>
+								<div class="metric-foot">
+									<span class="badge badge-violet">Adversarial</span>
+								</div>
+							</div>
+							<div class="card">
+								<div class="metric-label">F1 Score (Illustrative)</div>
+								<div class="metric-value mt-8">0.89</div>
+								<div class="metric-foot">
+									<span class="badge badge-green">Harmonic</span>
+								</div>
+							</div>
+							<div class="card">
+								<div class="metric-label">False-Positive Rate</div>
+								<div class="metric-value mt-8">2.4%</div>
+								<div class="metric-foot">
+									<span class="badge badge-green">Organic Safe</span>
+								</div>
+							</div>
+							<div class="card">
+								<div class="metric-label">Overall Accuracy</div>
+								<div class="metric-value mt-8">91.8%</div>
+								<div class="metric-foot">
+									<span class="badge badge-slate">Balanced Split</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="grid-12 mb-18">
+							<div class="card span-7">
+								<div class="card-header">
+									<div>
+										<div class="card-title">
+											Baseline vs. Adversarial Challenge Comparison
+										</div>
+										<div class="card-subtitle">
+											Illustrative model robustness under paraphrasing,
+											time-jitter, and low-volume campaigns
+										</div>
+									</div>
+									<div class="legend-pills">
+										<span class="badge badge-blue">Standard Baseline</span>
+										<span class="badge badge-violet"
+											>Adversarial Challenge</span
+										>
+									</div>
+								</div>
+								<svg viewBox="0 0 640 230" width="100%" height="230">
+									<g stroke="rgba(148,163,184,0.1)" stroke-dasharray="4 4">
+										<line x1="45" y1="30" x2="610" y2="30" />
+										<line x1="45" y1="75" x2="610" y2="75" />
+										<line x1="45" y1="120" x2="610" y2="120" />
+										<line x1="45" y1="165" x2="610" y2="165" />
+									</g>
+									<g fill="#64748B" font-size="10" font-family="JetBrains Mono">
+										<text x="10" y="34">1.00</text>
+										<text x="10" y="79">0.75</text>
+										<text x="10" y="124">0.50</text>
+										<text x="10" y="169">0.25</text>
+									</g>
+									<rect
+										x="85"
+										y="42"
+										width="32"
+										height="148"
+										rx="4"
+										fill="#3B82F6"
+									/>
+									<rect
+										x="122"
+										y="54"
+										width="32"
+										height="136"
+										rx="4"
+										fill="#8B5CF6"
+									/>
+									<text
+										x="118"
+										y="212"
+										text-anchor="middle"
+										fill="#94A3B8"
+										font-size="11"
+									>
+										Precision
+									</text>
+
+									<rect
+										x="215"
+										y="48"
+										width="32"
+										height="142"
+										rx="4"
+										fill="#3B82F6"
+									/>
+									<rect
+										x="252"
+										y="68"
+										width="32"
+										height="122"
+										rx="4"
+										fill="#8B5CF6"
+									/>
+									<text
+										x="248"
+										y="212"
+										text-anchor="middle"
+										fill="#94A3B8"
+										font-size="11"
+									>
+										Recall
+									</text>
+
+									<rect
+										x="345"
+										y="45"
+										width="32"
+										height="145"
+										rx="4"
+										fill="#3B82F6"
+									/>
+									<rect
+										x="382"
+										y="61"
+										width="32"
+										height="129"
+										rx="4"
+										fill="#8B5CF6"
+									/>
+									<text
+										x="378"
+										y="212"
+										text-anchor="middle"
+										fill="#94A3B8"
+										font-size="11"
+									>
+										F1 Score
+									</text>
+
+									<rect
+										x="475"
+										y="40"
+										width="32"
+										height="150"
+										rx="4"
+										fill="#3B82F6"
+									/>
+									<rect
+										x="512"
+										y="58"
+										width="32"
+										height="132"
+										rx="4"
+										fill="#8B5CF6"
+									/>
+									<text
+										x="508"
+										y="212"
+										text-anchor="middle"
+										fill="#94A3B8"
+										font-size="11"
+									>
+										Accuracy
+									</text>
+
+									<line
+										x1="45"
+										y1="190"
+										x2="610"
+										y2="190"
+										stroke="rgba(148,163,184,0.2)"
+									/>
+								</svg>
+							</div>
+
+							<div class="card span-5">
+								<div class="card-header">
+									<div>
+										<div class="card-title">
+											Confusion Matrix (Illustrative Split)
+										</div>
+										<div class="card-subtitle">
+											Campaign-level classification (n = 500 synthetic episodes)
+										</div>
+									</div>
+								</div>
+								<div class="cm-header-row mono">
+									<div></div>
+									<div>PRED: SWARM</div>
+									<div>PRED: ORGANIC</div>
+								</div>
+								<div class="cm-grid">
+									<div class="cm-axis mono">ACTUAL SWARM</div>
+									<div class="cm-cell cm-tp">
+										<div class="cm-num mono">218</div>
+										<div class="cm-caption">True Positive (87.2%)</div>
+									</div>
+									<div class="cm-cell cm-fn">
+										<div class="cm-num mono">32</div>
+										<div class="cm-caption">False Negative (12.8%)</div>
+									</div>
+
+									<div class="cm-axis mono">ACTUAL ORGANIC</div>
+									<div class="cm-cell cm-fp">
+										<div class="cm-num mono">6</div>
+										<div class="cm-caption">False Positive (2.4%)</div>
+									</div>
+									<div class="cm-cell cm-tn">
+										<div class="cm-num mono">244</div>
+										<div class="cm-caption">True Negative (97.6%)</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header">
+								<div>
+									<div class="card-title">
+										AI Explanation &amp; Operational Evaluation Metrics
+									</div>
+									<div class="card-subtitle">
+										Quality telemetry for narrative synthesis and manipulation
+										technique classification (Illustrative)
+									</div>
+								</div>
+							</div>
+							<div class="grid-3">
+								<div class="eval-tile">
+									<div class="eval-top">
+										<span>Evidence Grounding Score</span
+										><span class="mono text-green-strong">94.6%</span>
+									</div>
+									<p>
+										Claims in AI summaries directly backed by verified post
+										timestamps, graph edges, or similarity spans.
+									</p>
+								</div>
+								<div class="eval-tile">
+									<div class="eval-top">
+										<span>Technique Tag Agreement</span
+										><span class="mono text-blue-strong">0.86 &kappa;</span>
+									</div>
+									<p>
+										Inter-rater agreement (Cohen's kappa) against human OSINT
+										analyst manipulation annotations.
+									</p>
+								</div>
+								<div class="eval-tile">
+									<div class="eval-top">
+										<span>Throughput Latency</span
+										><span class="mono text-violet-strong">3.8s / 10k</span>
+									</div>
+									<p>
+										End-to-end processing speed per 10,000 posts including
+										embedding, clustering, and explanation.
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- =========================================================
+           PAGE E: ABOUT
+      ========================================================= -->
+					<section id="page-about" class="page-view">
+						<div class="hero-banner mb-20">
+							<div>
+								<div class="hero-eyebrow">
+									PLATFORM ARCHITECTURE &amp; MISSION
+								</div>
+								<h3 class="hero-title">
+									Transparent Intelligence Against Coordinated Manipulation
+								</h3>
+								<p class="hero-desc">
+									Modern influence operations rarely rely on naive copy-paste
+									bots. They blend LLM-paraphrased messaging, staggered timing
+									windows, and multi-tier relay rings. Swarmwatch turns opaque
+									social streams into auditable forensic evidence.
+								</p>
+							</div>
+						</div>
+
+						<div class="card mb-18">
+							<div class="card-header">
+								<div>
+									<div class="card-title">Four-Stage Detection Methodology</div>
+									<div class="card-subtitle">
+										How Swarmwatch isolates coordinated swarms without flagging
+										organic viral discourse
+									</div>
+								</div>
+							</div>
+							<div class="grid-4">
+								<div class="step-pillar">
+									<span class="step-num">01 // INGESTION</span>
+									<h4>Stream Normalization</h4>
+									<p>
+										Validates schemas, aligns UTC timestamps, extracts entity
+										mentions, URLs, and reply chains from heterogeneous social
+										exports.
+									</p>
+								</div>
+								<div class="step-pillar">
+									<span class="step-num">02 // MULTI-MODAL SIGNALS</span>
+									<h4>Temporal &amp; Semantic Fusion</h4>
+									<p>
+										Measures inter-post burst anomalies alongside dense semantic
+										embeddings to catch paraphrased talking points.
+									</p>
+								</div>
+								<div class="step-pillar">
+									<span class="step-num">03 // GRAPH FORENSICS</span>
+									<h4>Swarm Community Detection</h4>
+									<p>
+										Constructs weighted account-similarity graphs and isolates
+										high-density clusters (seeders, amplifiers, relays).
+									</p>
+								</div>
+								<div class="step-pillar">
+									<span class="step-num">04 // EXPLAINABILITY</span>
+									<h4>Evidence-Backed AI Synthesis</h4>
+									<p>
+										Generates human-readable verdicts, highlights manipulation
+										tactics, and links every claim to verifiable post evidence.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="grid-2">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Core Intelligence Technologies</div>
+								</div>
+								<div class="stack-10">
+									<div class="tech-row">
+										<span>Temporal Point-Process Burst Modeling</span
+										><span class="badge badge-blue">Timing Forensics</span>
+									</div>
+									<div class="tech-row">
+										<span>Dense Transformer Semantic Embeddings</span
+										><span class="badge badge-violet">Paraphrase Match</span>
+									</div>
+									<div class="tech-row">
+										<span>Weighted Louvain / Spectral Graph Clustering</span
+										><span class="badge badge-green">Ring Discovery</span>
+									</div>
+									<div class="tech-row">
+										<span>Grounded Threat Narrative Classification</span
+										><span class="badge badge-amber">Explainable NLP</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">
+										Analyst Guardrails &amp; Responsible Design
+									</div>
+								</div>
+								<p class="about-body">
+									Swarmwatch is built around
+									<strong>behavioral coordination</strong>, not political
+									viewpoint filtering. Organic grassroots trends can exhibit
+									high volume, so Swarmwatch requires converging multi-modal
+									evidence—simultaneous timing synchronization, structural
+									account similarity, and template alignment—before escalating
+									an alert.
+								</p>
+								<div class="guardrail-callout">
+									Every verdict exposes raw similarity pairs, cluster
+									topologies, and timeline anomalies so trust &amp; safety teams
+									remain the final decision-makers.
+								</div>
+							</div>
+						</div>
+					</section>
+				</main>
+			</div>
+		</div>
+
+		<script src="js/networkGraph.js"></script>
+		<script src="js/analyze.js"></script>
+		<script src="js/navigation.js"></script>
+	</body>
+</html>

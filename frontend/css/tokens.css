@@ -1,0 +1,148 @@
+:root {
+	--bg-canvas: #050811;
+	--bg-sidebar: #070b16;
+	--bg-surface: #0b1120;
+	--bg-surface-elevated: #11192e;
+
+	--border-subtle: rgba(148, 163, 184, 0.12);
+	--border-hover: rgba(59, 130, 246, 0.35);
+
+	--text-primary: #f1f5f9;
+	--text-secondary: #94a3b8;
+	--text-muted: #64748b;
+
+	--accent-blue: #3b82f6;
+	--accent-cyan: #38bdf8;
+	--accent-violet: #8b5cf6;
+
+	--status-green: #10b981;
+	--status-amber: #f59e0b;
+	--status-red: #ef4444;
+
+	--font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+	--font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	height: 100%;
+	background-color: var(--bg-canvas);
+	color: var(--text-primary);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+/* Ambient Radial Background Glows */
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background:
+		radial-gradient(
+			600px circle at 22% 0%,
+			rgba(59, 130, 246, 0.08),
+			transparent 60%
+		),
+		radial-gradient(
+			500px circle at 92% 12%,
+			rgba(139, 92, 246, 0.07),
+			transparent 60%
+		);
+	z-index: 0;
+}
+
+.mono {
+	font-family: var(--font-mono);
+}
+
+/* Spacing & Text Helpers */
+.mb-8 {
+	margin-bottom: 8px;
+}
+.mb-10 {
+	margin-bottom: 10px;
+}
+.mb-12 {
+	margin-bottom: 12px;
+}
+.mb-18 {
+	margin-bottom: 18px;
+}
+.mb-20 {
+	margin-bottom: 20px;
+}
+.mt-8 {
+	margin-top: 8px;
+}
+.mt-14 {
+	margin-top: 14px;
+}
+.gap-12 {
+	gap: 12px;
+}
+.text-right {
+	text-align: right;
+}
+
+.text-light {
+	color: var(--text-primary);
+}
+.text-cyan {
+	color: var(--accent-cyan);
+}
+.text-green {
+	color: #6ee7b7;
+}
+.text-muted-xs {
+	font-size: 11px;
+	color: var(--text-muted);
+}
+.text-red-strong {
+	color: #fca5a5;
+	font-weight: 600;
+}
+.text-amber-strong {
+	color: #fcd34d;
+	font-weight: 600;
+}
+.text-green-strong {
+	color: #6ee7b7;
+	font-weight: 600;
+}
+.text-blue-strong {
+	color: #93c5fd;
+	font-weight: 700;
+}
+.text-violet-strong {
+	color: #c4b5fd;
+	font-weight: 600;
+}
+
+.stack-7 {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+}
+.stack-8 {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.stack-10 {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.stack-18 {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}

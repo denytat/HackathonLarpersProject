@@ -1,6 +1,6 @@
 {
   "dataset": "posts",
-  "generated_at": "2026-11-14T07:09:58.586063+00:00",
+  "generated_at": "2026-11-14T09:19:22.095073+00:00",
   "posts_file": "data\\synthetic\\posts.csv",
   "labels_file": "data\\synthetic\\labels.json",
   "total_posts": 25,
