@@ -69,9 +69,10 @@ def build_swarm_graph(
         )
 
     # Add only pairs supported by enough independent signals
+    
     weights = {
-        "text_similarity": 0.40,
-        "timing_burst": 0.30,
+        "text_similarity": 0.45,
+        "timing_burst": 0.25,
         "account_similarity": 0.30
     }
 
@@ -85,12 +86,17 @@ def build_swarm_graph(
             for signal in evidence
         )
 
+        # Require stronger combined evidence.
+        if score < 0.71:
+            continue
+
         graph.add_edge(
             account_a,
             account_b,
             score=round(score, 3),
             evidence=evidence
         )
+
 
     return graph
 

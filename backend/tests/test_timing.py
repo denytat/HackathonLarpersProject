@@ -1,32 +1,52 @@
+﻿
+import pytest
 
-import json
-from pathlib import Path
-from timing import find_timing_bursts
+from backend.timing import find_timing_bursts, parse_timestamp
 
-# Locate the project folder
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DATA_PATH = PROJECT_ROOT / "data" / "sample_posts.json"
 
-with open(DATA_PATH, "r", encoding="utf-8") as file:
-    data = json.load(file)
+def test_detects_posts_within_time_window():
+    posts = [
+        {"id": "1", "account": "user1", "timestamp": "2026-11-14T10:00:00Z"},
+        {"id": "2", "account": "user2", "timestamp": "2026-11-14T10:00:20Z"},
+        {"id": "3", "account": "user3", "timestamp": "2026-11-14T10:00:40Z"}
+    ]
 
-posts = data["posts"]
+    bursts = find_timing_bursts(
+        posts,
+        window_seconds=60,
+        min_accounts=3
+    )
 
-# Run timing detection
-bursts = find_timing_bursts(
-    posts,
-    window_seconds=60,
-    min_accounts=3
-)
+    assert len(bursts) > 0
+    assert bursts[0]["account_count"] == 3
 
-# Display results
-print("\nTIMING BURSTS FOUND:\n")
 
-for burst in bursts:
-    print("Accounts:", ", ".join(burst["accounts"]))
-    print("Posts:", ", ".join(burst["post_ids"]))
-    print("Number of accounts:", burst["account_count"])
-    print("Time:", burst["start_time"], "to", burst["end_time"])
-    print("-" * 50)
+def test_does_not_detect_posts_outside_window():
+    posts = [
+        {"id": "1", "account": "user1", "timestamp": "2026-11-14T10:00:00Z"},
+        {"id": "2", "account": "user2", "timestamp": "2026-11-14T10:05:00Z"},
+        {"id": "3", "account": "user3", "timestamp": "2026-11-14T10:10:00Z"}
+    ]
 
-print(f"\nTotal bursts found: {len(bursts)}")
+    bursts = find_timing_bursts(
+        posts,
+        window_seconds=60,
+        min_accounts=3
+    )
+
+    assert bursts == []
+
+
+def test_requires_unique_accounts():
+    posts = [
+        {"id": "1", "account": "user1", "timestamp": "2026-11-14T10:00:00Z"},
+        {"id": "2", "account": "user1", "timestamp": "2026-11-14T10:00:10Z"},
+        {"id": "3", "account": "user1", "timestamp": "2026-11-14T10:00:20Z"}
+    ]
+
+    assert find_timing_bursts(posts, min_accounts=3) == []
+
+
+def test_rejects_invalid_timestamp():
+    with pytest.raises(ValueError):
+        parse_timestamp("not-a-timestamp")

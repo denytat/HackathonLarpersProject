@@ -1,28 +1,45 @@
+﻿
+from backend.similarity import find_similar_posts
 
-import json
-from pathlib import Path
-from similarity import find_similar_posts
 
-# Find the project root directory
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DATA_PATH = PROJECT_ROOT / "data" / "sample_posts.json"
+def test_identifies_similar_posts():
+    posts = [
+        {
+            "id": "1",
+            "account": "user1",
+            "text": "Breaking news about a major election today"
+        },
+        {
+            "id": "2",
+            "account": "user2",
+            "text": "Breaking news about a major election today"
+        },
+        {
+            "id": "3",
+            "account": "user3",
+            "text": "I enjoy playing football on weekends"
+        }
+    ]
 
-# Load the sample dataset
-with open(DATA_PATH, "r", encoding="utf-8") as file:
-    data = json.load(file)
+    matches = find_similar_posts(posts, threshold=0.75)
 
-posts = data["posts"]
+    assert len(matches) == 1
+    assert matches[0]["post_1"] == "1"
+    assert matches[0]["post_2"] == "2"
 
-# Run similarity detection
-matches = find_similar_posts(posts)
 
-# Print results
-print("\nSIMILAR POSTS FOUND:\n")
+def test_returns_empty_for_single_post():
+    posts = [
+        {"id": "1", "account": "user1", "text": "Hello world"}
+    ]
 
-for match in matches:
-    print(
-        f"{match['account_1']} and {match['account_2']} | "
-        f"Similarity: {match['similarity']}"
-    )
+    assert find_similar_posts(posts) == []
 
-print(f"\nTotal matches: {len(matches)}")
+
+def test_returns_empty_for_identical_empty_texts():
+    posts = [
+        {"id": "1", "account": "user1", "text": ""},
+        {"id": "2", "account": "user2", "text": ""}
+    ]
+
+    assert find_similar_posts(posts) == []
