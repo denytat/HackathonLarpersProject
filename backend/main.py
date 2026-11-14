@@ -2,7 +2,7 @@
 from fastapi import FastAPI, HTTPException
 
 from backend.schemas import AnalyzeRequest, AnalyzeResponse
-from backend.detector import analyze_posts
+from backend.phase2 import run_phase2
 
 
 app = FastAPI(
@@ -30,7 +30,7 @@ def health():
 def analyze(req: AnalyzeRequest):
 
     try:
-        result = analyze_posts(req.posts)
+        result = run_phase2(req.posts)
         return result
 
     except ValueError as error:

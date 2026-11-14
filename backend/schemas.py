@@ -1,6 +1,6 @@
+from typing import Any, Optional
 
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, Field
 
 
 class PostInput(BaseModel):
@@ -16,16 +16,30 @@ class AnalyzeRequest(BaseModel):
     posts: list[PostInput]
 
 
+class SwarmAIAnalysis(BaseModel):
+    status: str
+    gemini: Optional[dict[str, Any]] = None
+    verdict: str
+    explanation: str
+
+
 class SwarmResult(BaseModel):
     id: str
     accounts: list[str]
     score: float
     evidence: list[dict]
+    ai_analysis: Optional[SwarmAIAnalysis] = None
 
 
 class TechniqueResult(BaseModel):
     name: str
     span: str
+    explanation: str
+
+
+class PostAIAnalysis(BaseModel):
+    status: str
+    confidence: float = Field(ge=0, le=1)
     explanation: str
 
 
@@ -35,6 +49,7 @@ class PostResult(BaseModel):
     verdict: str
     confidence: float
     flagged_by: list[str]
+    ai_analysis: Optional[PostAIAnalysis] = None
 
 
 class AnalyzeResponse(BaseModel):
