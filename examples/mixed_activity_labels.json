@@ -1,0 +1,9 @@
+﻿{
+  "dataset": "mixed_activity.csv",
+  "synthetic": true,
+  "scenario": "A coordinated group operating alongside independent organic users.",
+  "intended_coordinated_accounts": ["campaign_a", "campaign_b", "campaign_c", "campaign_d"],
+  "intended_coordinated_post_ids": ["mx_001", "mx_002", "mx_003", "mx_004", "mx_005", "mx_006", "mx_007", "mx_008"],
+  "intended_organic_accounts": ["regular_01", "regular_02", "regular_03", "regular_04", "regular_05", "regular_06", "regular_07", "regular_08"],
+  "note": "Reference scenario labels only. They are not guaranteed detector predictions."
+}

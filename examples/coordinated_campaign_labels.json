@@ -1,0 +1,9 @@
+﻿{
+  "dataset": "coordinated_campaign.csv",
+  "synthetic": true,
+  "scenario": "A deliberately coordinated group mixed with unrelated organic posts.",
+  "intended_coordinated_accounts": ["account_alpha", "account_beta", "account_gamma", "account_delta"],
+  "intended_coordinated_post_ids": ["cc_001", "cc_002", "cc_003", "cc_004", "cc_005", "cc_006", "cc_007", "cc_008"],
+  "intended_organic_accounts": ["organic_01", "organic_02", "organic_03", "organic_04", "organic_05", "organic_06", "organic_07", "organic_08"],
+  "note": "Reference scenario labels only. They are not guaranteed detector predictions."
+}

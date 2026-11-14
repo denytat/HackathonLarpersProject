@@ -1,0 +1,21 @@
+﻿{
+  "synthetic": true,
+  "datasets": [
+    {
+      "file": "coordinated_campaign.csv",
+      "intended_scenario": "coordinated_group_present",
+      "reference_labels": "coordinated_campaign_labels.json"
+    },
+    {
+      "file": "organic_discussion.csv",
+      "intended_scenario": "organic_discussion",
+      "reference_labels": "organic_discussion_labels.json"
+    },
+    {
+      "file": "mixed_activity.csv",
+      "intended_scenario": "coordinated_and_organic_activity",
+      "reference_labels": "mixed_activity_labels.json"
+    }
+  ],
+  "warning": "Synthetic reference scenarios do not guarantee detector outputs or real-world performance."
+}

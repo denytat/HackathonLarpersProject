@@ -1,169 +1,296 @@
 # Swarmspotter
 
-**Spots coordinated bot swarms and names the propaganda techniques they use, with measured precision and honest false-positive rates.**
+**Detect coordinated activity across groups of social-media accounts,
+examine manipulation techniques, and make the evidence understandable.**
 
-Live demo: https://swarmspotter.tech
-Built at Junction 2026 for the Hostinger challenge, also entered in the Google Gemini and NVIDIA Nemotron challenges.
+[Website](https://swarmspotter.tech) · Built at **Junction 2026** for
+the Hostinger challenge, with entries in the Google Gemini, NVIDIA
+Nemotron and Verda challenges.
 
 ---
 
-## The problem
+## Why it matters
 
-Propaganda and bot networks spread faster than fact-checkers can react. Most tools judge one post at a time, but manipulation shows up mainly in the *pattern*: many accounts posting near-identical text within seconds and amplifying each other. Detectors also rarely say how often they wrongly flag real people.
+Manipulation campaigns are difficult to understand by looking at one
+post in isolation. Coordination can become visible across many accounts:
+repeated or near-identical messages, bursts of activity, and similar
+account behaviour.
+
+Swarmspotter analyses batches of posts to surface those patterns. It is
+designed to show the evidence behind a result and to make false
+positives visible---not to treat coordination as automatic proof of
+malicious intent.
 
 ## What it does
 
-Upload a batch of posts (CSV or JSON) and get:
+- **Analyses batches of posts** supplied as CSV, JSON or by provided URL.
+- **Looks for coordinated behaviour** across accounts using timing,
+  text similarity and account-level patterns.
+- **Explains suspicious patterns** with evidence that a reviewer can
+  inspect.
+- **Uses AI-assisted technique analysis** to identify possible
+  manipulation techniques in post text and explain the reasoning.
+- **Supports evaluation** on labelled datasets, including organic
+  look-alike cases.
 
-1. **Suspected swarms**: groups of accounts acting in coordination, with plain-language evidence (for example "14 accounts posted near-identical text within 90 seconds").
-2. **Named manipulation techniques** per post (loaded language, fear appeal, whataboutism, fabricated authority and so on), with the exact text span and an explanation, so a reader learns *why* something is propaganda.
-3. **A verdict with confidence**: `flagged`, `uncertain` or `organic`.
-4. **An evaluation page** with precision, recall and false-positive rate on a labeled test set, including hard cases such as organic viral posts.
+The exact output depends on the enabled analysis components and the data
+supplied. Model-generated technique labels are suggestions for human
+review, not verified facts.
+
+## Try it with the example datasets
+
+You do not need to collect your own social-media data to explore the
+project. The [`examples/`](examples/) folder contains three small,
+fictional CSV datasets:
+
+---
+
+Example What it demonstrates
+
+---
+
+[`coordinated_campaign.csv`](examples/coordinated_campaign.csv) A group of accounts posting closely
+related alarming claims in short
+bursts, mixed with unrelated
+discussion.
+
+[`organic_discussion.csv`](examples/organic_discussion.csv) An organic conversation about the
+same event, with posts close
+together in time but distinct
+wording. Useful for inspecting
+possible false positives.
+
+[`mixed_activity.csv`](examples/mixed_activity.csv) A coordinated cluster alongside a
+separate organic community
+conversation.
+
+---
+
+**To try them:**
+
+1.  Open the [Swarmspotter demo](https://swarmspotter.tech).
+2.  Go to the batch/post analysis workflow.
+3.  Upload one of the CSV files from `examples/`.
+4.  Inspect the detected patterns, supporting evidence and post-level
+    analysis.
+5.  Compare the result with
+    [`benchmark_labels.json`](examples/benchmark_labels.json), which
+    contains the ground-truth account labels for each example.
+
+The labels file is for evaluation; upload it only if the evaluation
+workflow explicitly asks for ground-truth labels. More details are in
+[`examples/README.md`](examples/README.md).
+
+> These are fictional demonstration fixtures. They are not real-world
+> campaign data and do not establish real-world accuracy.
+
+## How We Used the Challenge Technologies
+
+Swarmwatch combines Google Gemini, NVIDIA Nemotron and Verda to approach coordinated manipulation from different perspectives. Each technology has a specific role in the system.
+
+### Google Gemini — Swarm-Level Intelligence
+
+We use Google Gemini to analyse the wider context of potentially coordinated activity.
+
+Rather than examining a single post in isolation, Gemini helps interpret groups of posts and identify:
+
+- Shared narratives and recurring claims.
+- Similar messaging and communication strategies.
+- Common framing across different accounts.
+- Potential manipulation patterns and campaign context.
+- Explanations of why a group of posts may deserve further investigation.
+
+Gemini adds contextual reasoning to the measurable coordination signals detected by our backend. Its findings are AI-generated assessments, not definitive proof of malicious activity.
+
+### NVIDIA Nemotron — Manipulation Technique Detection
+
+We use NVIDIA Nemotron for post-level analysis.
+
+Nemotron examines individual posts and identifies possible manipulation techniques, including:
+
+- Repetitive messaging.
+- Hashtag spamming.
+- Narrative amplification.
+- Emotional manipulation.
+- Impersonation.
+- Misleading claims.
+
+This allows Swarmwatch to go beyond detecting that accounts are behaving similarly. It can also help explain what communication techniques appear in their content.
+
+Nemotron's classification is one piece of evidence. A post receiving a manipulation label does not automatically mean that its author is part of a coordinated campaign.
+
+### Verda — GPU Infrastructure and Model Hosting
+
+Verda provides the infrastructure used to deploy and serve NVIDIA Nemotron.
+
+We deployed the Nemotron model in a dedicated GPU-backed container on Verda and connected it to our backend through an OpenAI-compatible inference API.
+
+This approach allowed us to use a large AI model without running it directly on our application server.
+
+The backend sends requests to the Verda-hosted inference endpoint, receives Nemotron's classification results and integrates them into the analysis workflow.
+
+Verda therefore provides the computing infrastructure, while NVIDIA Nemotron performs the actual AI analysis.
+
+### How the Technologies Work Together
+
+The technologies complement our own coordination-detection system:
+
+1. **Swarm detection:** Our backend identifies relationships between accounts using posting-time patterns, text similarity and account behaviour.
+2. **Nemotron:** Examines individual posts and identifies possible manipulation techniques.
+3. **Gemini:** Analyses the wider narrative and context across groups of posts.
+4. **Verda:** Hosts the GPU-backed Nemotron inference service used by the backend.
+
+By combining measurable behavioural signals with AI-assisted content analysis, Swarmwatch aims to provide more transparent and useful explanations of suspicious coordinated activity.
+
+### Our Approach to Responsible AI
+
+We do not treat AI-generated conclusions as facts. Similar posting patterns do not necessarily indicate malicious coordination, and AI models can make mistakes.
+
+Swarmwatch is designed to present evidence and assessments that help users investigate potential manipulation, rather than automatically label accounts or individuals as malicious.
 
 ## How it works
 
-| Layer | What it does | Tech |
-|---|---|---|
-| 1. Swarm detection | Posting-time bursts, near-duplicate text, account-similarity graph, community detection. Deterministic and measurable. | Python, scikit-learn, networkx |
-| 2. Technique classification | Labels manipulation techniques from a fixed list and explains each one. Its vision input can read screenshots of posts. | NVIDIA Nemotron 3.5 Super VL |
-| 3. Cross-check and grounding | Reads a whole suspected swarm in one long-context call for a second opinion, and checks factual claims with search grounding. | Google Gemini |
-| 4. Agreement rule | A post is flagged only when the swarm signals and the model verdicts agree. Otherwise it is shown as `uncertain`. This is the main defence against false positives. | Our code |
+---
 
-## Status
+Layer Role Technology
 
-Work in progress, built over 48 hours.
+---
 
-- [x] Public deployment with HTTPS on a Hostinger VPS
-- [x] FastAPI backend with a stub `/analyze` that follows the API contract
-- [x] Streamlit UI shell
-- [x] Nemotron and Gemini API calls verified
-- [ ] Swarm detector (layer 1)
-- [ ] Nemotron technique classifier (layer 2)
-- [ ] Gemini cross-check (layer 3)
-- [ ] Labeled evaluation set and evaluation page
-- [ ] Agreement rule and `uncertain` verdict
+Batch analysis API Validates and processes Python, FastAPI,
+structured post data. Pydantic
+
+Coordination analysis Looks for timing bursts, Python, scikit-learn,
+similar text and NetworkX
+account-level patterns  
+ across posts.
+
+Technique analysis Produces AI-assisted NVIDIA Nemotron
+explanations and  
+ possible  
+ manipulation-technique  
+ labels.
+
+Swarm-level Adds broader Google Gemini
+interpretation narrative/context  
+ analysis where enabled.
+
+User interface Lets users submit data Streamlit
+and inspect results.
+
+Deployment Serves the application Docker Compose, Caddy,
+over HTTPS. Hostinger VPS
+
+---
+
+AI outputs can be incomplete or wrong. Swarm-level coordination signals
+and post-level technique classification answer different questions and
+should be interpreted separately.
 
 ## Architecture
 
+```text
+Browser
+  |
+  | HTTPS
+  v
+Caddy (TLS / reverse proxy)
+  |
+  +----> Streamlit UI (:8501)
+  |
+  +----> FastAPI (:8000)
+             |
+             +----> Coordination analysis
+             |
+             +----> NVIDIA Nemotron inference
+             |
+             +----> Google Gemini analysis (when enabled)
 ```
-Browser ──HTTPS──▶ Caddy ──▶ Streamlit UI (:8501) ──▶ FastAPI (:8000) ──▶ Nemotron endpoint
-                      │                                        └────────▶ Gemini API
-                      └──/api/*──▶ FastAPI (:8000)
-```
 
-Everything runs as three Docker containers (`api`, `ui`, `caddy`) on one Hostinger KVM 2 VPS. Caddy handles HTTPS certificates automatically.
+The deployed application uses Docker Compose services for the API, UI
+and Caddy reverse proxy.
 
-## API contract
+## API
 
-The full contract is in [`docs/contract.md`](docs/contract.md).
+The API contract is documented in
+[`docs/contract.md`](docs/contract.md).
 
-`POST /analyze`
+### `POST /analyze`
+
+Accepts a JSON object containing a `posts` array. Each post uses this
+shape:
 
 ```json
 {
-  "posts": [
-    {"id": "p1", "account": "user_a", "text": "...",
-     "timestamp": "2026-11-13T21:00:00Z", "reply_to": null, "image_url": null}
-  ]
+	"posts": [
+		{
+			"id": "p1",
+			"account": "user_a",
+			"text": "Example post text",
+			"timestamp": "2026-11-13T21:00:00Z",
+			"reply_to": null,
+			"image_url": null
+		}
+	]
 }
 ```
 
-Returns swarms (accounts, score, evidence) and per-post techniques, verdict, confidence and which detectors flagged it.
+### `GET /health`
 
-`GET /health` returns `{"status": "ok"}`.
+Returns the service health status.
 
-## Run it locally
+### URL analysis
 
-Requirements: Python 3.11 or newer. Docker is optional for local work.
+The backend also provides `POST /analyze/urls` for supported webpage and
+social-post URL inputs. Ordinary webpages can be collected and analyzed
+as page content. Social-platform URLs may require platform API access or
+authentication; URL recognition does not mean the post can always be
+retrieved.
 
-```powershell
-git clone https://github.com/denytat/HackathonLarpersProject
-cd HackathonLarpersProject
-python -m venv .venv
-.venv\Scripts\Activate.ps1            # macOS/Linux: source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
+A single webpage/article can be analyzed for content and possible
+techniques, but **one URL cannot establish coordinated behaviour**.
+Swarm detection requires a batch of posts with account identifiers and
+timestamps.
 
-Create a `.env` file in the project root (never commit it):
+## Evaluation and reproducibility
 
-```
-VERDA_INFERENCE_KEY=your-nemotron-key
-NEMOTRON_BASE_URL=https://containers.datacrunch.io/nemotron-3-5-super-vl-b300/v1
-NEMOTRON_MODEL=nemotron-3.5-super-vl
-GEMINI_API_KEY=your-gemini-key
-GEMINI_MODEL=gemini-3.8-flash
-API_URL=http://localhost:8000
-```
+The repository includes labelled synthetic datasets and evaluation
+tooling. Before publication, benchmark results should be regenerated
+from the committed code and datasets and saved under `reports/`.
 
-Start the backend and the UI in two terminals:
+Report at least:
 
-```powershell
-python -m uvicorn backend.main:app --reload
-python -m streamlit run frontend/app.py
-```
+- Dataset size and composition (posts and unique accounts)
+- True positives, false positives, true negatives and false negatives
+- Precision, recall and F1
+- False-positive rate
+- Results for each component separately and for any combined decision
+  rule, where implemented
+- Important failure cases and known limitations
 
-Check that the model keys work:
+Always identify synthetic data as synthetic. Small synthetic benchmarks
+are useful for repeatable engineering checks, but they are not a
+substitute for evaluation on representative real-world data. Do not
+present synthetic scores as expected real-world performance.
 
-```powershell
-python scripts\test_nvidia.py
-python scripts\test_gemini.py
-```
+## Limitations and responsible use
 
-> Nemotron spends many tokens on hidden reasoning. Keep `max_tokens` at 4000 or higher, otherwise `message.content` can come back empty.
-
-## Run it with Docker
-
-```bash
-docker compose up -d --build
-docker compose ps
-```
-
-Set `API_URL=http://api:8000` in the server's `.env`. Put your domain in the first line of the `Caddyfile`.
-
-## Deploy to the VPS
-
-```bash
-ssh root@<vps-ip>
-cd /opt/swarmspotter
-git pull origin main
-docker compose up -d --build
-docker compose logs --tail 30 caddy
-```
-
-Rebuild only when files in `backend/`, `frontend/`, `requirements.txt`, the Dockerfiles, `docker-compose.yml` or the `Caddyfile` change.
-
-## Repository layout
-
-```
-backend/        FastAPI app and detection logic
-frontend/       Streamlit UI
-data/           Sample data and the labeled evaluation set
-docs/           API contract
-scripts/        Helper scripts (model connectivity tests)
-docker-compose.yml
-Caddyfile
-requirements.txt
-```
-
-## Git workflow
-
-- `main`: deployed. Merge into it only from `dev`.
-- `dev`: integration branch. Both feature branches open pull requests into it.
-- `roman`, `egor`: personal feature branches.
-- Secrets live only in local `.env` files and are never committed.
-
-## Evaluation
-
-Results will be published here and on the dashboard's evaluation page: precision, recall and false-positive rate for each layer on its own and for the combined agreement rule, plus a list of real failure cases.
-
-_Numbers to be added after the evaluation run. Synthetic test data is labeled as synthetic._
-
-## Honest limitations
-
-- Coordinated behaviour is not proof of bad intent. Fandoms, newsrooms and campaigns can look coordinated, which is why we test against organic look-alikes and report false positives.
-- Technique labels come from a language model and can be wrong. They are shown with an explanation so a human can judge them.
-- Part of the test data is synthetic and may not reflect real campaigns.
+- **Coordination is not proof of malicious intent.** Activists,
+  newsrooms, fandoms and ordinary communities can behave in
+  coordinated ways.
+- **AI classifications can be wrong.** Treat technique labels and
+  explanations as decision support, not ground truth.
+- **Synthetic examples are limited.** They may not capture the
+  diversity and complexity of real campaigns.
+- **Platform access is constrained.** Recognizing a social-media URL
+  does not guarantee access to its post; platform APIs, authentication
+  and rate limits may apply.
+- **A single article is not a swarm.** Article analysis and
+  multi-account coordination analysis are distinct tasks.
 
 ## Team
 
-Hackathon Larpers: Roman and Egor.
+**Hackathon Larpers** --- Roman and Egor.
+
+---
+
+_Built at Junction 2026._
