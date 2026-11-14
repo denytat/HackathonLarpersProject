@@ -1,3 +1,4 @@
+
 from typing import Any, Optional
 
 from pydantic import BaseModel, Field
@@ -14,6 +15,32 @@ class PostInput(BaseModel):
 
 class AnalyzeRequest(BaseModel):
     posts: list[PostInput]
+
+
+class AnalyzeUrlsRequest(BaseModel):
+    urls: list[str] = Field(min_length=1, max_length=50)
+
+
+
+class UrlPostResult(BaseModel):
+    input_index: int
+    url: str
+    platform: Optional[str] = None
+    post_id: Optional[str] = None
+    content_type: Optional[str] = None
+    domain: Optional[str] = None
+    title: Optional[str] = None
+    text: Optional[str] = None
+    status: str
+    error: Optional[str] = None
+    analysis: Optional[dict[str, Any]] = None
+
+
+
+class AnalyzeUrlsResponse(BaseModel):
+    results: list[UrlPostResult]
+    collected_count: int
+    analysis: Optional[dict[str, Any]] = None
 
 
 class SwarmAIAnalysis(BaseModel):
