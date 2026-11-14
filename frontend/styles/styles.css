@@ -1,0 +1,250 @@
+/* SWARMWATCH — dark glass UI, no glowing borders */
+:root {
+	color-scheme: dark;
+	--sw-bg: #0b1018;
+	--sw-sidebar: #121a26;
+	--sw-surface: #172131;
+	--sw-border: rgba(255, 255, 255, 0.08);
+	--sw-text: #e8eef7;
+	--sw-muted: #a8b7ca;
+	--sw-accent: #7ea8f8;
+}
+
+html,
+body,
+.stApp,
+[data-testid="stAppViewContainer"] {
+	background-color: var(--sw-bg) !important;
+	color: var(--sw-text) !important;
+}
+[data-testid="stHeader"] {
+	background: var(--sw-bg) !important;
+}
+[data-testid="stSidebar"] {
+	background: rgba(18, 26, 38, 0.96) !important;
+	border-right: 1px solid var(--sw-border) !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--sw-text);
+}
+
+/* Frosted containers — subtle borders, no halo or shine */
+[data-testid="stVerticalBlockBorderWrapper"],
+[data-testid="stMetric"],
+[data-testid="stExpander"] {
+	background: rgba(25, 42, 65, 0.48) !important;
+	border: 1px solid var(--sw-border) !important;
+	border-radius: 14px !important;
+	box-shadow: none !important;
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+}
+[data-testid="stMetric"] {
+	padding: 14px;
+}
+[data-testid="stMetricValue"] {
+	color: var(--sw-text) !important;
+}
+[data-testid="stMetricLabel"] {
+	color: var(--sw-muted) !important;
+}
+[data-testid="stVerticalBlockBorderWrapper"]:hover,
+[data-testid="stMetric"]:hover,
+[data-testid="stExpander"]:hover {
+	border-color: var(--sw-border) !important;
+	box-shadow: none !important;
+	transform: none !important;
+}
+
+/* Glass buttons without glow */
+.stButton > button,
+.stDownloadButton > button,
+.stFormSubmitButton > button,
+.stLinkButton > a {
+	background: rgba(40, 60, 85, 0.65) !important;
+	color: var(--sw-text) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 11px !important;
+	box-shadow: none !important;
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+	transition: background-color 180ms ease;
+	transform: none !important;
+}
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+.stFormSubmitButton > button:hover,
+.stLinkButton > a:hover {
+	background: rgba(55, 78, 108, 0.78) !important;
+	border-color: rgba(255, 255, 255, 0.1) !important;
+	box-shadow: none !important;
+	transform: none !important;
+}
+.stButton > button::before,
+.stDownloadButton > button::before,
+.stFormSubmitButton > button::before,
+.stLinkButton > a::before {
+	content: none !important;
+}
+.stButton > button:focus-visible,
+.stDownloadButton > button:focus-visible,
+.stFormSubmitButton > button:focus-visible {
+	outline: 2px solid #a8cfff;
+	outline-offset: 2px;
+}
+
+/* Upload and form controls */
+[data-testid="stFileUploader"] {
+	background: rgba(27, 43, 64, 0.45);
+	border: 1px solid var(--sw-border);
+	border-radius: 14px;
+	padding: 12px;
+	box-shadow: none !important;
+}
+[data-testid="stFileUploaderDropzone"] {
+	background: rgba(20, 34, 52, 0.5) !important;
+	border: 1px dashed rgba(255, 255, 255, 0.16) !important;
+	border-radius: 12px !important;
+}
+[data-testid="stSelectbox"] > div > div {
+	background: rgba(27, 43, 64, 0.65) !important;
+	border-color: rgba(255, 255, 255, 0.12) !important;
+	border-radius: 10px !important;
+}
+
+/* Compact overview */
+.sw-overview-heading,
+.sw-analyze-heading {
+	margin-bottom: 12px;
+}
+.sw-overview-heading h1,
+.sw-analyze-heading h1 {
+	color: #f0f5ff;
+	font-size: 1.8rem;
+	font-weight: 650;
+	letter-spacing: -0.035em;
+	margin: 0;
+}
+.sw-overview-heading p,
+.sw-analyze-heading p {
+	color: #9dafc5;
+	font-size: 0.85rem;
+	margin: 4px 0 0;
+}
+.sw-overview-source {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: #a6b8cc;
+	font-size: 0.76rem;
+	margin-bottom: 12px;
+}
+.sw-overview-source-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #7eb6a4;
+}
+.sw-overview-metric,
+.sw-overview-stage {
+	background: rgba(27, 43, 64, 0.62);
+	border: 1px solid var(--sw-border);
+	border-radius: 14px;
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+	box-shadow: none !important;
+}
+.sw-overview-metric {
+	min-height: 116px;
+	padding: 16px;
+}
+.sw-overview-metric-label {
+	color: #9dafc5;
+	font-size: 0.78rem;
+	font-weight: 500;
+}
+.sw-overview-metric-value {
+	color: #f0f5ff;
+	font-size: clamp(1.2rem, 2vw, 1.8rem);
+	font-weight: 650;
+	letter-spacing: -0.035em;
+	margin-top: 8px;
+	overflow-wrap: anywhere;
+}
+.sw-overview-metric-detail {
+	color: #8fa1b8;
+	font-size: 0.7rem;
+	margin-top: 5px;
+}
+.sw-overview-section-title {
+	color: #e8eef7;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 22px 0 12px;
+}
+.sw-overview-stage {
+	min-height: 126px;
+	padding: 14px;
+}
+.sw-overview-stage-number {
+	color: #93aeca;
+	font-size: 0.72rem;
+	font-weight: 600;
+}
+.sw-overview-stage-title {
+	color: #f0f5ff;
+	font-size: 0.94rem;
+	font-weight: 600;
+	margin-top: 9px;
+}
+.sw-overview-stage-detail {
+	color: #9dafc5;
+	font-size: 0.74rem;
+	line-height: 1.45;
+	margin-top: 5px;
+}
+.sw-overview-metric:hover,
+.sw-overview-stage:hover {
+	border-color: var(--sw-border);
+	box-shadow: none !important;
+	transform: none !important;
+}
+
+/* Sidebar and footer */
+[data-testid="stSidebar"] div[role="radiogroup"] label {
+	border-radius: 11px;
+	transition: background-color 180ms ease;
+}
+[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+	background: rgba(126, 168, 248, 0.1);
+}
+.sw-footer {
+	margin-top: 3rem;
+	padding: 1.5rem 0;
+	border-top: 1px solid var(--sw-border);
+	text-align: center;
+	color: var(--sw-muted);
+	font-size: 0.8rem;
+	line-height: 1.8;
+}
+@media (max-width: 768px) {
+	.sw-overview-metric {
+		min-height: 96px;
+	}
+	.sw-overview-stage {
+		min-height: 110px;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.stButton > button,
+	.stDownloadButton > button,
+	.stFormSubmitButton > button,
+	.stLinkButton > a {
+		transition: none !important;
+	}
+}

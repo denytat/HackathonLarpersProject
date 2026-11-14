@@ -1,0 +1,1894 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<meta content="web_dashboard" name="shell-type" />
+		<link href="https://fonts.googleapis.com" rel="preconnect" />
+		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			@layer base {
+				html,
+				body {
+					margin: 0;
+					padding: 0;
+				}
+				body {
+					overscroll-behavior: none;
+				}
+				main > :first-child {
+					margin-top: 0 !important;
+				}
+				main > :last-child {
+					margin-bottom: 0 !important;
+				}
+			}
+			::-webkit-scrollbar {
+				display: none;
+			}
+		</style>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script id="tailwind-config">
+			tailwind.config = {
+				darkMode: "class",
+				theme: {
+					extend: {
+						colors: {
+							"outline-variant": "#c7c4d7",
+							"surface-container-lowest": "#ffffff",
+							"on-surface": "#181c22",
+							"surface-bright": "#f8f9ff",
+							"on-secondary-container": "#61656b",
+							"on-background": "#181c22",
+							"on-tertiary-fixed": "#301400",
+							"primary-container": "#5a5ce3",
+							"on-primary-fixed": "#07006c",
+							"on-primary-fixed-variant": "#302fbb",
+							"primary-fixed-dim": "#c1c1ff",
+							"tertiary-fixed": "#ffdcc5",
+							tertiary: "#83450a",
+							"surface-container-high": "#e5e8f0",
+							secondary: "#5b5f65",
+							"secondary-fixed": "#dfe2ea",
+							"on-error-container": "#93000a",
+							"on-error": "#ffffff",
+							"tertiary-container": "#a15c22",
+							"surface-container-low": "#f0f3fc",
+							"on-secondary": "#ffffff",
+							primary: "#4041c9",
+							"inverse-surface": "#2c3137",
+							"on-tertiary-fixed-variant": "#703800",
+							"on-surface-variant": "#464554",
+							"secondary-container": "#dfe2ea",
+							"on-tertiary-container": "#ffede3",
+							"on-primary": "#ffffff",
+							"surface-container-highest": "#dfe2eb",
+							"tertiary-fixed-dim": "#ffb782",
+							"inverse-on-surface": "#eef1f9",
+							"inverse-primary": "#c1c1ff",
+							"surface-variant": "#dfe2eb",
+							"on-secondary-fixed": "#181c21",
+							"surface-container": "#ebeef6",
+							"surface-dim": "#d7dae2",
+							"secondary-fixed-dim": "#c3c6ce",
+							"error-container": "#ffdad6",
+							outline: "#767586",
+							"on-tertiary": "#ffffff",
+							surface: "#f8f9ff",
+							"on-primary-container": "#f2efff",
+							"primary-fixed": "#e1e0ff",
+							error: "#ba1a1a",
+							"on-secondary-fixed-variant": "#43474d",
+							background: "#f8f9ff",
+							"surface-tint": "#4a4bd3",
+						},
+						borderRadius: {
+							DEFAULT: "0.125rem",
+							lg: "0.25rem",
+							xl: "0.5rem",
+							full: "0.75rem",
+						},
+						spacing: {
+							"space-xs": "0.25rem",
+							"space-xl": "2rem",
+							margin: "1rem",
+							"space-md": "0.75rem",
+							"space-lg": "1.25rem",
+							"space-sm": "0.375rem",
+							gutter: "0.75rem",
+						},
+						fontFamily: {
+							"data-md": ["JetBrains Mono"],
+							"body-sm": ["Inter"],
+							"data-sm": ["JetBrains Mono"],
+							"display-lg": ["Inter"],
+							"body-md": ["Inter"],
+							"headline-lg": ["Inter"],
+							"data-lg": ["JetBrains Mono"],
+							"headline-md": ["Inter"],
+							"body-lg": ["Inter"],
+							"label-caps": ["JetBrains Mono"],
+							"headline-sm": ["Inter"],
+							"code-block": ["JetBrains Mono"],
+						},
+						fontSize: {
+							"data-md": [
+								"13px",
+								{
+									lineHeight: "18px",
+									letterSpacing: "-0.01em",
+									fontWeight: "500",
+								},
+							],
+							"body-sm": [
+								"12px",
+								{
+									lineHeight: "16px",
+									letterSpacing: "0.005em",
+									fontWeight: "400",
+								},
+							],
+							"data-sm": [
+								"11px",
+								{ lineHeight: "14px", letterSpacing: "0em", fontWeight: "500" },
+							],
+							"display-lg": [
+								"32px",
+								{
+									lineHeight: "38px",
+									letterSpacing: "-0.02em",
+									fontWeight: "600",
+								},
+							],
+							"body-md": [
+								"13px",
+								{ lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" },
+							],
+							"headline-lg": [
+								"24px",
+								{
+									lineHeight: "30px",
+									letterSpacing: "-0.015em",
+									fontWeight: "600",
+								},
+							],
+							"data-lg": [
+								"18px",
+								{
+									lineHeight: "24px",
+									letterSpacing: "-0.02em",
+									fontWeight: "600",
+								},
+							],
+							"headline-md": [
+								"18px",
+								{
+									lineHeight: "24px",
+									letterSpacing: "-0.01em",
+									fontWeight: "600",
+								},
+							],
+							"body-lg": [
+								"14px",
+								{ lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" },
+							],
+							"label-caps": [
+								"10px",
+								{
+									lineHeight: "12px",
+									letterSpacing: "0.06em",
+									fontWeight: "600",
+								},
+							],
+							"headline-sm": [
+								"15px",
+								{
+									lineHeight: "20px",
+									letterSpacing: "-0.005em",
+									fontWeight: "600",
+								},
+							],
+							"code-block": [
+								"12px",
+								{ lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" },
+							],
+						},
+					},
+				},
+			}
+		</script>
+	</head>
+	<body class="bg-surface font-body-md text-on-surface antialiased">
+		<aside
+			class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest border-r border-surface-container-highest z-50 flex flex-col justify-between select-none"
+		>
+			<div class="flex flex-col">
+				<div
+					class="h-16 px-space-lg flex items-center gap-space-sm border-b border-surface-container-highest bg-surface-container-lowest"
+				>
+					<img
+						alt="Swarmspotter Logo"
+						class="h-8 w-auto object-contain"
+						src="https://lh3.googleusercontent.com/aida/ALJJyrApwW0RViE8LRN9oMB3qA4TH6n6gm9Gvm_I-G3Sm7hn5S7T1wWkdblJQbZ_G8yINxmHBovCYv9dWj0leyMBu2BxaZ_RWrxiNqcgC8NJz4QQLxCWKbHR_gnCnr5vNhCkfPP99sNOof5_cma3CwB4Q9QyHWaYM2-OEmuIdMxLworc_OHRzMOhLLJ-sGyDbfPZtr2Q7NJnYPklWeE20DU_XNrehsNhZLxSjNjaqSaToVoV"
+					/>
+					<div class="flex flex-col min-w-0">
+						<span
+							class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate"
+							>Swarmspotter</span
+						><span
+							class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider truncate"
+							>Propaganda Intel</span
+						>
+					</div>
+				</div>
+				<div class="px-space-md pt-space-lg">
+					<div
+						class="px-space-sm pb-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider"
+					>
+						Navigate
+					</div>
+					<nav
+						class="flex flex-col gap-space-xs"
+						data-active-classes="bg-primary-container text-on-primary-container font-semibold"
+					>
+						<a
+							class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+							data-path="upload-batch"
+							href="#"
+							><span class="material-symbols-outlined text-[18px]"
+								>upload_file</span
+							><span class="font-body-md text-body-md">Upload Batch</span></a
+						><a
+							aria-current="page"
+							class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg transition-colors bg-primary-container text-on-primary-container font-semibold"
+							data-path="swarm-analysis"
+							href="#"
+							><span class="material-symbols-outlined text-[18px]">hub</span
+							><span class="font-body-md text-body-md">Swarm Analysis</span></a
+						><a
+							class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+							data-path="technique-classi"
+							href="#"
+							><span class="material-symbols-outlined text-[18px]">policy</span
+							><span class="font-body-md text-body-md"
+								>Technique Classi</span
+							></a
+						><a
+							class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+							data-path="post-verdicts"
+							href="#"
+							><span class="material-symbols-outlined text-[18px]">rule</span
+							><span class="font-body-md text-body-md">Post Verdicts</span></a
+						><a
+							class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+							data-path="evaluation-page"
+							href="#"
+							><span class="material-symbols-outlined text-[18px]"
+								>analytics</span
+							><span class="font-body-md text-body-md">Evaluation Page</span></a
+						>
+					</nav>
+				</div>
+				<div class="px-space-md pt-space-lg">
+					<div
+						class="px-space-sm pb-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider"
+					>
+						System Utilities
+					</div>
+					<nav
+						class="flex flex-col gap-space-xs"
+						data-active-classes="bg-primary-container text-on-primary-container font-semibold"
+					>
+						<a
+							class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+							data-path="cross-check"
+							href="#"
+							><span class="material-symbols-outlined text-[18px]"
+								>fact_check</span
+							><span class="font-body-md text-body-md">Cross Check</span></a
+						><a
+							class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+							data-path="system-health"
+							href="#"
+							><span class="material-symbols-outlined text-[18px]"
+								>monitor_heart</span
+							><span class="font-body-md text-body-md">System Health</span></a
+						>
+					</nav>
+				</div>
+			</div>
+			<div
+				class="p-space-md border-t border-surface-container-highest bg-surface-container-low flex flex-col gap-space-sm"
+			>
+				<div
+					class="flex items-center justify-between px-space-sm py-space-xs bg-surface-container-lowest border border-surface-container-highest rounded-lg"
+				>
+					<span class="font-label-caps text-label-caps text-on-surface-variant"
+						>HOSTINGER VPS</span
+					>
+					<div class="flex items-center gap-space-xs">
+						<span
+							class="inline-block w-2 h-2 rounded-full bg-emerald-600 animate-pulse"
+						></span
+						><span class="font-data-sm text-data-sm text-on-surface"
+							>Live :8000</span
+						>
+					</div>
+				</div>
+				<div class="flex items-center justify-between px-space-sm py-space-xs">
+					<div class="flex items-center gap-space-xs">
+						<span
+							class="material-symbols-outlined text-[16px] text-on-surface-variant"
+							>terminal</span
+						><span class="font-data-sm text-data-sm text-on-surface-variant"
+							>Roman &amp; Egor</span
+						>
+					</div>
+					<span
+						class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-wider"
+						>JUNCTION '26</span
+					>
+				</div>
+			</div>
+		</aside>
+		<div class="pl-64 flex flex-col min-h-screen">
+			<header
+				class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-surface-container-highest z-40 px-space-lg flex items-center justify-between"
+			>
+				<div class="flex items-center gap-space-md">
+					<div
+						class="flex items-center gap-space-xs font-data-sm text-data-sm text-on-surface-variant"
+					>
+						<span class="material-symbols-outlined text-[16px]">radar</span
+						><span class="hover:text-on-surface cursor-pointer">Telemetry</span
+						><span class="text-outline-variant">/</span
+						><span class="font-semibold text-on-surface"
+							>Node Cluster 0x7E4</span
+						><span
+							class="inline-flex items-center px-space-xs py-0.5 rounded text-[10px] font-data-sm bg-surface-container-high text-on-surface border border-surface-container-highest"
+							>Active Feed</span
+						>
+					</div>
+				</div>
+				<div class="flex items-center gap-space-md">
+					<div
+						class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low border border-surface-container-highest"
+					>
+						<span
+							class="inline-block w-2 h-2 rounded-full bg-emerald-600"
+						></span
+						><span class="font-data-sm text-data-sm text-on-surface"
+							>Ingest: 1,420 evt/s</span
+						>
+					</div>
+					<button
+						class="flex items-center gap-space-xs h-8 px-space-md bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md rounded-lg transition-colors"
+						type="button"
+					>
+						<span class="material-symbols-outlined text-[16px]"
+							>upload_file</span
+						><span>Upload Batch</span>
+					</button>
+					<div class="relative flex items-center justify-center">
+						<button
+							class="w-8 h-8 flex items-center justify-center rounded-lg border border-surface-container-highest bg-surface-container-lowest text-on-surface-variant hover:text-on-surface transition-colors"
+							type="button"
+						>
+							<span class="material-symbols-outlined text-[18px]"
+								>notifications</span
+							></button
+						><span
+							class="absolute -top-1 -right-1 w-4 h-4 bg-error text-on-error rounded-full flex items-center justify-center font-data-sm text-[10px] font-bold"
+							>2</span
+						>
+					</div>
+					<div
+						class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+					>
+						<span class="material-symbols-outlined text-on-primary text-[18px]"
+							>person</span
+						>
+					</div>
+				</div>
+			</header>
+			<main
+				class="relative pt-16 w-full flex-1 bg-surface px-space-lg py-space-lg"
+			>
+				<div class="flex flex-col w-full gap-space-lg">
+					<!-- Primary Instrument Header & Sub-toolbar -->
+					<div
+						class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-xs"
+					>
+						<div class="flex flex-col">
+							<div class="flex items-center gap-space-sm">
+								<span
+									class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest bg-primary-fixed/60 px-space-xs py-0.5 rounded"
+									>Easy Mode</span
+								><span class="font-data-sm text-data-sm text-on-surface-variant"
+									>Active Monitoring</span
+								><span
+									class="inline-block w-1.5 h-1.5 rounded-full bg-outline-variant"
+								></span
+								><span class="font-data-sm text-data-sm text-on-surface-variant"
+									>Real-Time Protection</span
+								>
+							</div>
+							<h1
+								class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-0.5"
+							>
+								Bot Group Finder
+							</h1>
+							<p
+								class="font-body-sm text-body-sm text-on-surface-variant mt-0.5"
+							>
+								Detect coordinated groups of fake accounts repeating messages
+								together.
+							</p>
+						</div>
+						<div class="flex items-center gap-space-sm">
+							<div
+								class="flex items-center bg-surface-container-low px-space-sm py-1 rounded-lg"
+							>
+								<span
+									class="font-data-sm text-data-sm text-on-surface-variant mr-space-xs"
+									>Time Window:</span
+								><span
+									class="font-data-sm text-data-sm text-on-surface font-semibold"
+									>&lt; 90 Seconds</span
+								>
+							</div>
+							<button
+								class="flex items-center gap-space-xs h-8 px-space-md bg-error hover:bg-error/90 text-on-error font-body-md text-body-md rounded-lg shadow-sm transition-all duration-150"
+								type="button"
+							>
+								<span class="material-symbols-outlined text-[16px]">shield</span
+								><span>Quarantine Fake Accounts</span>
+							</button>
+						</div>
+					</div>
+					<!-- SECTION 1: Stat Tiles (4 Horizontal Metric Cards) -->
+					<section
+						class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md"
+					>
+						<div
+							class="relative bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between overflow-hidden border border-error/30"
+						>
+							<div class="flex items-start justify-between">
+								<span
+									class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider"
+									>Suspicious Bot Groups</span
+								><span class="material-symbols-outlined text-[18px] text-error"
+									>hub</span
+								>
+							</div>
+							<div class="my-space-xs flex items-baseline gap-space-sm">
+								<span
+									class="font-display-lg text-display-lg font-bold text-error"
+									>2</span
+								><span
+									class="font-data-sm text-data-sm text-error bg-error-container/40 px-1.5 py-0.5 rounded font-medium"
+									>Active Risk</span
+								>
+							</div>
+							<div
+								class="pt-space-xs flex items-center justify-between text-on-surface-variant"
+							>
+								<span class="font-data-sm text-data-sm">Network Status</span
+								><span class="font-data-sm text-data-sm font-medium text-error"
+									>Coordinated Attack</span
+								>
+							</div>
+						</div>
+						<div
+							class="relative bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between overflow-hidden"
+						>
+							<div class="flex items-start justify-between">
+								<span
+									class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider"
+									>Fake Accounts Detected</span
+								><span
+									class="material-symbols-outlined text-[18px] text-primary"
+									>groups</span
+								>
+							</div>
+							<div class="my-space-xs flex items-baseline gap-space-sm">
+								<span
+									class="font-display-lg text-display-lg font-bold text-on-surface"
+									>23</span
+								><span
+									class="font-data-sm text-data-sm text-on-surface-variant bg-surface-container-high px-1.5 py-0.5 rounded"
+									>Accounts</span
+								>
+							</div>
+							<div
+								class="pt-space-xs flex items-center justify-between text-on-surface-variant"
+							>
+								<span class="font-data-sm text-data-sm">Coordinated Speed</span
+								><span
+									class="font-data-sm text-data-sm font-medium text-on-surface"
+									>Under 90s apart</span
+								>
+							</div>
+						</div>
+						<div
+							class="relative bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between overflow-hidden"
+						>
+							<div class="flex items-start justify-between">
+								<span
+									class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider"
+									>Coordinated Messages</span
+								><span
+									class="material-symbols-outlined text-[18px] text-tertiary"
+									>content_copy</span
+								>
+							</div>
+							<div class="my-space-xs flex items-baseline gap-space-sm">
+								<span
+									class="font-display-lg text-display-lg font-bold text-on-surface"
+									>38</span
+								><span
+									class="font-data-sm text-data-sm text-tertiary bg-tertiary-fixed/40 px-1.5 py-0.5 rounded font-medium"
+									>Posts Caught</span
+								>
+							</div>
+							<div
+								class="pt-space-xs flex items-center justify-between text-on-surface-variant"
+							>
+								<span class="font-data-sm text-data-sm">Copy Type</span
+								><span
+									class="font-data-sm text-data-sm font-medium text-on-surface"
+									>Exact duplicates</span
+								>
+							</div>
+						</div>
+						<div
+							class="relative bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between overflow-hidden"
+						>
+							<div class="flex items-start justify-between">
+								<span
+									class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider"
+									>Real People Protected</span
+								><span
+									class="material-symbols-outlined text-[18px] text-primary"
+									>verified_user</span
+								>
+							</div>
+							<div class="my-space-xs flex items-baseline gap-space-sm">
+								<span
+									class="font-display-lg text-display-lg font-bold text-on-surface"
+									>98.5%</span
+								><span
+									class="font-data-sm text-data-sm text-on-surface-variant bg-surface-container-high px-1.5 py-0.5 rounded font-medium"
+									>Organic Pass</span
+								>
+							</div>
+							<div
+								class="pt-space-xs flex items-center justify-between text-on-surface-variant"
+							>
+								<span class="font-data-sm text-data-sm">Harmless Users</span
+								><span
+									class="font-data-sm text-data-sm font-medium text-on-surface"
+									>Not Filtered</span
+								>
+							</div>
+						</div>
+					</section>
+					<!-- SECTION 2: Chart & Analytical Diagnostics Grid -->
+					<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+						<div
+							class="lg:col-span-8 bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between"
+						>
+							<div>
+								<div
+									class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-md"
+								>
+									<div>
+										<h2
+											class="font-headline-sm text-headline-sm text-on-surface"
+										>
+											Top Coordinated Bot Communities
+										</h2>
+										<p
+											class="font-body-sm text-body-sm text-on-surface-variant"
+										>
+											Accounts grouped together by how often they post the exact
+											same talking points
+										</p>
+									</div>
+									<span
+										class="font-data-sm text-data-sm bg-surface-container px-space-xs py-0.5 rounded text-on-surface self-start sm:self-auto"
+										>Coordination Strength: High (0.74)</span
+									>
+								</div>
+								<div class="space-y-space-md pt-space-xs">
+									<div class="flex flex-col gap-1">
+										<div class="flex items-center justify-between">
+											<div class="flex items-center gap-space-sm">
+												<span
+													class="font-data-md text-data-md text-on-surface font-semibold"
+													>Group #A7</span
+												><span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>(Bank Panic Disinformation)</span
+												>
+											</div>
+											<div
+												class="flex items-center gap-space-sm font-data-sm text-data-sm"
+											>
+												<span class="text-on-surface-variant">14 accounts</span
+												><span class="font-semibold text-primary"
+													>96.4% Synchronized</span
+												>
+											</div>
+										</div>
+										<div
+											class="w-full h-3 bg-surface-container-low rounded-sm overflow-hidden flex"
+										>
+											<div
+												class="bg-primary-container h-full rounded-sm transition-all duration-500"
+												style="width: 96.4%"
+											></div>
+										</div>
+									</div>
+									<div class="flex flex-col gap-1">
+										<div class="flex items-center justify-between">
+											<div class="flex items-center gap-space-sm">
+												<span
+													class="font-data-md text-data-md text-on-surface font-semibold"
+													>Group #B3</span
+												><span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>(Power Grid Rumors)</span
+												>
+											</div>
+											<div
+												class="flex items-center gap-space-sm font-data-sm text-data-sm"
+											>
+												<span class="text-on-surface-variant">9 accounts</span
+												><span class="font-semibold text-tertiary"
+													>89.1% Synchronized</span
+												>
+											</div>
+										</div>
+										<div
+											class="w-full h-3 bg-surface-container-low rounded-sm overflow-hidden flex"
+										>
+											<div
+												class="bg-tertiary-container h-full rounded-sm transition-all duration-500"
+												style="width: 89.1%"
+											></div>
+										</div>
+									</div>
+									<div class="flex flex-col gap-1">
+										<div class="flex items-center justify-between">
+											<div class="flex items-center gap-space-sm">
+												<span
+													class="font-data-md text-data-md text-on-surface font-semibold"
+													>Group #C1</span
+												><span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>(Hashtag Flooding)</span
+												>
+											</div>
+											<div
+												class="flex items-center gap-space-sm font-data-sm text-data-sm"
+											>
+												<span class="text-on-surface-variant">8 accounts</span
+												><span class="font-semibold text-primary"
+													>84.7% Synchronized</span
+												>
+											</div>
+										</div>
+										<div
+											class="w-full h-3 bg-surface-container-low rounded-sm overflow-hidden flex"
+										>
+											<div
+												class="bg-primary-container h-full rounded-sm transition-all duration-500"
+												style="width: 84.7%"
+											></div>
+										</div>
+									</div>
+									<div class="flex flex-col gap-1">
+										<div class="flex items-center justify-between">
+											<div class="flex items-center gap-space-sm">
+												<span
+													class="font-data-md text-data-md text-on-surface font-semibold"
+													>Group #D8</span
+												><span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>(Artificial Viral Retweeting)</span
+												>
+											</div>
+											<div
+												class="flex items-center gap-space-sm font-data-sm text-data-sm"
+											>
+												<span class="text-on-surface-variant">6 accounts</span
+												><span class="font-semibold text-inverse-surface"
+													>76.2% Synchronized</span
+												>
+											</div>
+										</div>
+										<div
+											class="w-full h-3 bg-surface-container-low rounded-sm overflow-hidden flex"
+										>
+											<div
+												class="bg-inverse-surface h-full rounded-sm transition-all duration-500"
+												style="width: 76.2%"
+											></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div
+								class="mt-space-lg pt-space-sm bg-surface-container-low p-space-sm rounded flex flex-wrap items-center justify-between gap-space-sm"
+							>
+								<div class="flex items-center gap-space-md flex-wrap">
+									<div
+										class="flex items-center gap-space-xs font-data-sm text-data-sm text-on-surface-variant"
+									>
+										<span
+											class="w-2.5 h-2.5 rounded-sm bg-primary-container inline-block"
+										></span
+										><span>Same-Second Burst Timing</span>
+									</div>
+									<div
+										class="flex items-center gap-space-xs font-data-sm text-data-sm text-on-surface-variant"
+									>
+										<span
+											class="w-2.5 h-2.5 rounded-sm bg-tertiary-container inline-block"
+										></span
+										><span>Word-for-Word Copying</span>
+									</div>
+									<div
+										class="flex items-center gap-space-xs font-data-sm text-data-sm text-on-surface-variant"
+									>
+										<span
+											class="w-2.5 h-2.5 rounded-sm bg-inverse-surface inline-block"
+										></span
+										><span>Cross-Account Amplification</span>
+									</div>
+								</div>
+								<span
+									class="font-label-caps text-label-caps text-on-surface-variant uppercase"
+									>4 Distinct Groups Detected</span
+								>
+							</div>
+						</div>
+						<div
+							class="lg:col-span-4 bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between"
+						>
+							<div class="flex items-center justify-between pb-space-xs">
+								<span class="font-headline-sm text-headline-sm text-on-surface"
+									>Bot Network Map</span
+								><span
+									class="font-label-caps text-label-caps bg-surface-container px-space-xs py-0.5 rounded text-on-surface-variant uppercase"
+									>Cluster Map</span
+								>
+							</div>
+							<div
+								class="relative bg-surface-container-low rounded-lg p-space-md flex flex-col items-center justify-center my-space-xs overflow-hidden"
+							>
+								<svg
+									class="w-full h-36"
+									fill="none"
+									viewBox="0 0 280 140"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<line
+										class="text-surface-container-highest"
+										stroke="currentColor"
+										stroke-dasharray="2 2"
+										stroke-width="1"
+										x1="20"
+										x2="260"
+										y1="20"
+										y2="20"
+									></line>
+									<line
+										class="text-surface-container-highest"
+										stroke="currentColor"
+										stroke-dasharray="2 2"
+										stroke-width="1"
+										x1="20"
+										x2="260"
+										y1="70"
+										y2="70"
+									></line>
+									<line
+										class="text-surface-container-highest"
+										stroke="currentColor"
+										stroke-dasharray="2 2"
+										stroke-width="1"
+										x1="20"
+										x2="260"
+										y1="120"
+										y2="120"
+									></line>
+									<circle
+										class="text-surface-container-highest"
+										cx="140"
+										cy="70"
+										r="50"
+										stroke="currentColor"
+										stroke-width="1"
+									></circle>
+									<line
+										class="text-primary-container"
+										opacity="0.7"
+										stroke="currentColor"
+										stroke-width="2"
+										x1="75"
+										x2="140"
+										y1="45"
+										y2="70"
+									></line>
+									<line
+										class="text-primary-container"
+										opacity="0.6"
+										stroke="currentColor"
+										stroke-width="1.5"
+										x1="75"
+										x2="95"
+										y1="45"
+										y2="105"
+									></line>
+									<line
+										class="text-tertiary-container"
+										opacity="0.7"
+										stroke="currentColor"
+										stroke-width="2"
+										x1="140"
+										x2="205"
+										y1="70"
+										y2="55"
+									></line>
+									<line
+										class="text-primary-container"
+										opacity="0.8"
+										stroke="currentColor"
+										stroke-width="1.5"
+										x1="140"
+										x2="165"
+										y1="70"
+										y2="110"
+									></line>
+									<line
+										class="text-inverse-surface"
+										opacity="0.5"
+										stroke="currentColor"
+										stroke-width="1.5"
+										x1="205"
+										x2="230"
+										y1="55"
+										y2="95"
+									></line>
+									<circle
+										class="text-primary"
+										cx="75"
+										cy="45"
+										fill="currentColor"
+										r="7"
+									></circle>
+									<circle
+										class="text-primary-container"
+										cx="140"
+										cy="70"
+										fill="currentColor"
+										r="10"
+									></circle>
+									<circle
+										class="text-primary-fixed-dim"
+										cx="95"
+										cy="105"
+										fill="currentColor"
+										r="6"
+									></circle>
+									<circle
+										class="text-tertiary"
+										cx="205"
+										cy="55"
+										fill="currentColor"
+										r="8"
+									></circle>
+									<circle
+										class="text-primary"
+										cx="165"
+										cy="110"
+										fill="currentColor"
+										r="5"
+									></circle>
+									<circle
+										class="text-inverse-surface"
+										cx="230"
+										cy="95"
+										fill="currentColor"
+										r="6"
+									></circle>
+								</svg>
+								<div
+									class="absolute bottom-2 right-2 bg-surface-container-lowest/90 px-space-xs py-0.5 rounded font-data-sm text-[10px] text-on-surface-variant"
+								>
+									Interconnectedness: Very Tight
+								</div>
+							</div>
+							<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+								<div class="bg-surface-container-low p-space-xs rounded">
+									<span
+										class="font-label-caps text-label-caps text-on-surface-variant block uppercase"
+										>Key Ring Leader Accounts</span
+									><span
+										class="font-data-md text-data-md text-on-surface font-semibold"
+										>2 Accounts</span
+									>
+								</div>
+								<div class="bg-surface-container-low p-space-xs rounded">
+									<span
+										class="font-label-caps text-label-caps text-on-surface-variant block uppercase"
+										>Bot Closeness Rating</span
+									><span
+										class="font-data-md text-data-md text-on-surface font-semibold"
+										>93% Connected</span
+									>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- SECTION 3: Data Table (Dense 4-row table with highlighted and flagged rows) -->
+					<section
+						class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden"
+					>
+						<div
+							class="lg:col-span-8 bg-surface-container-lowest p-space-md rounded-lg shadow-sm border border-primary-container/30 flex flex-col justify-between relative overflow-hidden"
+						>
+							<div
+								class="absolute -right-6 -top-6 w-24 h-24 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"
+							></div>
+							<div>
+								<div
+									class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest"
+								>
+									<div class="flex items-center gap-space-xs">
+										<span
+											class="material-symbols-outlined text-[22px] text-primary"
+											>auto_awesome</span
+										>
+										<div>
+											<h3
+												class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1.5"
+											>
+												Gemini Summary: What Happened
+												<span
+													class="text-[10px] font-label-caps bg-primary-fixed text-on-primary-fixed px-1.5 py-0.5 rounded uppercase font-bold tracking-wider"
+													>Plain English</span
+												>
+											</h3>
+											<p
+												class="font-body-sm text-body-sm text-on-surface-variant"
+											>
+												Instant story summary decoded from uploaded file data
+											</p>
+										</div>
+									</div>
+									<span
+										class="font-data-sm text-data-sm bg-surface-container-high px-space-xs py-0.5 rounded text-on-surface font-medium"
+										>Verified Analysis</span
+									>
+								</div>
+								<div
+									class="mt-space-sm space-y-space-xs text-body-md font-body-md text-on-surface leading-relaxed"
+								>
+									<div
+										class="p-space-sm bg-error-container/10 rounded border-l-2 border-error"
+									>
+										<p class="text-on-surface font-medium">
+											We detected
+											<strong class="text-error">2 active bot networks</strong>
+											working together. 14 accounts posted the exact same
+											message within 90 seconds to trigger bank run panic. Clean
+											viral sharing was separated and not flagged.
+										</p>
+									</div>
+									<div
+										class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs pt-space-xs"
+									>
+										<div class="bg-surface-container-low p-space-xs rounded">
+											<span
+												class="font-label-caps text-label-caps text-on-surface-variant block uppercase"
+												>What They Spread</span
+											><span
+												class="font-data-md text-data-md font-semibold text-error"
+												>False Bank Run Rumor</span
+											>
+										</div>
+										<div class="bg-surface-container-low p-space-xs rounded">
+											<span
+												class="font-label-caps text-label-caps text-on-surface-variant block uppercase"
+												>Method Used</span
+											><span
+												class="font-data-md text-data-md font-semibold text-primary"
+												>Coordinated Timing</span
+											>
+										</div>
+										<div class="bg-surface-container-low p-space-xs rounded">
+											<span
+												class="font-label-caps text-label-caps text-on-surface-variant block uppercase"
+												>Suggested Action</span
+											><span
+												class="font-data-md text-data-md font-semibold text-error"
+												>Quarantine Group #1</span
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div
+								class="pt-space-sm flex items-center justify-between border-t border-surface-container-highest mt-space-sm"
+							>
+								<span class="font-data-sm text-data-sm text-on-surface-variant"
+									>Automatically summarized by Google Gemini</span
+								><button
+									class="font-data-sm text-data-sm text-primary font-semibold hover:underline flex items-center gap-0.5"
+									type="button"
+								>
+									<span class="material-symbols-outlined text-[16px]">flag</span
+									><span>Report Network</span>
+								</button>
+							</div>
+						</div>
+						<div
+							class="lg:col-span-4 bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between"
+						>
+							<div class="flex items-center justify-between pb-space-xs">
+								<h3 class="font-headline-sm text-headline-sm text-on-surface">
+									Safety Quick Check
+								</h3>
+								<span
+									class="font-label-caps text-label-caps bg-error-container/40 text-error px-space-xs py-0.5 rounded font-bold uppercase"
+									>Action Needed</span
+								>
+							</div>
+							<p class="font-body-sm text-body-sm text-on-surface-variant">
+								How the detected accounts are behaving right now:
+							</p>
+							<div class="space-y-space-xs my-space-sm">
+								<div
+									class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"
+								>
+									<div class="flex items-center gap-space-xs">
+										<span
+											class="material-symbols-outlined text-[16px] text-error"
+											>warning</span
+										><span
+											class="font-body-sm text-body-sm font-medium text-on-surface"
+											>High-Urgency Panic Text</span
+										>
+									</div>
+									<span
+										class="font-data-sm text-data-sm font-semibold text-error"
+										>Active</span
+									>
+								</div>
+								<div
+									class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"
+								>
+									<div class="flex items-center gap-space-xs">
+										<span
+											class="material-symbols-outlined text-[16px] text-primary"
+											>sync</span
+										><span
+											class="font-body-sm text-body-sm font-medium text-on-surface"
+											>Automated Synchrony</span
+										>
+									</div>
+									<span
+										class="font-data-sm text-data-sm font-semibold text-primary"
+										>&lt; 4 sec</span
+									>
+								</div>
+								<div
+									class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"
+								>
+									<div class="flex items-center gap-space-xs">
+										<span
+											class="material-symbols-outlined text-[16px] text-emerald-600"
+											>check_circle</span
+										><span
+											class="font-body-sm text-body-sm font-medium text-on-surface"
+											>Normal Fan Discussions</span
+										>
+									</div>
+									<span
+										class="font-data-sm text-data-sm font-semibold text-on-surface-variant"
+										>Protected</span
+									>
+								</div>
+							</div>
+							<div
+								class="pt-space-xs flex items-center justify-between border-t border-surface-container-highest"
+							>
+								<span class="font-data-sm text-data-sm text-on-surface-variant"
+									>Total Flagged Posts</span
+								><span class="font-data-md text-data-md font-bold text-error"
+									>38 Posts</span
+								>
+							</div>
+						</div>
+					</section>
+					<!-- SECTION 5: Gemini AI Synthesis & Overall Manipulation Stats -->
+					<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+						<div
+							class="p-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs border-b border-surface-container-highest"
+						>
+							<div>
+								<h2 class="font-headline-sm text-headline-sm text-on-surface">
+									Detected Bot Groups &amp; Communities
+								</h2>
+								<p class="font-body-sm text-body-sm text-on-surface-variant">
+									Clear breakdown of organized clusters and their risk
+									assessment
+								</p>
+							</div>
+							<span
+								class="font-data-sm text-data-sm bg-surface-container-low px-space-xs py-1 rounded text-on-surface font-medium border border-surface-container-highest"
+								>3 Groups Detected</span
+							>
+						</div>
+						<div class="w-full overflow-x-auto">
+							<table class="w-full text-left border-collapse">
+								<thead>
+									<tr
+										class="h-7 bg-surface-container-low text-on-surface-variant"
+									>
+										<th
+											class="px-space-md font-label-caps text-label-caps uppercase font-semibold"
+										>
+											Group Name
+										</th>
+										<th
+											class="px-space-md font-label-caps text-label-caps uppercase font-semibold"
+										>
+											Accounts Involved
+										</th>
+										<th
+											class="px-space-md font-label-caps text-label-caps uppercase font-semibold"
+										>
+											Observed Behavior
+										</th>
+										<th
+											class="px-space-md font-label-caps text-label-caps uppercase font-semibold text-right"
+										>
+											Risk Level
+										</th>
+										<th
+											class="px-space-md font-label-caps text-label-caps uppercase font-semibold text-right"
+										>
+											Action
+										</th>
+									</tr>
+								</thead>
+								<tbody class="divide-y divide-surface-container-highest/60">
+									<tr
+										class="h-10 hover:bg-surface-container-low transition-colors bg-error-container/5"
+									>
+										<td
+											class="px-space-md font-data-md text-data-md font-semibold text-error flex items-center gap-space-xs"
+										>
+											<span class="w-2 h-2 rounded-full bg-error"></span
+											><span>Group #1: Bank Panic Swarm</span>
+										</td>
+										<td
+											class="px-space-md font-data-sm text-data-sm text-on-surface"
+										>
+											14 accounts
+										</td>
+										<td
+											class="px-space-md font-body-sm text-body-sm text-on-surface"
+										>
+											Posted identical text within 90 seconds
+										</td>
+										<td class="px-space-md text-right">
+											<span
+												class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded text-data-sm font-data-sm font-semibold bg-error text-on-error"
+												><span class="material-symbols-outlined text-[12px]"
+													>emergency</span
+												><span>High Risk</span></span
+											>
+										</td>
+										<td class="px-space-md text-right">
+											<button
+												class="h-7 px-space-sm bg-error hover:bg-error/90 text-on-error rounded font-data-sm text-data-sm font-medium transition-colors"
+												type="button"
+											>
+												Quarantine
+											</button>
+										</td>
+									</tr>
+									<tr
+										class="h-10 hover:bg-surface-container-low transition-colors"
+									>
+										<td
+											class="px-space-md font-data-md text-data-md font-semibold text-primary flex items-center gap-space-xs"
+										>
+											<span class="w-2 h-2 rounded-full bg-primary"></span
+											><span>Group #2: Energy Rumor Network</span>
+										</td>
+										<td
+											class="px-space-md font-data-sm text-data-sm text-on-surface"
+										>
+											9 accounts
+										</td>
+										<td
+											class="px-space-md font-body-sm text-body-sm text-on-surface"
+										>
+											Automated retweets spreading false grid rumors
+										</td>
+										<td class="px-space-md text-right">
+											<span
+												class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded text-data-sm font-data-sm font-semibold bg-primary-container text-on-primary-container"
+												><span class="material-symbols-outlined text-[12px]"
+													>warning</span
+												><span>High Risk</span></span
+											>
+										</td>
+										<td class="px-space-md text-right">
+											<button
+												class="h-7 px-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-data-sm text-data-sm font-medium transition-colors"
+												type="button"
+											>
+												Review Group
+											</button>
+										</td>
+									</tr>
+									<tr
+										class="h-10 hover:bg-surface-container-low transition-colors"
+									>
+										<td
+											class="px-space-md font-data-md text-data-md font-semibold text-on-surface flex items-center gap-space-xs"
+										>
+											<span class="w-2 h-2 rounded-full bg-emerald-600"></span
+											><span>Group #3: Trending Sports Chat</span>
+										</td>
+										<td
+											class="px-space-md font-data-sm text-data-sm text-on-surface"
+										>
+											18 accounts
+										</td>
+										<td
+											class="px-space-md font-body-sm text-body-sm text-on-surface"
+										>
+											Organic hashtag chat verified as normal fans
+										</td>
+										<td class="px-space-md text-right">
+											<span
+												class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded text-data-sm font-data-sm font-semibold bg-surface-container-high text-on-surface"
+												><span class="material-symbols-outlined text-[12px]"
+													>check_circle</span
+												><span>Clean</span></span
+											>
+										</td>
+										<td class="px-space-md text-right">
+											<span
+												class="font-data-sm text-data-sm text-on-surface-variant font-medium"
+												>Allowed</span
+											>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div
+							class="px-space-md py-space-xs bg-surface-container-low flex items-center justify-between border-t border-surface-container-highest"
+						>
+							<span class="font-data-sm text-data-sm text-on-surface-variant"
+								>Showing 3 groups evaluated by timing &amp; phrasing</span
+							>
+							<div
+								class="flex items-center gap-space-xs font-data-sm text-data-sm"
+							>
+								<span class="text-on-surface-variant">Status:</span
+								><span class="font-semibold text-primary">Protection Live</span>
+							</div>
+						</div>
+					</section>
+					<!-- SECTION 6: Source Files & Ingest Batches Breakdown -->
+					<section
+						class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden"
+					>
+						<div
+							class="p-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs border-b border-surface-container-highest"
+						>
+							<div>
+								<h2 class="font-headline-sm text-headline-sm text-on-surface">
+									Uploaded Files &amp; Detected Manipulation
+								</h2>
+								<p class="font-body-sm text-body-sm text-on-surface-variant">
+									Clear breakdown of uploaded files, detected tactics, and
+									manipulation rates
+								</p>
+							</div>
+							<div class="flex items-center gap-space-xs">
+								<span class="font-data-sm text-data-sm text-on-surface-variant"
+									>10 more accounts tied to this cluster</span
+								><button
+									class="h-8 px-space-md bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-body-md text-body-md font-medium transition-colors flex items-center gap-1"
+									type="button"
+								>
+									<span class="material-symbols-outlined text-[16px]">rule</span
+									><span>Review Group</span>
+								</button>
+							</div>
+						</div>
+						<div class="w-full overflow-x-auto">
+							<div>
+								<div class="flex items-center justify-between pb-space-sm">
+									<span
+										class="font-headline-sm text-headline-sm text-on-surface"
+										>What the bots are saying</span
+									><span
+										class="font-data-sm text-data-sm text-error bg-error-container/40 px-space-xs py-0.5 rounded font-bold"
+										>Exact Match</span
+									>
+								</div>
+								<div
+									class="mb-space-xs bg-error-container/20 border border-error/30 rounded px-space-xs py-1 flex items-center gap-1 text-[11px] text-error font-medium"
+								>
+									<span class="material-symbols-outlined text-[14px]">info</span
+									><span>Manipulation marked in red</span>
+								</div>
+								<div
+									class="bg-surface-container-low p-space-sm rounded font-code-block text-code-block text-on-surface leading-relaxed my-space-xs border border-surface-container-highest"
+								>
+									<div
+										class="flex items-center justify-between text-on-surface-variant text-[10px] pb-1 uppercase font-semibold"
+									>
+										<span>Flagged Message Sample</span
+										><span class="text-error font-bold"
+											>2 High-Risk Phrases</span
+										>
+									</div>
+									<div class="mb-1.5 leading-normal">
+										BREAKING:
+										<span
+											class="bg-error-container/40 text-error border border-error/30 font-semibold px-1 py-0.5 rounded text-[11px] inline-block mr-0.5"
+											>Liquidity freeze declared</span
+										>
+										across key reserve banks after emergency Friday closing.
+										<span
+											class="bg-error-container/40 text-error border border-error/30 font-semibold px-1 py-0.5 rounded text-[11px] inline-block mr-0.5"
+											>Withdraw immediately!</span
+										>
+										<span class="text-on-surface font-semibold">#BankRun</span>
+									</div>
+									<div
+										class="mt-1 pt-1 border-t border-surface-container-highest/60 flex items-center justify-between text-[11px] text-on-surface-variant"
+									>
+										<span
+											>Pattern:
+											<strong class="text-on-surface"
+												>Fabricated Bank Run</strong
+											></span
+										><span class="font-data-sm text-error font-medium"
+											>14 Repeated Copies</span
+										>
+									</div>
+								</div>
+								<div
+									class="mt-space-md space-y-space-xs font-data-sm text-data-sm"
+								>
+									<div
+										class="flex justify-between py-1 bg-surface-container-low/50 px-space-xs rounded"
+									>
+										<span class="text-on-surface-variant"
+											>Synchronized Speed:</span
+										><span class="font-semibold text-on-surface"
+											>Posted within 90 seconds</span
+										>
+									</div>
+									<div
+										class="flex justify-between py-1 bg-surface-container-low/50 px-space-xs rounded"
+									>
+										<span class="text-on-surface-variant">Sender Type:</span
+										><span class="font-semibold text-on-surface"
+											>Automated Bot Swarm</span
+										>
+									</div>
+									<div
+										class="flex justify-between py-1 bg-surface-container-low/50 px-space-xs rounded"
+									>
+										<span class="text-on-surface-variant">Safety Verdict:</span
+										><span class="font-semibold text-error"
+											>Confirmed False Alarm</span
+										>
+									</div>
+								</div>
+							</div>
+							<div class="pt-space-md flex gap-space-xs">
+								<button
+									class="w-full h-8 px-space-sm bg-error hover:bg-error/90 text-on-error font-body-md text-body-md rounded shadow-sm flex items-center justify-center gap-1 transition-colors"
+									type="button"
+								>
+									<span class="material-symbols-outlined text-[16px]"
+										>shield</span
+									><span>Quarantine Fake Accounts</span></button
+								><button
+									class="h-8 px-space-sm bg-surface-container-low hover:bg-surface-container text-on-surface font-body-md text-body-md rounded shadow-sm flex items-center justify-center transition-colors"
+									type="button"
+								>
+									<span class="material-symbols-outlined text-[16px]"
+										>visibility</span
+									>
+								</button>
+							</div>
+						</div>
+						<div
+							class="px-space-md py-space-xs bg-surface-container-low flex items-center justify-between border-t border-surface-container-highest"
+						>
+							<span class="font-data-sm text-data-sm text-on-surface-variant"
+								>Checked across 1,842 repeated texts and 312 suspicious
+								handles</span
+							>
+							<div
+								class="flex items-center gap-space-xs font-data-sm text-data-sm"
+							>
+								<span class="text-on-surface-variant">Data Status:</span
+								><span class="font-semibold text-primary"
+									>Complete &amp; Verified</span
+								>
+							</div>
+						</div>
+					</section>
+					<!-- SECTION 4: Coordinated Accounts List & Forensic Inspector -->
+					<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+						<!-- Account Nodes Ledger (8 cols) -->
+						<div
+							class="lg:col-span-8 bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between"
+						>
+							<div>
+								<div class="flex items-center justify-between pb-space-sm">
+									<div>
+										<h2
+											class="font-headline-sm text-headline-sm text-on-surface"
+										>
+											Coordinated Account Nodes
+										</h2>
+										<p
+											class="font-body-sm text-body-sm text-on-surface-variant"
+										>
+											High-affinity actors in active swarm_alpha_7 partition
+										</p>
+									</div>
+									<span
+										class="font-label-caps text-label-caps bg-error-container/40 text-error px-space-xs py-0.5 rounded uppercase font-bold"
+										>14 Synced Actors</span
+									>
+								</div>
+								<!-- Account Pill Items -->
+								<div class="space-y-space-xs pt-space-xs">
+									<!-- Node 1 -->
+									<div
+										class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors"
+									>
+										<div class="flex items-center gap-space-sm min-w-0">
+											<div
+												class="w-8 h-8 rounded bg-error text-on-error flex items-center justify-center font-data-md text-data-md font-bold flex-shrink-0"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>smart_toy</span
+												>
+											</div>
+											<div class="flex flex-col min-w-0">
+												<span
+													class="font-data-md text-data-md font-semibold text-on-surface truncate"
+													>@bot_nexus_4</span
+												>
+												<span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>Created 14d ago · IP ASN49505</span
+												>
+											</div>
+										</div>
+										<div class="flex items-center gap-space-md flex-shrink-0">
+											<span
+												class="font-data-sm text-data-sm text-on-surface-variant hidden sm:inline"
+												>12 posts in 45s</span
+											>
+											<span
+												class="inline-flex items-center px-space-xs py-0.5 rounded font-data-sm text-data-sm font-semibold bg-error text-on-error"
+											>
+												score: 0.94
+											</span>
+											<button
+												class="w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+												type="button"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>open_in_new</span
+												>
+											</button>
+										</div>
+									</div>
+									<!-- Node 2 -->
+									<div
+										class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors"
+									>
+										<div class="flex items-center gap-space-sm min-w-0">
+											<div
+												class="w-8 h-8 rounded bg-error text-on-error flex items-center justify-center font-data-md text-data-md font-bold flex-shrink-0"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>smart_toy</span
+												>
+											</div>
+											<div class="flex flex-col min-w-0">
+												<span
+													class="font-data-md text-data-md font-semibold text-on-surface truncate"
+													>@synced_voice_9</span
+												>
+												<span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>Created 3d ago · IP ASN49505</span
+												>
+											</div>
+										</div>
+										<div class="flex items-center gap-space-md flex-shrink-0">
+											<span
+												class="font-data-sm text-data-sm text-on-surface-variant hidden sm:inline"
+												>11 posts in 45s</span
+											>
+											<span
+												class="inline-flex items-center px-space-xs py-0.5 rounded font-data-sm text-data-sm font-semibold bg-error text-on-error"
+											>
+												score: 0.91
+											</span>
+											<button
+												class="w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+												type="button"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>open_in_new</span
+												>
+											</button>
+										</div>
+									</div>
+									<!-- Node 3 -->
+									<div
+										class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors"
+									>
+										<div class="flex items-center gap-space-sm min-w-0">
+											<div
+												class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-data-md text-data-md font-bold flex-shrink-0"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>person_alert</span
+												>
+											</div>
+											<div class="flex flex-col min-w-0">
+												<span
+													class="font-data-md text-data-md font-semibold text-on-surface truncate"
+													>@echo_vector_01</span
+												>
+												<span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>Created 41d ago · IP ASN13335</span
+												>
+											</div>
+										</div>
+										<div class="flex items-center gap-space-md flex-shrink-0">
+											<span
+												class="font-data-sm text-data-sm text-on-surface-variant hidden sm:inline"
+												>9 posts in 45s</span
+											>
+											<span
+												class="inline-flex items-center px-space-xs py-0.5 rounded font-data-sm text-data-sm font-semibold bg-primary-container text-on-primary-container"
+											>
+												score: 0.88
+											</span>
+											<button
+												class="w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+												type="button"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>open_in_new</span
+												>
+											</button>
+										</div>
+									</div>
+									<!-- Node 4 -->
+									<div
+										class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors"
+									>
+										<div class="flex items-center gap-space-sm min-w-0">
+											<div
+												class="w-8 h-8 rounded bg-surface-container-highest text-on-surface flex items-center justify-center font-data-md text-data-md font-bold flex-shrink-0"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>account_circle</span
+												>
+											</div>
+											<div class="flex flex-col min-w-0">
+												<span
+													class="font-data-md text-data-md font-semibold text-on-surface truncate"
+													>@proxy_herald_q</span
+												>
+												<span
+													class="font-body-sm text-body-sm text-on-surface-variant"
+													>Created 120d ago · IP Proxy Pool</span
+												>
+											</div>
+										</div>
+										<div class="flex items-center gap-space-md flex-shrink-0">
+											<span
+												class="font-data-sm text-data-sm text-on-surface-variant hidden sm:inline"
+												>8 posts in 45s</span
+											>
+											<span
+												class="inline-flex items-center px-space-xs py-0.5 rounded font-data-sm text-data-sm font-semibold bg-surface-container-highest text-on-surface"
+											>
+												score: 0.85
+											</span>
+											<button
+												class="w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+												type="button"
+											>
+												<span class="material-symbols-outlined text-[16px]"
+													>open_in_new</span
+												>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="pt-space-md flex items-center justify-between">
+								<span class="font-data-sm text-data-sm text-on-surface-variant"
+									>+10 additional account vertices hidden</span
+								>
+								<button
+									class="font-data-sm text-data-sm text-primary font-semibold hover:underline flex items-center gap-0.5"
+									type="button"
+								>
+									<span>Expand Full Entity Cluster</span>
+									<span class="material-symbols-outlined text-[14px]"
+										>chevron_right</span
+									>
+								</button>
+							</div>
+						</div>
+						<!-- Forensic Match Payload Inspector (4 cols) -->
+						<div
+							class="lg:col-span-4 bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between"
+						>
+							<div>
+								<div class="flex items-center justify-between pb-space-sm">
+									<span
+										class="font-headline-sm text-headline-sm text-on-surface"
+										>Sample Bot Message</span
+									><span
+										class="font-data-sm text-data-sm text-error bg-error-container/40 px-space-xs py-0.5 rounded font-bold"
+										>96% Copy-Paste Match</span
+									>
+								</div>
+								<div
+									class="mb-space-xs bg-error-container/20 border border-error/30 rounded px-space-xs py-1 flex items-center gap-1 text-[11px] text-error font-medium"
+								>
+									<span class="material-symbols-outlined text-[14px]">info</span
+									><span
+										>Red text indicates deceptive phrases flagged by AI</span
+									>
+								</div>
+								<div
+									class="bg-surface-container-low p-space-sm rounded font-code-block text-code-block text-on-surface leading-relaxed my-space-xs border border-surface-container-highest"
+								>
+									<div
+										class="flex items-center justify-between text-on-surface-variant text-[10px] pb-1 uppercase font-semibold"
+									>
+										<span>Flagged Copy-Paste Text</span
+										><span class="text-error font-bold"
+											>3 Triggers Highlighted</span
+										>
+									</div>
+									<div class="mb-1.5 leading-normal">
+										<span
+											class="bg-error-container/40 text-error border border-error/30 font-semibold px-1 py-0.5 rounded text-[11px] inline-block mr-0.5"
+											>"BREAKING: Liquidity freeze declared"</span
+										>
+										across key reserve banks after emergency Friday closing.
+										<span
+											class="bg-error-container/40 text-error border border-error/30 font-semibold px-1 py-0.5 rounded text-[11px] inline-block mr-0.5"
+											>"Withdraw immediately!"</span
+										>
+										<span
+											class="bg-error-container/40 text-error border border-error/30 font-semibold px-1 py-0.5 rounded text-[11px] inline-block"
+											>"#BankRun"</span
+										>
+										<span
+											class="bg-primary-fixed text-primary px-1 py-0.5 rounded font-medium text-[11px] inline-block"
+											>#EmergencyFreeze</span
+										>
+									</div>
+									<div
+										class="mt-1 pt-1 border-t border-surface-container-highest/60 flex items-center justify-between text-[11px] text-on-surface-variant"
+									>
+										<span
+											>Tactic:
+											<strong class="text-on-surface"
+												>Creating Banking Panic</strong
+											></span
+										><span class="font-data-sm text-error font-medium"
+											>Artificial Urgency: 98%</span
+										>
+									</div>
+								</div>
+								<div
+									class="mt-space-md space-y-space-xs font-data-sm text-data-sm"
+								>
+									<div
+										class="flex justify-between py-1 bg-surface-container-low/50 px-space-xs rounded"
+									>
+										<span class="text-on-surface-variant"
+											>Synchronized Timing:</span
+										><span class="font-semibold text-on-surface"
+											>Sent within 4.2 seconds</span
+										>
+									</div>
+									<div
+										class="flex justify-between py-1 bg-surface-container-low/50 px-space-xs rounded"
+									>
+										<span class="text-on-surface-variant">Sender Type:</span
+										><span class="font-semibold text-on-surface"
+											>Automated Bot Script</span
+										>
+									</div>
+									<div
+										class="flex justify-between py-1 bg-surface-container-low/50 px-space-xs rounded"
+									>
+										<span class="text-on-surface-variant">Safety Verdict:</span
+										><span class="font-semibold text-error"
+											>Coordinated Disinformation</span
+										>
+									</div>
+								</div>
+							</div>
+							<div class="pt-space-md flex gap-space-xs">
+								<button
+									class="w-full h-8 px-space-sm bg-error hover:bg-error/90 text-on-error font-body-md text-body-md rounded shadow-sm flex items-center justify-center gap-1 transition-colors"
+									type="button"
+								>
+									<span class="material-symbols-outlined text-[16px]"
+										>block</span
+									><span>Quarantine Bot Group</span></button
+								><button
+									class="h-8 px-space-sm bg-surface-container-low hover:bg-surface-container text-on-surface font-body-md text-body-md rounded shadow-sm flex items-center justify-center transition-colors"
+									type="button"
+								>
+									<span class="material-symbols-outlined text-[16px]"
+										>share</span
+									>
+								</button>
+							</div>
+						</div>
+					</section>
+				</div>
+			</main>
+		</div>
+		<script>
+			;(function () {
+				const saved = sessionStorage.getItem("swarmwatch_analysis")
+
+				if (!saved) {
+					console.warn("No analysis results found.")
+					return
+				}
+
+				let result
+
+				try {
+					result = JSON.parse(saved)
+				} catch (error) {
+					console.error("Could not read analysis results:", error)
+					return
+				}
+
+				const swarms = Array.isArray(result.swarms) ? result.swarms : []
+
+				const posts = Array.isArray(result.posts) ? result.posts : []
+
+				const panel = document.createElement("section")
+
+				panel.style.cssText = `
+    margin: 24px;
+    padding: 24px;
+    border: 1px solid #38465a;
+    border-radius: 12px;
+    background: #111b29;
+    color: #e8eef7;
+  `
+
+				const heading = document.createElement("h2")
+				heading.textContent = "Live SWARMWATCH Analysis"
+				heading.style.cssText = `
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  `
+
+				const stats = document.createElement("div")
+				stats.style.cssText = `
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  `
+
+				function createStat(label, value) {
+					const card = document.createElement("div")
+
+					card.style.cssText = `
+      padding: 20px;
+      background: #1b293a;
+      border: 1px solid #38465a;
+      border-radius: 8px;
+      min-width: 160px;
+    `
+
+					const title = document.createElement("div")
+					title.textContent = label
+					title.style.color = "#9caec5"
+
+					const number = document.createElement("div")
+					number.textContent = value
+					number.style.cssText = `
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 8px;
+    `
+
+					card.append(title, number)
+					return card
+				}
+
+				stats.append(
+					createStat("Posts Analyzed", posts.length),
+					createStat("Swarms Detected", swarms.length),
+				)
+
+				const details = document.createElement("details")
+				const summary = document.createElement("summary")
+				summary.textContent = "View Complete Backend Results"
+				summary.style.cursor = "pointer"
+
+				const output = document.createElement("pre")
+				output.textContent = JSON.stringify(result, null, 2)
+				output.style.cssText = `
+    overflow: auto;
+    max-height: 500px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    margin-top: 16px;
+  `
+
+				details.append(summary, output)
+				panel.append(heading, stats, details)
+
+				const main = document.querySelector("main")
+
+				if (main) {
+					main.prepend(panel)
+				} else {
+					document.body.appendChild(panel)
+				}
+			})()
+		</script>
+	</body>
+</html>
