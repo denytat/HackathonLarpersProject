@@ -1,18 +1,46 @@
-
 from datetime import datetime, timezone
 
-
 def parse_timestamp(value):
-    """Convert an ISO timestamp into a timezone-aware datetime."""
-    timestamp = datetime.fromisoformat(
-        value.replace("Z", "+00:00")
-    )
+    if isinstance(value, datetime):
+        timestamp = value
+    else:
+        value = str(value).strip()
 
-    # Treat timestamps without a timezone as UTC
+        # First try ISO format
+        try:
+            timestamp = datetime.fromisoformat(
+                value.replace("Z", "+00:00")
+            )
+        except ValueError:
+            # Try common CSV timestamp formats
+            formats = [
+                "%m/%d/%Y %H:%M",
+                "%m/%d/%Y %H:%M:%S",
+                "%d/%m/%Y %H:%M",
+                "%d/%m/%Y %H:%M:%S",
+                "%Y-%m-%d %H:%M:%S",
+                "%Y-%m-%d %H:%M"
+            ]
+
+            timestamp = None
+
+            for fmt in formats:
+                try:
+                    timestamp = datetime.strptime(value, fmt)
+                    break
+                except ValueError:
+                    continue
+
+            if timestamp is None:
+                raise ValueError(
+                    f"Unsupported timestamp format: {value}"
+                )
+
     if timestamp.tzinfo is None:
         timestamp = timestamp.replace(tzinfo=timezone.utc)
 
     return timestamp
+
 
 
 def find_timing_bursts(posts, window_seconds=60, min_accounts=3):
