@@ -11,3 +11,4 @@ openai
 google-genai
 numpy
 python-dateutil
+pytest
