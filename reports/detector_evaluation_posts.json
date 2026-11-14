@@ -1,0 +1,167 @@
+{
+  "dataset": "posts",
+  "generated_at": "2026-11-14T07:09:58.586063+00:00",
+  "posts_file": "data\\synthetic\\posts.csv",
+  "labels_file": "data\\synthetic\\labels.json",
+  "total_posts": 25,
+  "total_accounts": 20,
+  "ground_truth": {
+    "coordinated_accounts": [
+      "user001",
+      "user002",
+      "user003",
+      "user004",
+      "user005"
+    ],
+    "organic_accounts": [
+      "user006",
+      "user007",
+      "user008",
+      "user009",
+      "user010",
+      "user011",
+      "user012",
+      "user013",
+      "user014",
+      "user015",
+      "user016",
+      "user017",
+      "user018",
+      "user019",
+      "user020"
+    ]
+  },
+  "detected_swarms": [
+    {
+      "id": "swarm_1",
+      "accounts": [
+        "user001",
+        "user002",
+        "user003",
+        "user004",
+        "user005"
+      ],
+      "score": 1.0,
+      "evidence": [
+        {
+          "account_1": "user001",
+          "account_2": "user002",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "user001",
+          "account_2": "user003",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "user001",
+          "account_2": "user004",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 0.999
+          }
+        },
+        {
+          "account_1": "user001",
+          "account_2": "user005",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 0.999
+          }
+        },
+        {
+          "account_1": "user002",
+          "account_2": "user003",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "user002",
+          "account_2": "user004",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "user002",
+          "account_2": "user005",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 0.999
+          }
+        },
+        {
+          "account_1": "user003",
+          "account_2": "user004",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "user003",
+          "account_2": "user005",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "user004",
+          "account_2": "user005",
+          "score": 1.0,
+          "signals": {
+            "text_similarity": 1.0,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        }
+      ]
+    }
+  ],
+  "predicted_coordinated_accounts": [
+    "user001",
+    "user002",
+    "user003",
+    "user004",
+    "user005"
+  ],
+  "metrics": {
+    "TP": 5,
+    "FP": 0,
+    "FN": 0,
+    "TN": 15,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "accuracy": 1.0
+  }
+}
