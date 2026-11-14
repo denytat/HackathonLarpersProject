@@ -9,7 +9,7 @@ from clustering import detect_swarms
 
 
 # Load sample dataset
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = PROJECT_ROOT / "data" / "sample_posts.json"
 
 with open(DATA_PATH, "r", encoding="utf-8") as file:
