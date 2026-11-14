@@ -1,12 +1,10 @@
 import os
-import streamlit as st
-
+import json
 import html
-import os
-
+from pathlib import Path
+import streamlit as st
 import pandas as pd
 import requests
-import streamlit as st
 
 API_URL = f"{os.getenv('API_URL', 'http://127.0.0.1:8000').rstrip('/')}/analyze"
 
@@ -443,6 +441,12 @@ def display_swarm(swarm):
 # POST EXPLORER
 # --------------------------------------------------
 
+def technique_name(item):
+    if isinstance(item, dict):
+        return item.get("name", "")
+
+    return str(item)
+
 def display_post_analysis(post_results):
     if not post_results:
         st.info("No post results available.")
@@ -454,7 +458,7 @@ def display_post_analysis(post_results):
         ai = post.get("ai_analysis") or {}
 
         techniques = [
-            item.get("name", "")
+            technique_name(item)
             for item in (post.get("techniques") or [])
         ]
 
@@ -577,20 +581,20 @@ def display_post_analysis(post_results):
 
             if techniques:
                 for technique in techniques:
-                    st.markdown(
-                        f"**Technique:** "
-                        f"{technique.get('name', '')}"
-                    )
-
-                    st.write(
-                        "**Evidence span:**",
-                        technique.get("span", "")
-                    )
-
-                    st.write(
-                        "**Explanation:**",
-                        technique.get("explanation", "")
-                    )
+                    if isinstance(technique, dict):
+                        st.markdown(
+                            f"**Technique:** {technique.get('name', '')}"
+                        )
+                        st.write(
+                            "**Evidence span:**",
+                            technique.get("span", "")
+                        )
+                        st.write(
+                            "**Explanation:**",
+                            technique.get("explanation", "")
+                        )
+                    else:
+                        st.markdown(f"**Technique:** {technique}")
             else:
                 st.write(
                     "No manipulation techniques identified."
@@ -761,6 +765,292 @@ def display_evaluation(df, mapping, post_results):
         "detection, not malicious intent or AI accuracy. "
         "Synthetic evaluation results do not establish "
         "real-world performance."
+    )
+
+# --------------------------------------------------
+# BENCHMARK REPORTS
+# --------------------------------------------------
+
+def display_benchmark_reports():
+    section_title(
+        "Benchmark Reports",
+        "Reproducible evaluation results against human-reviewed synthetic datasets."
+    )
+
+    reports_dir = Path(__file__).resolve().parent.parent / "reports"
+
+    report_files = {
+        "Baseline": reports_dir / "detector_evaluation_posts.json",
+        "Challenge": reports_dir / "detector_evaluation_challenge_posts.json",
+        "AI Evaluation": reports_dir / "ai_evaluation_challenge.json"
+    }
+
+    loaded = {}
+
+    for name, path in report_files.items():
+        if not path.exists():
+            st.warning(f"{name} report not found: {path.name}")
+            continue
+
+        try:
+            with path.open("r", encoding="utf-8") as file:
+                loaded[name] = json.load(file)
+        except (OSError, json.JSONDecodeError) as error:
+            st.error(f"Could not load {path.name}: {error}")
+
+    if not loaded:
+        st.info("No benchmark reports are available.")
+        return
+
+    detector_reports = {
+        name: loaded[name]
+        for name in ("Baseline", "Challenge")
+        if name in loaded
+    }
+
+    if detector_reports:
+        st.markdown("### Phase 1 — Detector Evaluation")
+
+        tabs = st.tabs(list(detector_reports.keys()))
+
+        for tab, (name, report) in zip(
+            tabs,
+            detector_reports.items()
+        ):
+            with tab:
+                metrics = report.get("metrics", {})
+                ground_truth = report.get("ground_truth", {})
+                swarms = report.get("detected_swarms", [])
+
+                st.caption(
+                    f"Dataset: {report.get('dataset', name)} | "
+                    f"Posts: {report.get('total_posts', 0)} | "
+                    f"Accounts: {report.get('total_accounts', 0)}"
+                )
+
+                col1, col2, col3, col4 = st.columns(4)
+
+                col1.metric(
+                    "Precision",
+                    f"{metrics.get('precision', 0):.1%}"
+                )
+                col2.metric(
+                    "Recall",
+                    f"{metrics.get('recall', 0):.1%}"
+                )
+                col3.metric(
+                    "F1 Score",
+                    f"{metrics.get('f1', 0):.1%}"
+                )
+                col4.metric(
+                    "Accuracy",
+                    f"{metrics.get('accuracy', 0):.1%}"
+                )
+
+                st.markdown("#### Confusion Matrix")
+
+                confusion = pd.DataFrame(
+                    [
+                        [metrics.get("TN", 0), metrics.get("FP", 0)],
+                        [metrics.get("FN", 0), metrics.get("TP", 0)]
+                    ],
+                    index=["Actual organic", "Actual coordinated"],
+                    columns=["Predicted organic", "Predicted coordinated"]
+                )
+
+                st.dataframe(
+                    confusion,
+                    use_container_width=True
+                )
+
+                col1, col2, col3, col4 = st.columns(4)
+
+                col1.metric("True Positives", metrics.get("TP", 0))
+                col2.metric("False Positives", metrics.get("FP", 0))
+                col3.metric("False Negatives", metrics.get("FN", 0))
+                col4.metric("True Negatives", metrics.get("TN", 0))
+
+                st.markdown("#### Detected Accounts")
+
+                predicted = report.get(
+                    "predicted_coordinated_accounts",
+                    []
+                )
+
+                st.write(
+                    ", ".join(predicted)
+                    if predicted else "No coordinated accounts detected."
+                )
+
+                st.markdown("#### Detected Swarms")
+
+                for swarm in swarms:
+                    with st.expander(
+                        f"{swarm.get('id', 'Swarm')} "
+                        f"— Score {swarm.get('score', 0):.3f}"
+                    ):
+                        st.write("Accounts:", swarm.get("accounts", []))
+                        st.write(
+                            "Evidence pairs:",
+                            len(swarm.get("evidence", []))
+                        )
+
+                st.caption(
+                    f"Ground truth: "
+                    f"{len(ground_truth.get('coordinated_accounts', []))} "
+                    f"coordinated accounts and "
+                    f"{len(ground_truth.get('organic_accounts', []))} "
+                    f"organic accounts."
+                )
+
+    if "AI Evaluation" in loaded:
+        report = loaded["AI Evaluation"]
+
+        st.divider()
+        st.markdown("### Phase 2 — AI Evaluation")
+
+        nemotron = report.get("nemotron", {})
+        gemini = report.get("gemini", {})
+
+        st.markdown("#### Nemotron — Post Classification")
+
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric(
+            "Evaluated Posts",
+            nemotron.get("evaluated_posts", 0)
+        )
+
+        col2.metric(
+            "False Positive Rate",
+            f"{nemotron.get('false_positive_rate', 0):.1%}"
+        )
+
+        col3.metric(
+            "Missing Posts",
+            len(nemotron.get("missing_posts", []))
+        )
+
+        st.write(
+            "**Precision / Recall / F1:**",
+            nemotron.get("precision_recall_f1", "Not available")
+        )
+
+        st.write(
+            "**False-positive posts:**",
+            nemotron.get("false_positive_posts", [])
+        )
+
+        predictions = nemotron.get("predictions", {})
+
+        if predictions:
+            prediction_rows = []
+
+            for post_id, prediction in predictions.items():
+                prediction_rows.append({
+                    "Post ID": post_id,
+                    "Expected": ", ".join(
+                        prediction.get("expected", [])
+                    ) or "None",
+                    "Predicted": ", ".join(
+                        prediction.get("predicted", [])
+                    ) or "None",
+                    "Correct": prediction.get("correct", False),
+                    "AI Confidence": prediction.get("ai_confidence"),
+                    "Explanation": prediction.get("explanation", "")
+                })
+
+            st.dataframe(
+                pd.DataFrame(prediction_rows),
+                use_container_width=True,
+                hide_index=True
+            )
+
+        st.caption(
+            "All reviewed Nemotron labels are negative. "
+            "Therefore, precision, recall and F1 are not meaningful. "
+            "The false-positive rate is measured across "
+            f"{nemotron.get('total_binary_decisions', 0)} "
+            "binary technique decisions."
+        )
+
+        st.divider()
+        st.markdown("#### Gemini — Swarm Analysis")
+
+        st.write(
+            "**Detected swarms evaluated:**",
+            gemini.get("number_of_detected_swarms", 0)
+        )
+
+        for result in gemini.get("results", []):
+            with st.expander(
+                f"{result.get('swarm_id', 'Swarm')} — "
+                f"{result.get('status', 'unknown')}",
+                expanded=True
+            ):
+                col1, col2, col3 = st.columns(3)
+
+                col1.metric(
+                    "Precision",
+                    f"{result.get('metrics', {}).get('precision', 0):.1%}"
+                )
+
+                col2.metric(
+                    "Recall",
+                    f"{result.get('metrics', {}).get('recall', 0):.1%}"
+                )
+
+                col3.metric(
+                    "F1 Score",
+                    f"{result.get('metrics', {}).get('f1', 0):.1%}"
+                )
+
+                st.write(
+                    "**Accounts:**",
+                    result.get("accounts", [])
+                )
+
+                st.write(
+                    "**Expected techniques:**",
+                    result.get("expected", [])
+                )
+
+                st.write(
+                    "**Predicted techniques:**",
+                    result.get("predicted", [])
+                )
+
+                st.write(
+                    "**Coordination assessment:**",
+                    result.get("coordination_assessment", "Unavailable")
+                )
+
+                st.write(
+                    "**Confidence:**",
+                    f"{result.get('confidence', 0):.0%}"
+                )
+
+                st.write(
+                    "**Malicious intent established:**",
+                    result.get("malicious_intent_established", False)
+                )
+
+                st.write(
+                    "**Explanation:**",
+                    result.get("explanation", "")
+                )
+
+        st.warning(
+            gemini.get(
+                "note",
+                "Gemini evaluation uses a limited synthetic dataset."
+            )
+        )
+
+    st.caption(
+        "These are synthetic benchmark results, not proof of "
+        "real-world detection accuracy. Coordination does not "
+        "establish malicious intent."
     )
 
 
@@ -1155,6 +1445,11 @@ else:
         unsafe_allow_html=True
     )
 
+# --------------------------------------------------
+# BENCHMARK REPORTS
+# --------------------------------------------------
+
+display_benchmark_reports()
 
 # --------------------------------------------------
 # FOOTER

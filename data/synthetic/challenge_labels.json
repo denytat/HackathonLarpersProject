@@ -1,0 +1,14 @@
+{
+	"coordinated_accounts": ["coord01", "coord02", "coord03"],
+	"organic_accounts": [
+		"organic01",
+		"organic02",
+		"organic03",
+		"organic04",
+		"organic05",
+		"organic06",
+		"organic07",
+		"organic08",
+		"organic09"
+	]
+}

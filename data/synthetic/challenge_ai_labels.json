@@ -1,0 +1,31 @@
+{
+  "dataset": "challenge",
+  "annotation_type": "human_reviewed",
+  "annotation_notes": [
+    "Individual posts are labelled independently of coordination between accounts.",
+    "Repetitive messaging is evaluated at swarm level, not individual post level.",
+    "Ordinary political advocacy and urgency alone are not emotional manipulation.",
+    "No misleading claims are labelled without independent fact-checking.",
+    "Coordination does not automatically establish malicious intent."
+  ],
+  "evaluated_by_nemotron": [
+    "a01", "a02", "a03",
+    "a04", "a05", "a06",
+    "a07", "a08", "a09"
+  ],
+  "post_labels": {
+    "a01": [], "a02": [], "a03": [],
+    "a04": [], "a05": [], "a06": [],
+    "a07": [], "a08": [], "a09": [],
+    "b01": [], "b02": [], "b03": [],
+    "c01": [], "c02": [], "c03": [],
+    "c04": [], "c05": [], "c06": [],
+    "d01": [], "d02": [], "d03": [],
+    "d04": [], "d05": []
+  },
+  "swarm_labels": {
+    "expected_techniques": ["repetitive_messaging"],
+    "coordination_assessment": "highly_likely_coordinated",
+    "malicious_intent_established": false
+  }
+}
