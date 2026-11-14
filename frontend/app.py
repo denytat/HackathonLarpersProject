@@ -1,9 +1,9 @@
-
+import os
 import streamlit as st
 import pandas as pd
 import requests
 
-API_URL = "http://127.0.0.1:8000/analyze"
+API_URL = f"{os.getenv('API_URL', 'http://127.0.0.1:8000').rstrip('/')}/analyze"
 
 st.set_page_config(
     page_title="SWARMWATCH",
