@@ -1,11 +1,14 @@
-"""CSV upload, mapping, validation, and analysis trigger."""
 
 from __future__ import annotations
+import time
+
+
+import hashlib
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
-from components.metrics import metric_card, section_title
 from components.sidebar import go_to
 from services.api import analyze_posts
 from services.columns import (
@@ -17,139 +20,271 @@ from services.columns import (
 from services.paths import SAMPLE_POSTS_CSV
 
 
-def _store_dataframe(df: pd.DataFrame, source_name: str) -> None:
-    st.session_state["uploaded_df"] = df
-    st.session_state["upload_source"] = source_name
-    st.session_state["uploaded_accounts"] = (
-        df[detect_columns(df.columns).get("account")].dropna().astype(str).unique().tolist()
-        if detect_columns(df.columns).get("account") in df.columns
-        else []
-    )
-    # Clear stale results when dataset changes
-    signature = (source_name, len(df), tuple(df.columns.astype(str)))
+def _store_dataframe(
+    df: pd.DataFrame,
+    source_name: str,
+    signature: str,
+) -> None:
+    """Store a dataset and invalidate results when it changes."""
+
     if st.session_state.get("file_signature") != signature:
         st.session_state["file_signature"] = signature
-        st.session_state.pop("analysis_result", None)
-        st.session_state.pop("analysis_mapping", None)
-        st.session_state.pop("analysis_warnings", None)
+
+        for key in (
+            "analysis_result",
+            "analysis_mapping",
+            "analysis_warnings",
+            "analyzed_df",
+        ):
+            st.session_state.pop(key, None)
+
+        # Reset mapping widgets for the new dataset.
+        for field in REQUIRED_FIELDS:
+            st.session_state.pop(f"mapping_{field}", None)
+
+    st.session_state["uploaded_df"] = df
+    st.session_state["upload_source"] = source_name
+
+    detected = detect_columns(df.columns)
+    account_column = detected.get("account")
+
+    if account_column in df.columns:
+        st.session_state["uploaded_accounts"] = (
+            df[account_column]
+            .dropna()
+            .astype(str)
+            .unique()
+            .tolist()
+        )
+    else:
+        st.session_state["uploaded_accounts"] = []
+
+
+def _load_csv(content: bytes) -> pd.DataFrame:
+    """Read CSV content as text without modifying identifiers."""
+
+    from io import BytesIO
+
+    return pd.read_csv(
+        BytesIO(content),
+        dtype=str,
+        keep_default_na=False,
+    )
+
+
+def _load_uploaded_file(uploaded_file) -> None:
+    """Load a user-uploaded CSV into session state."""
+
+    content = uploaded_file.getvalue()
+
+    signature = hashlib.sha256(content).hexdigest()
+
+    if st.session_state.get("file_signature") == signature:
+        return
+
+    df = _load_csv(content)
+
+    if df.empty:
+        st.error("The uploaded CSV contains no rows.")
+        return
+
+    _store_dataframe(
+        df,
+        uploaded_file.name,
+        signature,
+    )
+
+
+def _load_sample() -> None:
+    """Load the existing synthetic sample dataset."""
+
+    sample_path = Path(SAMPLE_POSTS_CSV)
+
+    if not sample_path.is_file():
+        st.error("Synthetic sample dataset is unavailable.")
+        return
+
+    content = sample_path.read_bytes()
+    signature = hashlib.sha256(content).hexdigest()
+
+    df = _load_csv(content)
+
+    if df.empty:
+        st.error("The synthetic sample dataset is empty.")
+        return
+
+    _store_dataframe(
+        df,
+        sample_path.name,
+        signature,
+    )
+
+
+def _section_heading(title: str, subtitle: str = "") -> None:
+    """Render a compact section heading."""
+
+    st.markdown(
+        f"#### {title}"
+    )
+
+    if subtitle:
+        st.caption(subtitle)
 
 
 def render() -> None:
-    section_title(
-        "Dataset Upload",
-        "Import a CSV of social media posts. Required fields: id, account, text, timestamp.",
-    )
+    """Render the Analyze page."""
 
     st.markdown(
         """
-        <div class="sw-dropzone-visual">
-            <div style="font-size:14px;font-weight:600;color:#F1F5F9;margin-bottom:6px;">
-                Drop a CSV into the uploader below
-            </div>
-            <div class="sw-muted">
-                Column names are auto-detected when possible. Invalid rows are reported,
-                not silently discarded.
-            </div>
+        <div class="sw-analyze-heading">
+            <h1>Analyze</h1>
+            <p>Upload, validate and investigate a dataset.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    c1, c2 = st.columns([2, 1])
-    with c1:
-        uploaded_file = st.file_uploader(
-            "Choose a CSV dataset",
-            type=["csv"],
-            key="csv_uploader",
-        )
-    with c2:
-        st.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
-        load_sample = st.button(
-            "Load sample dataset",
-            use_container_width=True,
-            help="Loads data/synthetic/posts.csv when available",
+    # ----------------------------------------------
+    # Upload area
+    # ----------------------------------------------
+
+    with st.container(border=True):
+        st.markdown("**Dataset upload**")
+        st.caption(
+            "Upload a CSV containing social-media posts. "
+            "Column names can be mapped before analysis."
         )
 
-    if load_sample:
-        if SAMPLE_POSTS_CSV.exists():
-            df = pd.read_csv(SAMPLE_POSTS_CSV, dtype=str)
-            _store_dataframe(df, SAMPLE_POSTS_CSV.name)
-            st.success(f"Loaded sample dataset: {SAMPLE_POSTS_CSV.name}")
-        else:
-            st.error(
-                f"Sample dataset not found at {SAMPLE_POSTS_CSV}. "
-                "Ensure data/synthetic is available in this environment."
+        upload_col, sample_col = st.columns(
+            [3, 1],
+            vertical_alignment="bottom",
+            gap="medium",
+        )
+
+        with upload_col:
+            uploaded_file = st.file_uploader(
+                "Choose a CSV file",
+                type=["csv"],
+                key="csv_uploader",
+                label_visibility="collapsed",
             )
 
-    if uploaded_file is not None:
+        with sample_col:
+            load_sample = st.button(
+                "Load sample",
+                width="stretch",
+                key="load_sample_dataset",
+            )
+
+    if load_sample:
         try:
-            df = pd.read_csv(uploaded_file, dtype=str)
-            if df.empty:
-                st.error("The uploaded CSV is empty.")
-                return
-            _store_dataframe(df, uploaded_file.name)
-            st.success(f"Dataset uploaded: {uploaded_file.name}")
+            _load_sample()
+        except Exception as error:
+            st.error(f"Could not load sample: {error}")
+
+    if uploaded_file is not None and not load_sample:
+        try:
+            _load_uploaded_file(uploaded_file)
         except Exception as error:
             st.error(f"Could not read CSV: {error}")
-            return
-
-    # Coming soon: URL analysis
-    st.markdown(
-        """
-        <div class="sw-coming-soon">
-            <span class="sw-coming-soon-tag">Coming Soon</span>
-            <div style="font-weight:600;color:#F1F5F9;margin-bottom:4px;">
-                URL-based swarm analysis
-            </div>
-            <p class="sw-muted" style="margin:0;">
-                Paste a post or thread URL to pull related activity automatically.
-                This feature is planned and not implemented yet.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
     df = st.session_state.get("uploaded_df")
+
+    # ----------------------------------------------
+    # Empty state
+    # ----------------------------------------------
+
     if df is None:
-        st.markdown(
-            """
-            <div class="sw-panel">
-                <div class="sw-card-label">Ready for investigation</div>
-                <p class="sw-muted">
-                    Upload a CSV or load the synthetic sample to start analyzing
-                    potential coordinated social media activity.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        with st.container(border=True):
+            st.markdown("**No dataset loaded**")
+            st.caption(
+                "Upload a CSV or select the synthetic sample "
+                "to begin an investigation."
+            )
+
         return
 
-    source = st.session_state.get("upload_source", "dataset")
-    col1, col2 = st.columns([1, 3])
-    with col1:
-        metric_card("Total posts", len(df), f"Source: {source}")
-    with col2:
-        st.markdown("#### Dataset Preview")
-        st.dataframe(df.head(15), use_container_width=True, hide_index=True)
+    source = st.session_state.get(
+        "upload_source",
+        "Dataset",
+    )
 
-    section_title("Column Mapping")
-    st.caption("Confirm automatically detected columns before running analysis.")
+    # ----------------------------------------------
+    # Dataset summary
+    # ----------------------------------------------
 
     detected = detect_columns(df.columns)
+
+    account_column = detected.get("account")
+
+    if account_column in df.columns:
+        account_count = (
+    df[account_column]
+    .astype(str)
+    .str.strip()
+    .replace("", pd.NA)
+    .nunique()
+)
+        account_label = str(account_count)
+    else:
+        account_label = "—"
+
+    m1, m2, m3 = st.columns(3, gap="small")
+
+    with m1:
+        st.metric("Posts", f"{len(df):,}")
+
+    with m2:
+        st.metric("Accounts", account_label)
+
+    with m3:
+        st.metric("Columns", len(df.columns))
+
+    st.caption(f"Source: {source}")
+
+    # ----------------------------------------------
+    # Preview
+    # ----------------------------------------------
+
+    with st.expander("Dataset preview", expanded=True):
+        st.dataframe(
+            df.head(10),
+            width="stretch",
+            hide_index=True,
+        )
+
+        st.caption(
+            f"Showing up to 10 of {len(df):,} rows."
+        )
+
+    # ----------------------------------------------
+    # Column mapping
+    # ----------------------------------------------
+
+    _section_heading(
+        "Column mapping",
+        "Confirm the required fields before analysis.",
+    )
+
     available_columns = [PLACEHOLDER] + list(df.columns)
+
     mapping: dict[str, str] = {}
-    columns = st.columns(4)
+
+    mapping_columns = st.columns(
+        len(REQUIRED_FIELDS),
+        gap="small",
+    )
 
     for position, field in enumerate(REQUIRED_FIELDS):
         default_column = detected.get(field)
+
         default_index = (
             available_columns.index(default_column)
             if default_column in available_columns
             else 0
         )
-        with columns[position]:
+
+        with mapping_columns[position]:
             mapping[field] = st.selectbox(
                 field.capitalize(),
                 available_columns,
@@ -157,65 +292,135 @@ def render() -> None:
                 key=f"mapping_{field}",
             )
 
-    # Keep account list synced to mapped column
-    if mapping.get("account") and mapping["account"] != PLACEHOLDER:
+    # Update account list using confirmed mapping.
+    mapped_account = mapping.get("account")
+
+    if (
+        mapped_account
+        and mapped_account != PLACEHOLDER
+        and mapped_account in df.columns
+    ):
         st.session_state["uploaded_accounts"] = (
-            df[mapping["account"]].dropna().astype(str).unique().tolist()
+            df[mapped_account]
+            .dropna()
+            .astype(str)
+            .unique()
+            .tolist()
         )
 
-    st.divider()
+    missing = [
+        field
+        for field, column in mapping.items()
+        if column == PLACEHOLDER
+    ]
 
-    analyze_clicked = st.button(
-        "Analyze Dataset",
-        type="primary",
-        use_container_width=True,
-    )
+    if missing:
+        st.caption(
+            "Missing mappings: " + ", ".join(missing)
+        )
+    else:
+        st.caption("All required fields mapped.")
 
+    # ----------------------------------------------
+    # Run analysis
+    # ----------------------------------------------
+
+    with st.container(border=True):
+        left, right = st.columns(
+            [3, 1],
+            vertical_alignment="center",
+        )
+
+        with left:
+            st.markdown("**Run coordination analysis**")
+            st.caption(
+                "Validate posts and send them to the "
+                "connected detector backend."
+            )
+
+        with right:
+            analyze_clicked = st.button(
+                "Run analysis",
+                type="primary",
+                width="stretch",
+                disabled=bool(missing),
+                key="analyze_dataset_button",
+            )
+
+    
     if analyze_clicked:
-        missing = [
-            field
-            for field, column in mapping.items()
-            if column == PLACEHOLDER
-        ]
-        if missing:
-            st.error("Please select columns for: " + ", ".join(missing))
-            return
+        posts, warnings = build_posts_from_dataframe(
+            df,
+            mapping,
+        )
 
-        posts, warnings = build_posts_from_dataframe(df, mapping)
         st.session_state["analysis_warnings"] = warnings
 
         if warnings:
-            with st.expander(f"Validation notices ({len(warnings)})", expanded=True):
+            with st.expander(
+                f"Validation notices ({len(warnings)})",
+                expanded=True,
+            ):
                 for warning in warnings[:50]:
                     st.warning(warning)
+
                 if len(warnings) > 50:
-                    st.caption(f"…and {len(warnings) - 50} more notices.")
+                    st.caption(
+                        f"{len(warnings) - 50} additional notices."
+                    )
 
         if not posts:
-            st.error("No valid posts found in the dataset after validation.")
+            st.error("No valid posts remain after validation.")
             return
 
-        with st.spinner(f"Analyzing {len(posts)} posts…"):
+        # Run backend analysis exactly once.
+        start_time = time.perf_counter()
+
+        with st.spinner(f"Analyzing {len(posts):,} posts..."):
             outcome = analyze_posts(posts)
+
+        elapsed = time.perf_counter() - start_time
+
+        st.caption(
+            f"Backend request took {elapsed:.1f} seconds."
+        )
 
         if outcome.get("ok"):
             st.session_state["analysis_result"] = outcome["data"]
             st.session_state["analysis_mapping"] = mapping.copy()
             st.session_state["analyzed_df"] = df
+
             st.success(
-                f"Analysis completed for {len(posts)} posts. "
-                "Open the Results page to inspect findings."
+                f"Analysis completed for {len(posts):,} posts."
             )
-            if st.button("Go to Results", type="primary", key="goto_results_after"):
-                go_to("Results")
+
         else:
             st.error(outcome.get("error", "Analysis failed."))
-            if outcome.get("body"):
-                st.code(outcome["body"])
 
-    # Show prior validation warnings if present
-    prior_warnings = st.session_state.get("analysis_warnings") or []
+            if outcome.get("body"):
+                with st.expander("Backend error details"):
+                    st.code(str(outcome["body"]))
+
+    # Show results navigation whenever a completed analysis exists.
+    if st.session_state.get("analysis_result") is not None:
+        if st.button(
+            "View results",
+            type="primary",
+            key="analyze_view_results",
+        ):
+            go_to("Results")
+
+    # ----------------------------------------------
+    # Previous validation notices
+    # ----------------------------------------------
+
+    prior_warnings = (
+        st.session_state.get("analysis_warnings") or []
+    )
+
     if prior_warnings and not analyze_clicked:
-        with st.expander(f"Last validation notices ({len(prior_warnings)})"):
+        with st.expander(
+            f"Previous validation notices ({len(prior_warnings)})"
+        ):
             for warning in prior_warnings[:30]:
                 st.write(warning)

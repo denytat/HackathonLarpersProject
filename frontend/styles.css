@@ -1,0 +1,83 @@
+﻿.stApp {
+    background-color: #10141b;
+    color: #e9edf4;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #171c25;
+    border-right: 1px solid #303846;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: #1b222d;
+    border: 1px solid #313b4b;
+    border-radius: 11px;
+}
+
+.block-container {
+    max-width: 1550px;
+    padding: 1.7rem 2.1rem 4rem;
+}
+
+.brand {
+    font-size: 1.32rem;
+    font-weight: 800;
+    color: #f1f4fa;
+}
+
+.page-title {
+    font-size: 1.9rem;
+    font-weight: 750;
+}
+
+.subtle, .smallcap {
+    color: #9eacbd;
+}
+
+.pill {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.pill-red {
+    background: #493039;
+    color: #f1b6bc;
+}
+
+.pill-green {
+    background: #263f3b;
+    color: #9ed9c4;
+}
+
+.pill-gray {
+    background: #323b48;
+    color: #c0cad7;
+}
+
+.post-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.post-account {
+    font-weight: 700;
+    color: #edf2f8;
+}
+
+.post-text {
+    color: #e1e7ef;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.post-foot {
+    color: #9daabb;
+    font-size: .76rem;
+    margin-top: 12px;
+}

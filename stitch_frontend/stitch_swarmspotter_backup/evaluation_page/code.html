@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline-variant":"#c7c4d7","surface-container-lowest":"#ffffff","on-surface":"#181c22","surface-bright":"#f8f9ff","on-secondary-container":"#61656b","on-background":"#181c22","on-tertiary-fixed":"#301400","primary-container":"#5a5ce3","on-primary-fixed":"#07006c","on-primary-fixed-variant":"#302fbb","primary-fixed-dim":"#c1c1ff","tertiary-fixed":"#ffdcc5","tertiary":"#83450a","surface-container-high":"#e5e8f0","secondary":"#5b5f65","secondary-fixed":"#dfe2ea","on-error-container":"#93000a","on-error":"#ffffff","tertiary-container":"#a15c22","surface-container-low":"#f0f3fc","on-secondary":"#ffffff","primary":"#4041c9","inverse-surface":"#2c3137","on-tertiary-fixed-variant":"#703800","on-surface-variant":"#464554","secondary-container":"#dfe2ea","on-tertiary-container":"#ffede3","on-primary":"#ffffff","surface-container-highest":"#dfe2eb","tertiary-fixed-dim":"#ffb782","inverse-on-surface":"#eef1f9","inverse-primary":"#c1c1ff","surface-variant":"#dfe2eb","on-secondary-fixed":"#181c21","surface-container":"#ebeef6","surface-dim":"#d7dae2","secondary-fixed-dim":"#c3c6ce","error-container":"#ffdad6","outline":"#767586","on-tertiary":"#ffffff","surface":"#f8f9ff","on-primary-container":"#f2efff","primary-fixed":"#e1e0ff","error":"#ba1a1a","on-secondary-fixed-variant":"#43474d","background":"#f8f9ff","surface-tint":"#4a4bd3"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-xl":"2rem","margin":"1rem","space-md":"0.75rem","space-lg":"1.25rem","space-sm":"0.375rem","gutter":"0.75rem"},"fontFamily":{"data-md":["JetBrains Mono"],"body-sm":["Inter"],"data-sm":["JetBrains Mono"],"display-lg":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"data-lg":["JetBrains Mono"],"headline-md":["Inter"],"body-lg":["Inter"],"label-caps":["JetBrains Mono"],"headline-sm":["Inter"],"code-block":["JetBrains Mono"]},"fontSize":{"data-md":["13px",{"lineHeight":"18px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.005em","fontWeight":"400"}],"data-sm":["11px",{"lineHeight":"14px","letterSpacing":"0em","fontWeight":"500"}],"display-lg":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["13px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["24px",{"lineHeight":"30px","letterSpacing":"-0.015em","fontWeight":"600"}],"data-lg":["18px",{"lineHeight":"24px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"label-caps":["10px",{"lineHeight":"12px","letterSpacing":"0.06em","fontWeight":"600"}],"headline-sm":["15px",{"lineHeight":"20px","letterSpacing":"-0.005em","fontWeight":"600"}],"code-block":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest border-r border-surface-container-highest z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm border-b border-surface-container-highest bg-surface-container-lowest"><img alt="Swarmspotter Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrApwW0RViE8LRN9oMB3qA4TH6n6gm9Gvm_I-G3Sm7hn5S7T1wWkdblJQbZ_G8yINxmHBovCYv9dWj0leyMBu2BxaZ_RWrxiNqcgC8NJz4QQLxCWKbHR_gnCnr5vNhCkfPP99sNOof5_cma3CwB4Q9QyHWaYM2-OEmuIdMxLworc_OHRzMOhLLJ-sGyDbfPZtr2Q7NJnYPklWeE20DU_XNrehsNhZLxSjNjaqSaToVoV"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate">Swarmspotter</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider truncate">Propaganda Intel</span></div></div><div class="px-space-md pt-space-lg"><div class="px-space-sm pb-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Navigate</div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="upload-batch" href="../upload_batch/code.html"><span class="material-symbols-outlined text-[18px]">upload_file</span><span class="font-body-md text-body-md">Upload Batch</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="swarm-analysis" href="../swarm_analysis/code.html"><span class="material-symbols-outlined text-[18px]">hub</span><span class="font-body-md text-body-md">Swarm Analysis</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="technique-classi" href="../technique_classifier/code.html"><span class="material-symbols-outlined text-[18px]">policy</span><span class="font-body-md text-body-md">Technique Classi</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="post-verdicts" href="../post_verdicts/code.html"><span class="material-symbols-outlined text-[18px]">rule</span><span class="font-body-md text-body-md">Post Verdicts</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg transition-colors bg-primary-container text-on-primary-container font-semibold" data-path="evaluation-page" href="../evaluation_page/code.html"><span class="material-symbols-outlined text-[18px]">analytics</span><span class="font-body-md text-body-md">Evaluation Page</span></a></nav></div><div class="px-space-md pt-space-lg"><div class="px-space-sm pb-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">System Utilities</div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="cross-check" href="../cross_check/code.html"><span class="material-symbols-outlined text-[18px]">fact_check</span><span class="font-body-md text-body-md">Cross Check</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="system-health" href="../system_health/code.html"><span class="material-symbols-outlined text-[18px]">monitor_heart</span><span class="font-body-md text-body-md">System Health</span></a></nav></div></div><div class="p-space-md border-t border-surface-container-highest bg-surface-container-low flex flex-col gap-space-sm"><div class="flex items-center justify-between px-space-sm py-space-xs bg-surface-container-lowest border border-surface-container-highest rounded-lg"><span class="font-label-caps text-label-caps text-on-surface-variant">HOSTINGER VPS</span><div class="flex items-center gap-space-xs"><span class="inline-block w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span><span class="font-data-sm text-data-sm text-on-surface">Live :8000</span></div></div><div class="flex items-center justify-between px-space-sm py-space-xs"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">terminal</span><span class="font-data-sm text-data-sm text-on-surface-variant">Roman &amp; Egor</span></div><span class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-wider">JUNCTION '26</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-surface-container-highest z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-data-sm text-data-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">radar</span><span class="hover:text-on-surface cursor-pointer">Telemetry</span><span class="text-outline-variant">/</span><span class="font-semibold text-on-surface">Node Cluster 0x7E4</span><span class="inline-flex items-center px-space-xs py-0.5 rounded text-[10px] font-data-sm bg-surface-container-high text-on-surface border border-surface-container-highest">Active Feed</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low border border-surface-container-highest"><span class="inline-block w-2 h-2 rounded-full bg-emerald-600"></span><span class="font-data-sm text-data-sm text-on-surface">Ingest: 1,420 evt/s</span></div><button class="flex items-center gap-space-xs h-8 px-space-md bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">upload_file</span><span>Upload Batch</span></button><div class="relative flex items-center justify-center"><button class="w-8 h-8 flex items-center justify-center rounded-lg border border-surface-container-highest bg-surface-container-lowest text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span></button><span class="absolute -top-1 -right-1 w-4 h-4 bg-error text-on-error rounded-full flex items-center justify-center font-data-sm text-[10px] font-bold">2</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 w-full flex-1 bg-surface px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Evaluation Action Bar / Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-primary tracking-widest">Model Audit &amp; Performance Ledger</span>
+<span class="text-outline-variant font-data-sm">•</span>
+<span class="font-data-sm text-data-sm text-on-surface-variant">Benchmark Cycle v4.28-REV3</span>
+</div>
+<div class="flex items-center gap-space-md">
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight font-bold">Evaluation Page</h1>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-data-sm text-data-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+          Certified Grounding: Active
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        Continuous validation telemetry measuring multi-layered heuristic burst detection against deep reasoning consensus. Designed to safeguard genuine activism and viral journalism from false algorithmic suppression.
+      </p>
+</div>
+<!-- Quick Action Tray -->
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<button class="flex items-center gap-space-xs h-8 px-space-md bg-surface-container-lowest text-on-surface hover:bg-surface-container-low transition-colors rounded-lg shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px] text-error">notification_important</span>
+<span class="font-body-md text-body-md font-medium">Alerts</span>
+<span class="px-1.5 py-0.2 bg-error text-on-error rounded text-[10px] font-data-sm font-bold">3</span>
+</button>
+<button class="flex items-center gap-space-xs h-8 px-space-md bg-primary hover:bg-primary-container text-on-primary transition-colors rounded-lg shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span class="font-body-md text-body-md font-medium">Upload Batch</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface-variant transition-colors shadow-sm" title="Download Audit CSV" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<!-- Section 1: Test Set Metrics (High-Density Instrument Ledger) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg mb-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between pb-space-md mb-space-md bg-surface-container-low p-space-md rounded-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">bar_chart_4_bars</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Test Set Metrics</span>
+<p class="font-data-sm text-data-sm text-on-surface-variant">Standardized Reference Evaluation Corpus</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-2 lg:mt-0">
+<span class="px-space-sm py-1 rounded bg-surface-container text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+          Cohort ID: #DS-2026-VAL
+        </span>
+<span class="px-space-sm py-1 rounded bg-secondary-container text-on-secondary-container font-data-sm text-data-sm font-medium">
+          Labeled Test Set (N=2,500 posts, 400 organic viral look-alikes)
+        </span>
+</div>
+</div>
+<!-- Metric Property List Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Property 1: Precision -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Property 1</span>
+</div>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-data-sm font-semibold">
+<span class="material-symbols-outlined text-[12px]">trending_up</span>
+            +1.8% vs Layer 1 standalone
+          </span>
+</div>
+<div class="my-space-md flex items-baseline justify-between">
+<div>
+<div class="font-display-lg text-display-lg font-bold text-on-surface tracking-tight">94.2%</div>
+<div class="font-body-md text-body-md font-semibold text-on-surface">Precision Metric</div>
+</div>
+<!-- Sparkline Mini Chart Inline SVG -->
+<svg class="w-24 h-10 text-primary" fill="none" viewbox="0 0 100 40">
+<path d="M0 32 L20 28 L40 30 L60 18 L80 14 L100 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="M0 32 L20 28 L40 30 L60 18 L80 14 L100 6 V40 H0 Z" fill="currentColor" fill-opacity="0.1"></path>
+</svg>
+</div>
+<div class="pt-space-xs bg-surface-container-low p-2 rounded text-on-surface-variant font-data-sm text-data-sm flex items-center justify-between">
+<span>False Discovery Count:</span>
+<span class="text-on-surface font-semibold font-data-md text-data-md">58 / 1,000 flags</span>
+</div>
+</div>
+<!-- Property 2: Recall -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">travel_explore</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Property 2</span>
+</div>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface text-[10px] font-data-sm font-semibold">
+            High Coverage Threshold
+          </span>
+</div>
+<div class="my-space-md flex items-baseline justify-between">
+<div>
+<div class="font-display-lg text-display-lg font-bold text-on-surface tracking-tight">91.8%</div>
+<div class="font-body-md text-body-md font-semibold text-on-surface">Recall Metric</div>
+</div>
+<!-- Progress Arc / Ring SVG -->
+<div class="relative w-11 h-11 flex items-center justify-center">
+<svg class="w-11 h-11 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="91.8, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute font-data-sm text-[10px] font-bold text-on-surface">.91</span>
+</div>
+</div>
+<div class="pt-space-xs bg-surface-container-low p-2 rounded text-on-surface-variant font-data-sm text-data-sm flex items-center justify-between">
+<span>Missed Coordinated Nodes:</span>
+<span class="text-on-surface font-semibold font-data-md text-data-md">82 instances</span>
+</div>
+</div>
+<!-- Property 3: False-Positive Rate -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">format_image_left</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Property 3</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 text-[10px] font-data-sm font-bold">
+            Target &lt;2.0% Achieved
+          </span>
+</div>
+<div class="my-space-md flex items-baseline justify-between">
+<div>
+<div class="font-display-lg text-display-lg font-bold text-emerald-700 tracking-tight">1.4%</div>
+<div class="font-body-md text-body-md font-semibold text-on-surface">False-Positive Rate</div>
+</div>
+<!-- Tiny Bar Graph SVG -->
+<svg class="w-16 h-8 text-emerald-600" fill="currentColor" viewbox="0 0 60 30">
+<rect height="12" opacity="0.3" rx="1" width="8" x="0" y="18"></rect>
+<rect height="16" opacity="0.5" rx="1" width="8" x="13" y="14"></rect>
+<rect height="8" opacity="0.4" rx="1" width="8" x="26" y="22"></rect>
+<rect height="22" opacity="0.7" rx="1" width="8" x="39" y="8"></rect>
+<rect height="5" rx="1" width="8" x="52" y="25"></rect>
+</svg>
+</div>
+<div class="pt-space-xs bg-surface-container-low p-2 rounded text-on-surface-variant font-data-sm text-data-sm flex items-center justify-between">
+<span>Viral Look-alikes Misclassified:</span>
+<span class="text-emerald-700 font-semibold font-data-md text-data-md">6 of 400</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Prose Block & Architecture Documentation -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-lg">
+<!-- Left Narrative Column (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-label-caps text-label-caps uppercase tracking-wider mb-space-xs">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span>Technical Whitepaper Extract // Doc-ID: SW-774</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold mb-space-md">Methodology and Validation</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-space-lg">
+          Swarmspotter evaluates detection performance against a balanced test set containing both coordinated bot campaigns and organic viral look-alikes. By combining Layer 1 burst metrics with NVIDIA Nemotron 3.5 Super VL technique classification and Google Gemini 3.8 Flash cross-checks, our agreement rule successfully minimizes false positives on benign activist and fandom spikes.
+        </p>
+<!-- Bullet Points with Custom Icon Panels -->
+<div class="flex flex-col gap-space-md">
+<div class="flex gap-space-md p-space-md rounded-lg bg-surface-container-low transition-colors hover:bg-surface-container">
+<div class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Layer 1: Deterministic Network Burst Engine</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                Handles posting-time bursts and account similarity graphs (Python, scikit-learn, networkx — deterministic &amp; measurable). Computes sliding-window dispersion indexes and cross-account hash similarity across seconds-level windows.
+              </p>
+</div>
+</div>
+<div class="flex gap-space-md p-space-md rounded-lg bg-surface-container-low transition-colors hover:bg-surface-container">
+<div class="w-9 h-9 rounded-lg bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Layers 2 &amp; 3: Multimodal Disinformation Reasoners</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                Layer 2 and 3 models provide technique classification and long-context cross-checks (NVIDIA Nemotron 3.5 Super VL vision + Google Gemini 3.8 Flash search grounding) to isolate deliberate syntactic templates, visual manipulation, and manufactured memes.
+              </p>
+</div>
+</div>
+<div class="flex gap-space-md p-space-md rounded-lg bg-surface-container-low transition-colors hover:bg-surface-container">
+<div class="w-9 h-9 rounded-lg bg-emerald-600 text-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">rule_folder</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Strict Tri-Partite Agreement Rule</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                Agreement rule requires both swarm signals and model verdicts to align before flagging. Prevents wrongful flags; non-aligned cases remain ‘Uncertain’ and are quarantined to a forensic human-in-the-loop review queue rather than penalized outright.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Execution Trace Footnote -->
+<div class="mt-space-lg pt-space-md bg-surface-container-low p-space-md rounded-lg flex items-center justify-between text-on-surface-variant font-data-sm text-data-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>Validator Engine: Consensus ConsensusEngine-v1.2</span>
+</div>
+<span class="font-code-block text-code-block">Hash: 0x9f7a...3c21</span>
+</div>
+</div>
+<!-- Right Telemetry & Architecture Visual Column (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Diagram Visualization Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">account_tree</span>
+<span>Tri-Tier Consensus Pipeline</span>
+</div>
+<span class="font-data-sm text-data-sm text-primary font-bold">Latency: 284ms avg</span>
+</div>
+<!-- Pipeline Stack Visual -->
+<div class="space-y-2.5">
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded bg-surface-container-high text-on-surface flex items-center justify-center font-data-sm text-data-sm font-bold">L1</span>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Temporal Heuristics</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Graph Adjacency &amp; Cosine Burst</div>
+</div>
+</div>
+<span class="font-data-sm text-data-sm text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-semibold">99.8% Determinism</span>
+</div>
+<div class="flex justify-center -my-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">south</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-data-sm text-data-sm font-bold">L2</span>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Nemotron 3.5 Super VL</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Visual Frame &amp; Propaganda Semantics</div>
+</div>
+</div>
+<span class="font-data-sm text-data-sm text-primary bg-primary-fixed px-2 py-0.5 rounded font-semibold">120K Token Context</span>
+</div>
+<div class="flex justify-center -my-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">south</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-fixed-dim text-on-primary-fixed flex items-center justify-center font-data-sm text-data-sm font-bold">L3</span>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Gemini 3.8 Flash</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Web Grounding &amp; Factuality Anchor</div>
+</div>
+</div>
+<span class="font-data-sm text-data-sm text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-semibold">Real-Time Index</span>
+</div>
+</div>
+<!-- Consensus Logic Box -->
+<div class="mt-space-md p-space-sm rounded-lg bg-primary-fixed/30 flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">gavel</span>
+<p class="font-data-sm text-data-sm text-on-surface leading-tight">
+<strong>Agreement Condition:</strong> Flagged ONLY if (L1 Swarm Flag = TRUE) &amp;&amp; (L2 Technique Conf ≥ 0.85) &amp;&amp; (L3 Grounding != Organic).
+          </p>
+</div>
+</div>
+<!-- Live Hard Cases Snapshot Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between flex-1">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">Hard Cases Audit Ledger</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">N=400 Viral</span>
+</div>
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between">
+<span class="text-on-surface">Breaking Pop Culture Fan Spikes</span>
+<span class="font-data-sm text-data-sm text-emerald-700 font-bold">100% Organic Pass</span>
+</div>
+<div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between">
+<span class="text-on-surface">Coordinated Hashtag Charity Rallies</span>
+<span class="font-data-sm text-data-sm text-emerald-700 font-bold">98.5% Organic Pass</span>
+</div>
+<div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between">
+<span class="text-on-surface">Rapid Breaking News Eyewitness Shares</span>
+<span class="font-data-sm text-data-sm text-emerald-700 font-bold">99.2% Organic Pass</span>
+</div>
+<div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between">
+<span class="text-on-surface">State-Sponsored Astroturf Replication</span>
+<span class="font-data-sm text-data-sm text-error font-bold">96.8% Intercepted</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs text-on-surface-variant font-data-sm text-data-sm">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span>Organic viral benchmarks updated daily from live APIs.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Honest Limitations & Failure Cases Grid -->
+<div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm mb-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-md mb-space-lg bg-surface-container-low p-space-md rounded-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">warning_amber</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold">Honest Limitations &amp; Transparency Register</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Explicit constraints, known blind spots, and evidential accountability protocol</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase">
+<span class="material-symbols-outlined text-[14px]">security</span>
+          Tamper-Resistant Log
+        </span>
+</div>
+</div>
+<!-- Limitation Prose Pillars -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-xl">
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center gap-space-xs text-on-surface font-headline-sm text-headline-sm mb-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">group_work</span>
+<span>Coordination ≠ Bad Intent</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Coordinated behaviour is not proof of bad intent. Fandoms, newsrooms, community campaigns, and political organizers often show temporal clustering and account similarity that mirror inorganic swarms. We treat correlation as a signal for verification, not guilt.
+        </p>
+<div class="mt-space-md pt-space-xs font-data-sm text-data-sm text-primary font-medium">
+          Mitigation: Multimodal Context Validation
+        </div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center gap-space-xs text-on-surface font-headline-sm text-headline-sm mb-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">spellcheck</span>
+<span>LLM Technique Fallibility</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Technique labels come from large language models and can be wrong or biased toward hypersensitivity. Therefore, mechanical explanations and verbatim text spans are preserved and visibly rendered for human verification in every case packet.
+        </p>
+<div class="mt-space-md pt-space-xs font-data-sm text-data-sm text-primary font-medium">
+          Mitigation: Raw Span Highlighting + Explanations
+        </div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center gap-space-xs text-on-surface font-headline-sm text-headline-sm mb-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">dataset</span>
+<span>Synthetic Baseline Tagging</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Synthetic test data and adversarial generative benchmarks are explicitly tagged and segmented from live network feeds to prevent skewing empirical production drift estimates and real-world precision decay.
+        </p>
+<div class="mt-space-md pt-space-xs font-data-sm text-data-sm text-primary font-medium">
+          Mitigation: Strict Test/Prod Segment Isolation
+        </div>
+</div>
+</div>
+<!-- Comparative Table: Model Breakdown -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Ablation Study &amp; Pipeline Comparison</span>
+<span class="text-on-surface-variant font-data-sm text-data-sm">(Validation Cohort N=2,500)</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Updated Hourly</span>
+</div>
+<div class="overflow-x-auto rounded-lg bg-surface-container-low">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-2.5 px-space-md">Pipeline Architecture</th>
+<th class="py-2.5 px-space-md text-right">Precision</th>
+<th class="py-2.5 px-space-md text-right">Recall</th>
+<th class="py-2.5 px-space-md text-right">False Positive Rate (FPR)</th>
+<th class="py-2.5 px-space-md text-right">Organic Viral Accuracy</th>
+<th class="py-2.5 px-space-md">Operational Verdict</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md divide-y divide-surface-container-highest">
+<!-- Row 1: Layer 1 Only -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-md text-data-md font-semibold text-on-surface">Layer 1 Only</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-caps">Heuristics Only</span>
+</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Temporal bursts + similarity graph</div>
+</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-on-surface font-medium">92.4%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-on-surface font-medium">94.1%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-error font-semibold">7.6%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-error font-medium">78.2%</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-error-container text-on-error-container font-data-sm text-data-sm">
+                  High Viral Collateral Damage
+                </span>
+</td>
+</tr>
+<!-- Row 2: Nemotron Only -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-md text-data-md font-semibold text-on-surface">Nemotron 3.5 VL Only</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-caps">LLM Only</span>
+</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Zero heuristic signals; text/image semantic scan</div>
+</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-on-surface font-medium">88.1%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-on-surface font-medium">83.4%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-tertiary font-semibold">4.8%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-tertiary font-medium">89.5%</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-data-sm text-data-sm">
+                  Sub-Optimal Recall (Misses Swarms)
+                </span>
+</td>
+</tr>
+<!-- Row 3: Full Agreement Rule (Champion) -->
+<tr class="bg-primary-fixed/20 hover:bg-primary-fixed/30 transition-colors">
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span class="font-data-md text-data-md font-bold text-on-surface">Full Agreement Rule</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-primary text-on-primary font-label-caps">Active Engine</span>
+</div>
+<div class="font-data-sm text-data-sm text-primary font-medium">Layer 1 Burst + Nemotron VL + Gemini Grounding</div>
+</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-primary font-bold">94.2%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-on-surface font-bold">91.8%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-emerald-700 font-bold">1.4%</td>
+<td class="py-3 px-space-md text-right font-data-md text-data-md text-emerald-700 font-bold">98.5%</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-data-sm text-data-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  Production Certified
+                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Operational Footer & Audit Certificate Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Cryptographic Verification Passed</span>
+<span class="font-data-sm text-data-sm text-on-surface-variant">SHA256: d83e...b412a • Signed by Lead Forensic Officer Roman &amp; Egor</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-8 px-space-md rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-body-md text-body-md font-medium transition-colors" onclick="alert('Raw evaluation ledger exported to active terminal.')" type="button">
+        Export Raw Test Spans
+      </button>
+<button class="h-8 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-medium transition-colors" onclick="alert('Running re-evaluation against full 2,500 dataset...')" type="button">
+        Re-Run Full Test Matrix
+      </button>
+</div>
+</div>
+</div></main></div><div id="swarmwatch-demo-note" role="status" style="position:fixed;right:18px;bottom:18px;z-index:9999;max-width:360px;background:#fff8e8;border:1px solid #e8c878;color:#614b13;padding:12px 15px;border-radius:9px;font:12px/1.5 Inter,Arial,sans-serif;box-shadow:0 5px 18px #0002">Preview page: sample metrics shown here are not yet connected to your FastAPI results.</div>
+</body></html>
