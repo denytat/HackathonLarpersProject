@@ -81,10 +81,17 @@ def build_swarm_graph(
         if len(evidence) < min_signals:
             continue
 
-        score = sum(
+        available_weight = sum(
+            weights[signal]
+            for signal in evidence
+        )
+
+        weighted_score = sum(
             evidence[signal] * weights[signal]
             for signal in evidence
         )
+
+        score = weighted_score / available_weight if available_weight else 0
 
         # Require stronger combined evidence.
         if score < 0.71:

@@ -1,0 +1,116 @@
+{
+  "dataset": "challenge",
+  "generated_at": "2026-11-14T07:07:18.840194+00:00",
+  "posts_file": "data/synthetic/challenge_posts.csv",
+  "labels_file": "data/synthetic/challenge_ai_labels.json",
+  "ai_enabled": true,
+  "detected_swarms": 1,
+  "nemotron": {
+    "evaluated_posts": 9,
+    "missing_posts": [],
+    "predictions": {
+      "a01": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.9,
+        "explanation": "The post is a standard political opinion with a general call to action. It contains no repetition, hashtags, impersonation, or verifiable misleading claims. A single post cannot establish narrative amplification, and the urgent phrasing alone does not clearly constitute emotional manipulation."
+      },
+      "a02": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.1,
+        "explanation": "The post expresses a political opinion and urgent call to action, but contains no repetition, hashtags, impersonation, or verifiable misleading claim. Ordinary advocacy language alone is insufficient to classify emotional manipulation or narrative amplification under the given constraints."
+      },
+      "a03": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.0,
+        "explanation": "The post expresses an ordinary political opinion and a general call to action. It contains no repetition, hashtags, coordination indicators, impersonation, or clearly misleading or emotionally manipulative language."
+      },
+      "a04": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.9,
+        "explanation": "The post is a standard political opinion with a general call to action. It contains no repetition, hashtags, impersonation, or verifiable misleading claims. A single post cannot establish narrative amplification, and the urgent phrasing alone does not clearly constitute emotional manipulation."
+      },
+      "a05": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.1,
+        "explanation": "The post expresses a political opinion and urgent call to action, but contains no repetition, hashtags, impersonation, or verifiable misleading claim. Ordinary advocacy language alone is insufficient to classify emotional manipulation or narrative amplification under the given constraints."
+      },
+      "a06": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.0,
+        "explanation": "The post expresses an ordinary political opinion and a general call to action. It contains no repetition, hashtags, coordination indicators, impersonation, or clearly misleading or emotionally manipulative language."
+      },
+      "a07": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.9,
+        "explanation": "The post is a standard political opinion with a general call to action. It contains no repetition, hashtags, impersonation, or verifiable misleading claims. A single post cannot establish narrative amplification, and the urgent phrasing alone does not clearly constitute emotional manipulation."
+      },
+      "a08": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.1,
+        "explanation": "The post expresses a political opinion and urgent call to action, but contains no repetition, hashtags, impersonation, or verifiable misleading claim. Ordinary advocacy language alone is insufficient to classify emotional manipulation or narrative amplification under the given constraints."
+      },
+      "a09": {
+        "expected": [],
+        "predicted": [],
+        "correct": true,
+        "ai_confidence": 0.0,
+        "explanation": "The post expresses an ordinary political opinion and a general call to action. It contains no repetition, hashtags, coordination indicators, impersonation, or clearly misleading or emotionally manipulative language."
+      }
+    },
+    "false_positive_posts": [],
+    "false_positive_technique_predictions": 0,
+    "total_binary_decisions": 54,
+    "false_positive_rate": 0.0,
+    "precision_recall_f1": "Not meaningful: all reviewed post-level labels are negative."
+  },
+  "gemini": {
+    "number_of_detected_swarms": 1,
+    "results": [
+      {
+        "swarm_id": "swarm_1",
+        "status": "completed",
+        "accounts": [
+          "coord01",
+          "coord02",
+          "coord03"
+        ],
+        "expected": [
+          "repetitive_messaging"
+        ],
+        "predicted": [
+          "repetitive_messaging"
+        ],
+        "metrics": {
+          "true_positive": 1,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "coordination_assessment": "Highly likely coordinated",
+        "confidence": 0.95,
+        "explanation": "The accounts post near-identical phrasing in synchronized 20-second bursts at precise two-hour intervals (10:00, 12:00, and 14:00 UTC). Each account repeatedly publishes identical messages across these cycles, demonstrating repetitive messaging and systematic coordination, though the content does not contain sufficient evidence of misleading claims, impersonation, or emotional manipulation beyond general urgency.",
+        "malicious_intent_established": false
+      }
+    ],
+    "note": "Gemini technique metrics are based on a single synthetic swarm and should not be treated as evidence of general real-world accuracy."
+  }
+}

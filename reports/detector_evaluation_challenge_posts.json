@@ -1,0 +1,83 @@
+{
+  "dataset": "challenge_posts",
+  "generated_at": "2026-11-14T07:10:12.380108+00:00",
+  "posts_file": "data\\synthetic\\challenge_posts.csv",
+  "labels_file": "data\\synthetic\\challenge_labels.json",
+  "total_posts": 23,
+  "total_accounts": 12,
+  "ground_truth": {
+    "coordinated_accounts": [
+      "coord01",
+      "coord02",
+      "coord03"
+    ],
+    "organic_accounts": [
+      "organic01",
+      "organic02",
+      "organic03",
+      "organic04",
+      "organic05",
+      "organic06",
+      "organic07",
+      "organic08",
+      "organic09"
+    ]
+  },
+  "detected_swarms": [
+    {
+      "id": "swarm_1",
+      "accounts": [
+        "coord01",
+        "coord02",
+        "coord03"
+      ],
+      "score": 0.986,
+      "evidence": [
+        {
+          "account_1": "coord01",
+          "account_2": "coord03",
+          "score": 0.957,
+          "signals": {
+            "text_similarity": 0.904,
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "coord01",
+          "account_2": "coord02",
+          "score": 1.0,
+          "signals": {
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        },
+        {
+          "account_1": "coord03",
+          "account_2": "coord02",
+          "score": 1.0,
+          "signals": {
+            "timing_burst": 1.0,
+            "account_similarity": 1.0
+          }
+        }
+      ]
+    }
+  ],
+  "predicted_coordinated_accounts": [
+    "coord01",
+    "coord02",
+    "coord03"
+  ],
+  "metrics": {
+    "TP": 3,
+    "FP": 0,
+    "FN": 0,
+    "TN": 9,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "accuracy": 1.0
+  }
+}
